@@ -1,0 +1,25 @@
+{
+  "name": "c28_wsp_prj_team_7",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node main.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vinci33/C28_WSP_PRJ_team_7.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vinci33/C28_WSP_PRJ_team_7/issues"
+  },
+  "homepage": "https://github.com/vinci33/C28_WSP_PRJ_team_7#readme",
+  "dependencies": {
+    "@types/node": "^20.7.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  }
+}
