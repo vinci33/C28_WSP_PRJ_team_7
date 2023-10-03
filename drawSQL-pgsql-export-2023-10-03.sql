@@ -1,42 +1,3 @@
-CREATE TABLE "shippings"(
-    "id" BIGINT NOT NULL,
-    "order_id" BIGINT NOT NULL,
-    "ship_name" BIGINT NOT NULL,
-    "ship_phone" BIGINT NOT NULL,
-    "ship_email" BIGINT NOT NULL,
-    "ship_address" BIGINT NOT NULL,
-    "ship_city" BIGINT NOT NULL
-);
-ALTER TABLE
-    "shippings" ADD PRIMARY KEY("id");
-CREATE TABLE "subcategories"(
-    "id" INTEGER NOT NULL,
-    "category_id" INTEGER NOT NULL,
-    "subcategory_name" VARCHAR(255) NOT NULL,
-    "created_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
-    "modified_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL
-);
-ALTER TABLE
-    "subcategories" ADD PRIMARY KEY("id");
-ALTER TABLE
-    "subcategories" ADD CONSTRAINT "subcategories_subcategory_name_unique" UNIQUE("subcategory_name");
-CREATE TABLE "brands"(
-    "id" INTEGER NOT NULL,
-    "brand_name" VARCHAR(255) NOT NULL,
-    "brand_logo" VARCHAR(255) NOT NULL,
-    "created_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
-    "modified_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL
-);
-ALTER TABLE
-    "brands" ADD PRIMARY KEY("id");
-ALTER TABLE
-    "brands" ADD CONSTRAINT "brands_brand_name_unique" UNIQUE("brand_name");
-CREATE TABLE "login"(
-    "id" VARCHAR(255) NOT NULL,
-    "passward" BIGINT NOT NULL
-);
-ALTER TABLE
-    "login" ADD PRIMARY KEY("id");
 CREATE TABLE "categories"(
     "id" INTEGER NOT NULL,
     "categories_name" BIGINT NOT NULL,
@@ -47,13 +8,6 @@ ALTER TABLE
     "categories" ADD PRIMARY KEY("id");
 ALTER TABLE
     "categories" ADD CONSTRAINT "categories_categories_name_unique" UNIQUE("categories_name");
-CREATE TABLE "cat_product"(
-    "id" BIGINT NOT NULL,
-    "product_id" BIGINT NOT NULL,
-    "cat_id" BIGINT NOT NULL
-);
-ALTER TABLE
-    "cat_product" ADD PRIMARY KEY("id");
 CREATE TABLE "order_items"(
     "id" BIGINT NOT NULL,
     "order_id" BIGINT NOT NULL,
@@ -94,23 +48,6 @@ CREATE TABLE "order"(
 );
 ALTER TABLE
     "order" ADD PRIMARY KEY("id");
-CREATE TABLE "post_categories"(
-    "id" INTEGER NOT NULL,
-    "category_name" VARCHAR(255) NOT NULL
-);
-ALTER TABLE
-    "post_categories" ADD PRIMARY KEY("id");
-CREATE TABLE "posts"(
-    "id" INTEGER NOT NULL,
-    "post_category_id" INTEGER NOT NULL,
-    "post_title" VARCHAR(255) NOT NULL,
-    "post_image" VARCHAR(255) NOT NULL,
-    "details" TEXT NOT NULL
-);
-ALTER TABLE
-    "posts" ADD PRIMARY KEY("id");
-ALTER TABLE
-    "posts" ADD CONSTRAINT "posts_post_title_unique" UNIQUE("post_title");
 CREATE TABLE "shopping_cart"(
     "id" BIGINT NOT NULL,
     "user_id" BIGINT NOT NULL,
@@ -150,12 +87,6 @@ ALTER TABLE
     "product" ADD CONSTRAINT "product_product_name_unique" UNIQUE("product_name");
 ALTER TABLE
     "product" ADD CONSTRAINT "product_product_code_unique" UNIQUE("product_code");
-CREATE TABLE "register"(
-    "id" VARCHAR(255) NOT NULL,
-    "passward" BIGINT NOT NULL
-);
-ALTER TABLE
-    "register" ADD PRIMARY KEY("id");
 ALTER TABLE
     "order" ADD CONSTRAINT "order_user_id_foreign" FOREIGN KEY("user_id") REFERENCES "users"("id");
 ALTER TABLE
