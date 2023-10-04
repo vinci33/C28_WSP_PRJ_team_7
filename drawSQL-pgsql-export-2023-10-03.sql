@@ -68,6 +68,7 @@ CREATE TABLE "product"(
     "id" INTEGER NOT NULL,
     "category_id" INTEGER NOT NULL,
     "product_name" VARCHAR(255) NOT NULL,
+    "product_details" TEXT NOT NULL,
     "product_color" VARCHAR(255) NOT NULL,
     "product_size" VARCHAR(255) NULL,
     "selling_price" INTEGER NOT NULL,
@@ -97,7 +98,7 @@ ALTER TABLE
 
 
 INSERT INTO categories (categories_name) VALUES ('iphone','airpods','ipad');
-INSERT INTO product (product_name,product_details,product_color,product_size,selling_price,image_one,image_two,image_three) VALUES ('iphone_15','iphone_15_pro','airpods','airpods_pro','ipad_air','ipad_pro','black','blue','green','yellow','pink','natural_titanium','blue_titanium','white_titanium','black_titanium','white','space_grey','blue','pink','purple','starlight','silver','64gb','128gb','256gb','512gb','1tb','2tb',7699,8499,10199,8599,9399,11099,12799,1099,1849,4799,5999,6499,7299,8899,12099.15299,'./img/iphone_15_pro/iphone_15_pro_black.jpg','./img/iphone_15_pro/iphone_15_pro_natural.jpg','./img/iphone_15_pro/iphone_15_pro_blue.jpg');
+INSERT INTO product (product_name,product_details,product_color,product_size,selling_price,image_one,image_two,image_three) VALUES ('iphone_15','iphone_15_pro','airpods','airpods_pro','ipad_air','ipad_pro','the_all_new_iphone','black','blue','green','yellow','pink','natural_titanium','blue_titanium','white_titanium','black_titanium','white','space_grey','blue','pink','purple','starlight','silver','64gb','128gb','256gb','512gb','1tb','2tb',7699,8499,10199,8599,9399,11099,12799,1099,1849,4799,5999,6499,7299,8899,12099.15299,'./img/iphone_15_pro/iphone_15_pro_black.jpg','./img/iphone_15_pro/iphone_15_pro_natural.jpg','./img/iphone_15_pro/iphone_15_pro_blue.jpg');
 INSERT INTO shopping_cart (product_name,product_color,product_size,product_quantity,selling_price,product_total_price,total_amount) VALUES ('iphone_15_pro','airpods_pro','ipad_pro','black','blue','green','yellow','pink','natural_titanium','blue_titanium','white_titanium','black_titanium','white','space_grey','blue','pink','purple','starlight','silver','128gb','256gb','512gb','1tb',7699,8499,10199,8599,9399,11099,12799,1099,1849,4799,5999,6499,7299,8899,12099.15299);
 INSERT INTO order (product_color,product_size,product_quantity,selling_price,product_total_price) VALUES ('black','blue','green','yellow','pink','natural_titanium','blue_titanium','white_titanium','black_titanium','white','space_grey','blue','pink','purple','starlight','silver','64gb','128gb','256gb','512gb','1tb','2tb',7699,8499,10199,8599,9399,11099,12799,1099,1849,4799,5999,6499,7299,8899,12099.15299);
 INSERT INTO order_items (total_amount) VALUES (8499);
