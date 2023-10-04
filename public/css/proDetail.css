@@ -1,4 +1,4 @@
-:root[data-theme="light"] {
+:root {
     --text: #010403;
     --background: #f1f9f9;
     --primary: #67c1bb;
@@ -57,4 +57,36 @@ h5 {
 small {
     font-size: 0.750rem;
     /* 12px */
+}
+
+.logo-div .logo-img {
+    height: 100px;
+    padding-left: 80px;
+}
+
+.navbar {
+    font-size: 16px;
+}
+
+.navbar-light .navbar-nav .nav-item .nav-link {
+    padding: 0 20px;
+    color: var(--text);
+    transition: 0.3 ease-in-out;
+}
+
+.navbar-light .navbar-nav .nav-item .nav-link:hover,
+.navbar-light .navbar-nav .nav-item .nav-link:active {
+    color: var(--primary);
+}
+
+.navbar i {
+    font-size: 1.2rem;
+    padding: 0 9px;
+    cursor: pointer;
+    transition: 0.3 ease-in-out;
+}
+
+.navbar i:hover .navbar i:active {
+    color: var(--primary);
+    filter: drop-shadow(0 0 0.5rem var(--primary));
 }
