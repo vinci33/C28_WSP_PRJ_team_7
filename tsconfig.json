@@ -1,5 +1,6 @@
 {
 	"compilerOptions": {
+		"strict": true,
 		"module": "commonjs",
 		"target": "es5",
 		"lib": [
@@ -22,7 +23,6 @@
 		"node_modules",
 		"build",
 		"scripts",
-		"index.js",
-		"tsconfig.json"
+		"index.js"
 	]
 }
