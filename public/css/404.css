@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap");
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700');
 
 /* 404 css */
@@ -11,7 +11,9 @@
 
 body {
     overflow: hidden;
-    background-color: #f4f6ff;
+    background-color: #caeceb;
+    background-image: url("../asset/banner_img/404_2.jpg");
+    background-size: cover;
 }
 
 .container {
@@ -36,12 +38,12 @@ body {
     width: 40vmin;
     height: 40vmin;
     border-radius: 50%;
-    border: 6vmin solid #5b96e1;
+    border: 6vmin solid #4eb7b0;
     position: relative;
 }
 
 .cog2 {
-    border: 6vmin solid #5bf1a9;
+    border: 6vmin solid #67c1bb;
 }
 
 .top,
@@ -54,7 +56,7 @@ body {
 .right-down {
     width: 10vmin;
     height: 10vmin;
-    background-color: #5b96e1;
+    background-color: #4eb7b0;
     position: absolute;
 }
 
@@ -66,7 +68,7 @@ body {
 .cog2 .left-down,
 .cog2 .right-top,
 .cog2 .right-down {
-    background-color: #5bf1a9;
+    background-color: #67c1bb;
 }
 
 .top {
@@ -120,7 +122,7 @@ body {
 }
 
 h1 {
-    color: #142833;
+    color: #caeceb;
 }
 
 .first-four {
@@ -142,7 +144,7 @@ h1 {
     bottom: 15vmin;
     padding: 3vmin 12vmin 3vmin 3vmin;
     font-weight: 800;
-    color: #486721;
+    color: #4eb7b0;
 }
 
 /* 404css */
