@@ -1,4 +1,36 @@
-.productHeadersContainer {
+.logo-div .logo-img {
+  height: 100px;
+  padding-left: 80px;
+}
+
+.navbar {
+  font-size: 16px;
+}
+
+.navbar-light .navbar-nav .nav-item .nav-link {
+  padding: 0 20px;
+  color: var(--text);
+  transition: 0.3 ease-in-out;
+}
+
+.navbar-light .navbar-nav .nav-item .nav-link:hover,
+.navbar-light .navbar-nav .nav-item .nav-link:active {
+  color: var(--primary);
+}
+
+.navbar i {
+  font-size: 1.2rem;
+  padding: 0 9px;
+  cursor: pointer;
+  transition: 0.3 ease-in-out;
+}
+
+.navbar i:hover .navbar i:active {
+  color: var(--primary);
+  filter: drop-shadow(0 0 0.5rem var(--primary));
+}
+
+.product-headers-container {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -19,12 +51,12 @@ h3 {
   align-items: flex-start;
 }
 
-.leftButtonBox {
+.left-button-box {
   display: flex;
   justify-content: flex-start;
 }
 
-.buttonBox {
+.button-box {
   display: flex;
   padding: 12px 24px;
   align-items: center;
