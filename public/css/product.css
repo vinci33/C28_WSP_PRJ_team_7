@@ -1,0 +1,41 @@
+.productHeadersContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 24px;
+}
+
+h3 {
+  font-family: Noto Sans;
+  font-size: 36px;
+}
+
+.filter {
+  display: flex;
+  width: 80%;
+  padding: 8px 24px;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.leftButtonBox {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.buttonBox {
+  display: flex;
+  padding: 12px 24px;
+  align-items: center;
+  gap: 8px;
+}
+
+select {
+  display: flex;
+  padding: 12px 24px;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  border: none;
+}

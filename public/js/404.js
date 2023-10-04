@@ -1,4 +1,4 @@
-import gsap from "gsap";
+import gsap from 'gsap';
 
 let t1 = gsap.timeline();
 let t2 = gsap.timeline();
@@ -33,4 +33,4 @@ t3.fromTo(".wrong-para",
             repeat: -1,
             yoyo: true
         }
-    });
+    }); 
