@@ -1,8 +1,8 @@
 import express from 'express';
 import expressSession from 'express-session';
 import path from 'path';
-// import { Client } from "pg";
-// import dotenv from "dotenv";
+import { Client } from "pg";
+import dotenv from "dotenv";
 
 const app = express();
 
@@ -17,17 +17,36 @@ app.use(
 );
 
 
-// // #TODO Revise it later once SQL created
-// dotenv.config();
-// async function main() {
-//     const client = new Client({
-//         database: process.env.DB_NAME,
-//         user: process.env.DB_USERNAME,
-//         password: process.env.DB_PASSWORD,
-//     });
-//     await client.connect();
-//     await client.end();
-// }
+dotenv.config();
+const client = new Client({
+    database: process.env.DB_NAME,
+    user: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+});
+client.connect();
+
+app.get("/product_categories", (req, res) => {
+    client.query(/*sql*/ `select categories_name from categories`, function (err, results) {
+        if (err) {
+            throw err;
+        }
+        res.send(results.rows);
+    });
+})
+
+interface Colors {
+    product_color: string;
+}
+
+app.get("/product_colors", async (req, res) => {
+    try {
+        const results = await client.query(/*sql*/ `SELECT product_color FROM products`);
+        const colors: Colors[] = results.rows;
+        res.send(Array.from(new Set(colors.map((c) => c.product_color))));
+    } catch (err) {
+        res.status(400).send({ message: "error occured" });
+    }
+});
 
 // // #TODO Revise it later once SQL created
 // import { ParsedQs } from "qs";
@@ -54,18 +73,12 @@ app.use(
 // });
 
 
-// // #TODO Revise it later once SQL created
-// app.get("./categories", async (req, res) => {
-//     const products: Product[] = await readJsonFile(PRODUCT_JSON_PATH);
-//     res.json(Array.from(new Set(products.map((p) => p.category))));
-// });
-
 
 
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use((_req, res) => {
-    res.sendFile(path.join(__dirname, 'public', '404.html'))
+    res.sendFile(path.join(__dirname, 'public', 'html', '404.html'))
 })
 
 const PORT = 8080
