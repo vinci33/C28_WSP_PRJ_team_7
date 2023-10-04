@@ -12,6 +12,7 @@ CREATE TABLE "order_items"(
     "id" BIGINT NOT NULL,
     "order_id" BIGINT NOT NULL,
     "product_id" BIGINT NOT NULL,
+    "product_name" VARCHAR(255) NOT NULL,
     "product_color" VARCHAR(255) NOT NULL,
     "product_size" VARCHAR(255) NULL,
     "product_quantity" BIGINT NOT NULL,
@@ -97,11 +98,36 @@ ALTER TABLE
 
 
 
-INSERT INTO categories (categories_name) VALUES ('iphone','airpods','ipad');
-INSERT INTO product (product_name,product_details,product_color,product_size,selling_price,image_one,image_two,image_three) VALUES ('iphone_15','iphone_15_pro','airpods','airpods_pro','ipad_air','ipad_pro','the_all_new_iphone','black','blue','green','yellow','pink','natural_titanium','blue_titanium','white_titanium','black_titanium','white','space_grey','blue','pink','purple','starlight','silver','64gb','128gb','256gb','512gb','1tb','2tb',7699,8499,10199,8599,9399,11099,12799,1099,1849,4799,5999,6499,7299,8899,12099.15299,'./img/iphone_15_pro/iphone_15_pro_black.jpg','./img/iphone_15_pro/iphone_15_pro_natural.jpg','./img/iphone_15_pro/iphone_15_pro_blue.jpg');
-INSERT INTO shopping_cart (product_name,product_color,product_size,product_quantity,selling_price,product_total_price,total_amount) VALUES ('iphone_15_pro','airpods_pro','ipad_pro','black','blue','green','yellow','pink','natural_titanium','blue_titanium','white_titanium','black_titanium','white','space_grey','blue','pink','purple','starlight','silver','128gb','256gb','512gb','1tb',7699,8499,10199,8599,9399,11099,12799,1099,1849,4799,5999,6499,7299,8899,12099.15299);
-INSERT INTO order (product_color,product_size,product_quantity,selling_price,product_total_price) VALUES ('black','blue','green','yellow','pink','natural_titanium','blue_titanium','white_titanium','black_titanium','white','space_grey','blue','pink','purple','starlight','silver','64gb','128gb','256gb','512gb','1tb','2tb',7699,8499,10199,8599,9399,11099,12799,1099,1849,4799,5999,6499,7299,8899,12099.15299);
-INSERT INTO order_items (total_amount) VALUES (8499);
-INSERT INTO users (user_name,password,first_name,last_name,phone,email) VALUES ('john','0000','john','chan','99229922','john@gmail.com');
+INSERT INTO categories (categories_name) VALUES ('iphone')('airpods')('ipad');
+INSERT INTO product (category_id,product_name,product_details,product_color,product_size,selling_price,image_one,image_two,image_three)
+VALUES
+(1,'iphone_15','iphone_15 128gb','blue','128gb',6899,'./img/iphone_15/iphone_15_blue.jpg','null','null'),
+(1,'iphone_15','iphone_15 128gb','pink','128gb',6899,'./img/iphone_15/iphone_15_pink.jpg','null','null'),
+(1,'iphone_15_pro','iphone_15_pro 128gb','black','128gb',8599,'./img/iphone_15_pro/iphone_15_pro_black.jpg','null','null'),
+(1,'iphone_15_pro','iphone_15_pro 128gb natural','natural','128gb',8599,'./img/iphone_15_pro/iphone_15_pro_natural.jpg','null','null'),
+(3,'ipad_air','ipad_air 256gb wifi','blue','256gb',5999,'./img/ipad_air/ipad_air_blue.jpg','null','null'),
+(3,'ipad_air','ipad_air 256gb wifi','purple','256gb',5999,'./img/ipad_air/purple.jpg','null','null'),
+(3,'ipad_pro','ipad_pro 128gb 11inch wifi','grey','128gb',6499,'./img/ipad_pro/ipad_pro1.jpg','./img/ipad_pro/ipad_pro2.jpg','./img/ipad_pro/ipad_pro3.jpg'),
+(2,'airpods','airpods 3rd gen','white','null',1499,'./img/airpods/airpods1.jpeg','./img/airpods/airpods2.jpeg''./img/airpods/airpods3.jpeg'),
+(2,'airpods_pro','airpods 2nd gen','white','null',1849,'./img/airpods_pro/airpods_pro1.jpeg','./img/airpods_pro/airpods_pro2.jpeg''./img/airpods_pro/airpods_pro3.jpeg');
+INSERT INTO shopping_cart (user_id,product_name,product_id,product_color,product_size,product_quantity,selling_price,product_total_price,total_amount)
+VALUES
+(3,'iphone_15',4,'blue','128gb',2,6899,13798,13798),
+(3,'iphone_15',4,'pink','128gb',2,6899,13798,13798),
+(3,'iphone_15_pro',4,'black','128gb',2,8599,17198,17198),
+(3,'iphone_15_pro',4,'natural','128gb',2,8599,,17198,17198),
+(3,'ipad_air',4,'blue','256gb',2,5999,11998,11998),
+(3,'ipad_air',4,'purple','256gb',2,5999,11998,11998),
+(3,'ipad_pro',4,'grey','128gb',2,6499,12998,12998),
+(3,'airpods',4,'white','null',2,1499,2998,2998),
+(3,'airpods_pro',4,'white','null',2,1849,3698,3698);
+INSERT INTO order (user_id,total_amount)
+VALUES (8499);
+INSERT INTO order_items (order_id,product_id,product_name,product_color,product_size,product_quantity,selling_price,product_total_price)
+VALUES
+(5,6,'ipad_air','blue','256gb',4,5999,23996);
+INSERT INTO users (user_name,password,first_name,last_name,phone,email)
+VALUES
+('john','0000','john','chan','99229922','john@gmail.com');
 
 
