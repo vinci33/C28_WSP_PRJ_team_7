@@ -90,3 +90,101 @@ small {
     color: var(--primary);
     filter: drop-shadow(0 0 0.5rem var(--primary));
 }
+
+
+#home {
+    background-color: var(--background);
+    height: 100vh;
+    width: 100%;
+    display: flex;
+
+}
+
+.hero-blocks {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 1440px;
+    height: 704px;
+    background-color: var(--white);
+}
+
+.hero-blocks .container {
+    position: relative;
+    width: 1280px;
+    height: 584px;
+    top: 60px;
+
+    background-color: #3e9892;
+}
+
+.hero-blocks .a-new-era-in-eco {
+    position: absolute;
+    top: 442px;
+    left: 60px;
+    font-family: "Noto Sans-Regular", Helvetica;
+    font-weight: 400;
+    color: var(--white);
+    font-size: 18px;
+    letter-spacing: 0;
+    line-height: 27px;
+}
+
+.hero-blocks .right-image {
+    position: absolute;
+    width: 520px;
+    height: 584px;
+    top: 0;
+    left: 760px;
+    background-image: url("../asset/banner_Img/IMG_2247.WEBP");
+    background-size: cover;
+    background-position: 50% 50%;
+}
+
+.hero-blocks .top-content {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 41px;
+    position: absolute;
+    top: 60px;
+    left: 60px;
+}
+
+.hero-blocks .text-wrapper {
+    position: relative;
+    width: 513px;
+    margin-top: -1px;
+    font-family: "Poppins-Regular", Helvetica;
+    font-weight: 400;
+    color: var(--white);
+    font-size: 32px;
+    letter-spacing: 0;
+    line-height: 44.8px;
+}
+
+.hero-blocks .button-medium {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 16px 32px;
+    position: relative;
+    flex: 0 0 auto;
+    background-color: #f9f9f926;
+}
+
+.hero-blocks .button {
+    position: relative;
+    width: fit-content;
+    margin-top: -1px;
+    font-family: "Noto Sans-Regular", Helvetica;
+    font-weight: 400;
+    color: var(--white);
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 24px;
+    white-space: nowrap;
+    all: unset;
+    box-sizing: border-box;
+}
