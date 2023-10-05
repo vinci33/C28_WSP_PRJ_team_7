@@ -13,6 +13,10 @@ body {
     font-weight: 400;
 }
 
+.a {
+    text-decoration: none;
+}
+
 .logo-div .logo-img {
     height: 100px;
     padding-left: 80px;
@@ -190,7 +194,11 @@ body {
     font-size: 15px;
 }
 
-.loginbtn {
+.createaccbtn {
     color: var(--primary);
     text-decoration: none;
+}
+
+.globalfooter {
+    background-color: var(--primary);
 }
