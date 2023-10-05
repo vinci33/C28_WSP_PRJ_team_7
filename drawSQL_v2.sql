@@ -91,7 +91,7 @@ VALUES
 ('john','0000','john','chan','99229922','john@gmail.com',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
 INSERT INTO products (category_id,product_name,product_details,product_color,product_size,selling_price,image_one,image_two,image_three,created_at,modified_at)
 VALUES
-(1,'iphone_15','iphone_15 128gb','blue','128gb',6899,'./img/iphone_15/iphone_15_blue.jpg','null','null',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
+(1,'iphone_15','iphone_15 128gb','blue','128gb',6899,'../asset/product-img/iphone_15/iphone_15_blue.jpg','null','null',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
 (1,'iphone_15','iphone_15 128gb','pink','128gb',6899,'./img/iphone_15/iphone_15_pink.jpg','null','null',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
 (1,'iphone_15_pro','iphone_15_pro 128gb','black','128gb',8599,'./img/iphone_15_pro/iphone_15_pro_black.jpg','null','null',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
 (1,'iphone_15_pro','iphone_15_pro 128gb natural','natural','128gb',8599,'./img/iphone_15_pro/iphone_15_pro_natural.jpg','null','null',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
