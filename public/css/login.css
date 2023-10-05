@@ -202,3 +202,78 @@ body {
 .globalfooter {
     background-color: var(--primary);
 }
+
+.footer-img {
+    height: 100px;
+    margin-bottom: 15px;
+}
+
+footer {
+    background-color: var(--accent);
+}
+
+
+footer h5 {
+    color: var(--background);
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+footer h6 {
+    color: var(--background);
+}
+
+footer li {
+    padding-bottom: 4px;
+}
+
+footer li a {
+    text-decoration: none;
+    color: var(--secondary);
+    transition: 0.3 ease-in-out;
+}
+
+footer li a:hover,
+footer li a:active {
+    color: var(--background);
+    text-decoration: none;
+}
+
+footer p {
+    color: var(--secondary);
+    padding-top: 7px;
+    font-size: 0.9rem;
+}
+
+footer .email p {
+    text-decoration: none;
+    transition: 0.3 ease-in-out;
+}
+
+footer .email p:hover,
+footer .email p:active {
+    text-decoration: none;
+}
+
+footer .copyright a {
+    color: var(--primary);
+    font-size: 25px;
+    height: 38px;
+    width: 38px;
+    background-color: white;
+    display: inline-block;
+    text-align: center;
+    /* line-height: 38px; */
+    border-radius: 50%;
+    text-decoration: none;
+    cursor: pointer;
+    margin: 0 8px;
+    transition: 0.3 ease-in-out;
+}
+
+footer .copyright a:hover,
+footer .social-icons a:hover {
+    color: var(--background);
+    background-color: var(--primary);
+    text-decoration: none;
+}
