@@ -92,11 +92,11 @@ VALUES
 INSERT INTO products (category_id,product_name,product_details,product_color,product_size,selling_price,image_one,image_two,image_three,created_at,modified_at)
 VALUES
 (1,'iphone_15','iphone_15 128gb','blue','128gb',6899,'../asset/product-img/iphone_15/iphone_15_blue.jpg','null','null',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
-(1,'iphone_15','iphone_15 128gb','pink','128gb',6899,'./img/iphone_15/iphone_15_pink.jpg','null','null',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
-(1,'iphone_15_pro','iphone_15_pro 128gb','black','128gb',8599,'./img/iphone_15_pro/iphone_15_pro_black.jpg','null','null',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
-(1,'iphone_15_pro','iphone_15_pro 128gb natural','natural','128gb',8599,'./img/iphone_15_pro/iphone_15_pro_natural.jpg','null','null',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
-(3,'ipad_air','ipad_air 256gb wifi','blue','256gb',5999,'./img/ipad_air/ipad_air_blue.jpg','null','null',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
-(3,'ipad_air','ipad_air 256gb wifi','purple','256gb',5999,'./img/ipad_air/purple.jpg','null','null',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
-(3,'ipad_pro','ipad_pro 128gb 11inch wifi','grey','128gb',6499,'./img/ipad_pro/ipad_pro1.jpg','./img/ipad_pro/ipad_pro2.jpg','./img/ipad_pro/ipad_pro3.jpg',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
-(2,'airpods','airpods 3rd gen','white','null',1499,'./img/airpods/airpods1.jpeg','./img/airpods/airpods2.jpeg','./img/airpods/airpods3.jpeg',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
-(2,'airpods_pro','airpods 2nd gen','white','null',1849,'./img/airpods_pro/airpods_pro1.jpeg','./img/airpods_pro/airpods_pro2.jpeg','./img/airpods_pro/airpods_pro3.jpeg',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+(1,'iphone_15','iphone_15 128gb','pink','128gb',6899,'../asset/product-img/iphone_15/iphone_15_pink.jpg','null','null',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
+(1,'iphone_15_pro','iphone_15_pro 128gb','black','128gb',8599,'../asset/product-img/iphone_15_pro/iphone_15_pro_black.jpg','null','null',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
+(1,'iphone_15_pro','iphone_15_pro 128gb natural','natural','128gb',8599,'../asset/product-img/iphone_15_pro/iphone_15_pro_natural.jpg','null','null',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
+(3,'ipad_air','ipad_air 256gb wifi','blue','256gb',5999,'../asset/product-img/ipad_air/ipad_air_blue.jpg','null','null',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
+(3,'ipad_air','ipad_air 256gb wifi','purple','256gb',5999,'../asset/product-img/ipad_air/ipad_air_purple.jpg','null','null',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
+(3,'ipad_pro','ipad_pro 128gb 11inch wifi','grey','128gb',6499,'../asset/product-img/ipad_pro/ipad_pro1.jpg','../asset/product-img/ipad_pro/ipad_pro2.jpg','../asset/product-img/ipad_pro/ipad_pro3.jpg',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
+(2,'airpods','airpods 3rd gen','white','null',1499,'../asset/product-img/airpods/airpods1.jpeg','../asset/product-img/airpods/airpods2.jpeg','../asset/product-img/airpods/airpods3.jpeg',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
+(2,'airpods_pro','airpods 2nd gen','white','null',1849,'../asset/product-img/airpods_pro/airpods_pro1.jpeg','../asset/product-img/airpods_pro/airpods_pro2.jpeg','../asset/product-img/airpods_pro/airpods_pro3.jpeg',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);

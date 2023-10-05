@@ -1,7 +1,7 @@
 window.onload = () => {
   const paramsString = window.location.search;
-  // const searchParams = new URLSearchParams(paramsString);
-  // initProducts(searchParams);
+  const searchParams = new URLSearchParams(paramsString);
+  initProducts(searchParams);
   initCategorySelect();
   initColorSelect();
 };
@@ -30,19 +30,19 @@ async function initColorSelect() {
   });
 }
 
-// async function initProducts(searchParams) {
-//   const resp = await fetch("/products?" + searchParams);
-//   const products = await resp.json();
+async function initProducts(searchParams) {
+  const resp = await fetch("/products?" + searchParams);
+  const products = await resp.json();
 
-//   const productContainerEle = document.querySelector(".product-container");
-//   const templateEle = document.querySelector("#product-template");
+  const productContainerEle = document.querySelector(".product-container");
+  const templateEle = document.querySelector("#product-template");
 
-//   for (const product of products) {
-//     const productClone = templateEle.content.cloneNode(true);
-//     productClone.querySelector("img").src = product.image;
-//     productClone.querySelector(".title").textContent = product.title;
-//     productClone.querySelector(".description").textContent =
-//       product.description;
-//     productContainerEle.appendChild(productClone);
-//   }
-// }
+  for (const product of products) {
+    const productClone = templateEle.content.cloneNode(true);
+    productClone.querySelector("img").src = product["image_one"];
+    productClone.querySelector(".title").textContent = product["product_name"];
+    productClone.querySelector(".description").textContent =
+      product["selling_price"];
+    productContainerEle.appendChild(productClone);
+  }
+}

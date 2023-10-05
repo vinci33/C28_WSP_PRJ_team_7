@@ -58,25 +58,25 @@
     </div>
   </nav>
 
-  <div class="productHeadersContainer">
+  <div class="product-headers-container">
     <h3>View All Products</h3>
 
     <div class="filter">
-      <div class="leftButtonBox">
-        <div class="buttonBox">
+      <div class="left-button-box">
+        <div class="button-box">
           <select id="category-select">
             <option disabled selected value>Category</option>
           </select>
         </div>
 
-        <div class="buttonBox">
+        <div class="button-box">
           <select id="color-select">
             <option disabled selected value>Color</option>
           </select>
         </div>
       </div>
 
-      <div class="buttonBox">
+      <div class="button-box">
         <label for="date-order">Sorting by:</label>
         <select id="date-order">
           <option disabled selected value>Date added</option>
@@ -87,15 +87,7 @@
     </div>
   </div>
 
-  <template id="product-template">
-    <div class="product card">
-      <img src="" alt="Avatar" height="400" width="100%" />
-      <div class="container">
-        <h4 class="title"></h4>
-        <p class="description"></p>
-      </div>
-    </div>
-  </template>
+  <div class="product-container"></div>
 
   <footer class="mt-5 py-5">
     <div class="row container mx-auto pt-5">
@@ -151,5 +143,13 @@
     crossorigin="anonymous"></script>
   <script src="../js/product.js"></script>
 </body>
-
+<template id="product-template">
+  <div class="product card">
+    <img src="" alt="Avatar" height="200" width="20%" />
+    <div class="container">
+      <h4 class="title"></h4>
+      <p class="description"></p>
+    </div>
+  </div>
+</template>
 </html>
