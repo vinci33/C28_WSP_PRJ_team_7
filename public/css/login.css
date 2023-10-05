@@ -7,12 +7,12 @@
 }
 
 @import url('https://fonts.googleapis.com/css?family=Poppins:400|Noto Sans:700');
-
 body {
-    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     font-family: 'poppins', sans-serif;
     font-weight: 400;
-    min-height: 100vh;
 }
 
 /* Nar Bar */
@@ -218,9 +218,8 @@ input:hover {
 }
 
 footer {
+    margin-top:auto;
     width: 100%;
-    position: absolute;
-    bottom: 0;
     background-color: var(--accent);
 }
 
