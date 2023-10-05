@@ -48,14 +48,16 @@ app.get("/product_colors", async (req, res) => {
     }
 });
 
-// app.get("/product_categories", async (req, res) => {
-//     let products: Product[] = await readJsonFile(PRODUCT_JSON_PATH);
-//     const categories = convertStr2Arr(req.query.category);
-//     if (categories) {
-//         products = products.filter((product) => categories.includes(product.category));
-//     }
-//     res.json(products);
-// });
+app.get("/products", (req, res) => {
+    client.query(
+        `SELECT categories_name, product_name, product_color, selling_price, image_one, products.modified_at
+        from categories inner join products on categories.id = products.category_id`, function (err, results) {
+        if (err) {
+            res.status(400).send({ message: "error occurred" });
+        }
+        res.send(results.rows);
+    })
+});
 
 
 
