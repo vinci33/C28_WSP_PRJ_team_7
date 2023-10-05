@@ -57,7 +57,20 @@ app.get("/product_colors", async (req, res) => {
 //     res.json(products);
 // });
 
-
+// this is the route for the product page for the product with the id Fm KDL
+app.get("product/:id", async (req, res) => {
+    try {
+        const id = parseInt(req.params.id);
+        if (isNaN(id)) {
+            res.status(400).json({ success: false, msg: "id is not a number" });
+            return
+        }
+        const results = await client.query(/*sql*/ `SELECT * FROM products WHERE id = $1`, [id]);
+        res.send(results.rows[0]);
+    } catch (err) {
+        res.status(400).json({ success: false, msg: `unable to retrieve product with id ${req.params.id}` });
+    }
+});
 
 
 app.use(express.static(path.join(__dirname, 'public')))

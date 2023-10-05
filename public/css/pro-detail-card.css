@@ -1,0 +1,139 @@
+.container {
+    margin-top: 50px;
+}
+
+.image-left {
+    background-image: url("https://via.placeholder.com/600x400");
+    background-size: cover;
+    background-position: center;
+    height: 400px;
+}
+
+.description {
+    padding: 20px;
+}
+
+.description-text {
+    margin-bottom: 20px;
+}
+
+.text-wrapper {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.frame {
+    border: 1px solid #ccc;
+    padding: 20px;
+}
+
+.p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.premium-material {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-top: 20px;
+}
+
+.dimensions {
+    margin-bottom: 20px;
+}
+
+.dimensions-text {
+    margin-bottom: 10px;
+}
+
+.metrics {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.div-2 {
+    flex: 1 1 33.33%;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.text-wrapper-2 {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.text-wrapper-3 {
+    font-size: 14px;
+}
+
+.amount {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.quantitiy {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.text-wrapper-4 {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.stepper {
+    display: flex;
+    align-items: center;
+}
+
+.text-wrapper-5 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.text-wrapper-6 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0 10px;
+}
+
+.button-medium {
+    flex: 1;
+}
+
+.button {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+}
+
+.frame-2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.text-wrapper-7 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.text-wrapper-8 {
+    font-size: 24px;
+    font-weight: bold;
+}
