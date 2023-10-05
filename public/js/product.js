@@ -26,7 +26,7 @@ async function initColorSelect() {
     selectEle.innerHTML += `<option value="${color}">${color}</option>`;
   }
   selectEle.addEventListener("change", async () => {
-    window.location = `/?category=${selectEle.value}`;
+    window.location = `/?product_color=${selectEle.value}`;
   });
 }
 

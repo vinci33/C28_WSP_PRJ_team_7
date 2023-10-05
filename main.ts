@@ -28,7 +28,7 @@ client.connect();
 app.get("/product_categories", (req, res) => {
     client.query(/*sql*/ `select categories_name from categories`, function (err, results) {
         if (err) {
-            throw err;
+            res.status(400).send({ message: "error occurred" });
         }
         res.send(results.rows);
     });
@@ -42,28 +42,13 @@ app.get("/product_colors", async (req, res) => {
     try {
         const results = await client.query(/*sql*/ `SELECT product_color FROM products`);
         const colors: Colors[] = results.rows;
-        res.send(Array.from(new Set(colors.map((c) => c.product_color))));
+        res.send(Array.from(new Set(colors.map((elem) => elem.product_color))));
     } catch (err) {
-        res.status(400).send({ message: "error occured" });
+        res.status(400).send({ message: "error occurred" });
     }
 });
 
-// // #TODO Revise it later once SQL created
-// import { ParsedQs } from "qs";
-// function convertStr2Arr(query: string | string[] | ParsedQs | ParsedQs[] | undefined) {
-//     if (typeof query === "undefined" || Array.isArray(query)) {
-//         return query;
-//     }
-//     return [query];
-// }
-
-// async function readJsonFile(filepath: string) {
-//     const data = await jsonfile.readFile(filepath);
-//     return data;
-// }
-
-
-// app.get("./products", async (req, res) => {
+// app.get("/product_categories", async (req, res) => {
 //     let products: Product[] = await readJsonFile(PRODUCT_JSON_PATH);
 //     const categories = convertStr2Arr(req.query.category);
 //     if (categories) {
@@ -76,6 +61,7 @@ app.get("/product_colors", async (req, res) => {
 
 
 app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'public/html')))
 
 app.use((_req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'html', '404.html'))

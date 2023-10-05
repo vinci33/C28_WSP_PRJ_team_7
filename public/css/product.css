@@ -72,8 +72,6 @@ select {
   border: none;
 }
 
-
-
 /* navbar and footer css */
 :root {
   --text: #010403;
@@ -83,11 +81,10 @@ select {
   --accent: #4eb7b0;
 }
 
-
-@import url('https://fonts.googleapis.com/css?family=Poppins:400|Noto Sans:700');
+@import url("https://fonts.googleapis.com/css?family=Poppins:400|Noto Sans:700");
 
 body {
-  font-family: 'poppins', sans-serif;
+  font-family: "poppins", sans-serif;
   font-weight: 400;
 }
 
@@ -96,7 +93,7 @@ h2,
 h3,
 h4,
 h5 {
-  font-family: 'Poppins';
+  font-family: "Poppins";
   font-weight: 700;
 }
 
@@ -107,7 +104,7 @@ html {
 /* 16px */
 
 h1 {
-  font-size: 4.210rem;
+  font-size: 4.21rem;
   /* 67.36px */
 }
 
@@ -132,7 +129,7 @@ h5 {
 }
 
 small {
-  font-size: 0.750rem;
+  font-size: 0.75rem;
   /* 12px */
 }
 
@@ -196,7 +193,6 @@ small {
 footer {
   background-color: var(--accent);
 }
-
 
 footer h5 {
   color: var(--background);
