@@ -9,9 +9,17 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:400|Noto Sans:700');
 
 body {
+    position: relative;
     font-family: 'poppins', sans-serif;
     font-weight: 400;
+    min-height: 100vh;
 }
+
+.logo-img {
+    height: 100px;
+    padding-left: 80px;
+}
+
 
 .a {
     text-decoration: none;
@@ -90,7 +98,7 @@ body {
     display: flex;
     justify-content: center;
     margin-top: 20px;
-  }
+}
 
 .email {
     display: flex;
@@ -124,7 +132,7 @@ body {
     font-size: 15px;
 }
 
-.fa-regular{
+.fa-regular {
     display: flex;
     align-items: center;
 }
@@ -140,7 +148,7 @@ body {
     display: flex;
     justify-content: center;
     margin-top: 20px;
-    
+
 }
 
 .confirm-password {
@@ -160,8 +168,8 @@ body {
     font-size: 5px;
 }
 
-.input-label{
-    width:400px;
+.input-label {
+    width: 400px;
     padding-left: 12px;
     text-align: left;
 }
@@ -199,8 +207,12 @@ body {
     text-decoration: none;
 }
 
-.globalfooter {
-    background-color: var(--primary);
+input:focus {
+    box-shadow: 2px 2px 2px 2px lightgrey;
+}
+
+input:hover {
+    box-shadow: 2px 2px 2px 2px lightgrey;
 }
 
 .footer-img {
@@ -209,6 +221,9 @@ body {
 }
 
 footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
     background-color: var(--accent);
 }
 
@@ -245,13 +260,15 @@ footer p {
     font-size: 0.9rem;
 }
 
-footer .email p {
+footer .teckyemail p {
     text-decoration: none;
     transition: 0.3 ease-in-out;
+    display: flex;
+    align-items: left;
 }
 
-footer .email p:hover,
-footer .email p:active {
+footer .teckyemail p:hover,
+footer .teckyemail p:active {
     text-decoration: none;
 }
 

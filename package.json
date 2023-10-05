@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/vinci33/C28_WSP_PRJ_team_7#readme",
   "dependencies": {
-    "@types/node": "^20.7.1",
+    "@types/node": "^20.8.2",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "express-session": "^1.17.3",
