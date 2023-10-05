@@ -1,6 +1,6 @@
 CREATE TABLE "categories"(
     "id" INTEGER NOT NULL,
-    "categories_name" BIGINT NOT NULL,
+    "categories_name" VARCHAR(255) NOT NULL,
     "created_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     "modified_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL
 );
@@ -25,7 +25,7 @@ ALTER TABLE
     "order_items" ADD PRIMARY KEY("id");
 CREATE TABLE "users"(
     "id" INTEGER NOT NULL,
-    "user_name" BIGINT NOT NULL,
+    "user_name" VARCHAR(255) NOT NULL,
     "password" VARCHAR(255) NOT NULL,
     "first_name" VARCHAR(255) NOT NULL,
     "last_name" VARCHAR(255) NOT NULL,
@@ -43,7 +43,7 @@ ALTER TABLE
 CREATE TABLE "order"(
     "id" BIGINT NOT NULL,
     "user_id" BIGINT NOT NULL,
-    "total_amount" VARCHAR(255) NOT NULL,
+    "total_amount" BIGINT NOT NULL,
     "created_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     "modified_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL
 );
@@ -98,7 +98,12 @@ ALTER TABLE
 
 
 
-INSERT INTO categories (categories_name) VALUES ('iphone')('airpods')('ipad');
+INSERT INTO categories (categories_name) VALUES ('iphone'),('airpods'),('ipad');
+
+INSERT INTO users (user_name,password,first_name,last_name,phone,email)
+VALUES
+('john','0000','john','chan','99229922','john@gmail.com');
+
 INSERT INTO product (category_id,product_name,product_details,product_color,product_size,selling_price,image_one,image_two,image_three)
 VALUES
 (1,'iphone_15','iphone_15 128gb','blue','128gb',6899,'./img/iphone_15/iphone_15_blue.jpg','null','null'),
