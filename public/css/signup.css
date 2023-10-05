@@ -6,18 +6,18 @@
     --accent: #4eb7b0;
 }
 
-
 @import url('https://fonts.googleapis.com/css?family=Poppins:400|Noto Sans:700');
 
 body {
     font-family: 'poppins', sans-serif;
     font-weight: 400;
 }
-
 footer {
     font-family: 'poppins', sans-serif;
 }
 
+
+/* Nav Bar */
 .logo-img {
     height: 100px;
     padding-left: 80px;
@@ -28,7 +28,6 @@ footer {
 }
 
 .navbar-light .navbar-nav .nav-item .nav-link {
-    padding: 0 20px;
     color: var(--text);
     transition: 0.3 ease-in-out;
 }
@@ -50,6 +49,27 @@ footer {
     filter: drop-shadow(0 0 0.5rem var(--primary));
 }
 
+/* mobile */
+.navbar-light .navbar-toggler {
+    border: none;
+    outline: none;
+}
+
+.navbar-toggler-icon {
+    font-size: 1.5rem;
+    padding: 7px;
+    cursor: pointer;
+    transition: 0.3 ease-in-out;
+    border-color: var(--primary);
+    /* background-color: var(--accent); */
+}
+
+.navbar-toggler-icon:hover,
+.navbar-toggler-icon:active {
+    color: var(--primary);
+}
+
+/* Body */
 .greeting {
     color: var(--neutral-gray-1, #303030);
     font-family: Poppins;
@@ -207,26 +227,7 @@ input:hover {
     box-shadow: 2px 2px 2px 2px lightgrey;
 }
 
-/* mobile */
-.navbar-light .navbar-toggler {
-    border: none;
-    outline: none;
-}
-
-.navbar-toggler-icon {
-    font-size: 1.5rem;
-    padding: 7px;
-    cursor: pointer;
-    transition: 0.3 ease-in-out;
-    border-color: var(--primary);
-    /* background-color: var(--accent); */
-}
-
-.navbar-toggler-icon:hover,
-.navbar-toggler-icon:active {
-    color: var(--primary);
-}
-
+/* Footer */
 .footer-img {
     height: 100px;
     margin-bottom: 15px;

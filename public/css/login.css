@@ -15,14 +15,10 @@ body {
     min-height: 100vh;
 }
 
+/* Nar Bar */
 .logo-img {
     height: 100px;
     padding-left: 80px;
-}
-
-
-.a {
-    text-decoration: none;
 }
 
 .logo-div .logo-img {
@@ -215,6 +211,7 @@ input:hover {
     box-shadow: 2px 2px 2px 2px lightgrey;
 }
 
+/* Footer */
 .footer-img {
     height: 100px;
     margin-bottom: 15px;
@@ -226,7 +223,6 @@ footer {
     bottom: 0;
     background-color: var(--accent);
 }
-
 
 footer h5 {
     color: var(--background);
