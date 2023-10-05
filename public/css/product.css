@@ -33,6 +33,7 @@
 .product-headers-container {
   display: flex;
   flex-direction: column;
+  padding: 80px 80px 5px 80px;
   justify-content: flex-end;
   align-items: center;
   gap: 24px;
@@ -69,6 +70,24 @@ select {
   align-items: center;
   gap: 8px;
   border: none;
+}
+
+.product-container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 28px 80px 20px 80px;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
 /* navbar and footer css */

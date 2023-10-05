@@ -40,9 +40,12 @@ async function initProducts(searchParams) {
   for (const product of products) {
     const productClone = templateEle.content.cloneNode(true);
     productClone.querySelector("img").src = product["image_one"];
-    productClone.querySelector(".title").textContent = product["product_name"];
-    productClone.querySelector(".description").textContent =
-      product["selling_price"];
+    productClone.querySelector(
+      ".product-title"
+    ).textContent = `${product["product_name"]} (${product["product_color"]})`;
+    productClone.querySelector(
+      ".product-price"
+    ).textContent = `$ ${product["selling_price"]}`;
     productContainerEle.appendChild(productClone);
   }
 }
