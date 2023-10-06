@@ -79,8 +79,8 @@
       <div class="button-box">
         <label for="date-order">Sorting by:</label>
         <select id="date-order">
-          <option value="newest">Newest</option>
-          <option value="oldest">Oldest</option>
+          <option value="newest">Newest to Oldest</option>
+          <option value="oldest">Oldest to Newest</option>
         </select>
       </div>
     </div>
@@ -144,12 +144,14 @@
 </body>
 <template id="product-template">
   <div class="product card">
+    <a href = "">
     <img src="" alt="Avatar" height="375" width="100%" />
     <div class="container">
       <p class="product-title"></p>
       <p class="product-price"></p>
       <p class="post-date"></p>
     </div>
+  </a>
   </div>
 </template>
 </html>

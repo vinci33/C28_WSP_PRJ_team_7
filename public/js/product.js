@@ -41,6 +41,8 @@ async function initProducts(searchParams) {
   for (const product of products) {
     const productClone = templateEle.content.cloneNode(true);
 
+    productClone.querySelector("a").href = `/proDetail.html?id=${product.id}`;
+
     productClone.querySelector("img").src = product["image_one"];
 
     productClone.querySelector(

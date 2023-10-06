@@ -64,7 +64,7 @@ app.get("/product.html/allproducts", async (req, res) => {
         const categories = convertStr2Arr(req.query.category)
         const colors = convertStr2Arr(req.query.product_color)
         const queryResult = await client.query(
-            `SELECT categories_name, product_name, product_color, selling_price, image_one, products.modified_at
+            `SELECT products.id, categories_name, product_name, product_color, selling_price, image_one, products.modified_at
             from categories inner join products on categories.id = products.category_id`)
         let products: products[] = queryResult.rows
         if (categories) {
