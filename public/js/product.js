@@ -4,6 +4,7 @@ window.onload = () => {
   initProducts(searchParams);
   initCategorySelect();
   initColorSelect();
+  // initDateSort();
 };
 
 async function initCategorySelect() {
@@ -39,13 +40,28 @@ async function initProducts(searchParams) {
 
   for (const product of products) {
     const productClone = templateEle.content.cloneNode(true);
+
     productClone.querySelector("img").src = product["image_one"];
+
     productClone.querySelector(
       ".product-title"
     ).textContent = `${product["product_name"]} (${product["product_color"]})`;
+
     productClone.querySelector(
       ".product-price"
     ).textContent = `$ ${product["selling_price"]}`;
+
+    let difference =
+      new Date().getTime() - new Date(product["modified_at"]).getTime();
+    productClone.querySelector(
+      ".post-date"
+    ).textContent = `Posted On: ${Math.floor(
+      difference / (1000 * 3600 * 24)
+    )} day(s) ago`;
     productContainerEle.appendChild(productClone);
   }
 }
+
+// function initDateSort (){
+
+// }
