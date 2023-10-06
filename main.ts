@@ -3,6 +3,7 @@ import expressSession from 'express-session';
 import path from 'path';
 import { Client } from "pg";
 import dotenv from "dotenv";
+import { convertStr2Arr } from './utils';
 
 const app = express();
 
@@ -25,7 +26,7 @@ const client = new Client({
 });
 client.connect();
 
-app.get("/product_categories", (req, res) => {
+app.get("/product.html/product_categories", (req, res) => {
     client.query(/*sql*/ `select categories_name from categories`, function (err, results) {
         if (err) {
             res.status(400).send({ message: "error occurred" });
@@ -38,7 +39,7 @@ interface Colors {
     product_color: string;
 }
 
-app.get("/product_colors", async (req, res) => {
+app.get("/product.html/product_colors", async (req, res) => {
     try {
         const results = await client.query(/*sql*/ `SELECT product_color FROM products`);
         const colors: Colors[] = results.rows;
@@ -48,16 +49,36 @@ app.get("/product_colors", async (req, res) => {
     }
 });
 
-app.get("/products", (req, res) => {
-    client.query(
-        `SELECT categories_name, product_name, product_color, selling_price, image_one, products.modified_at
-        from categories inner join products on categories.id = products.category_id`, function (err, results) {
-        if (err) {
-            res.status(400).send({ message: "error occurred" });
+// Query: Filter
+interface products {
+    categories_name: string;
+    product_name: string;
+    product_color: string;
+    selling_price: number;
+    image_one: string;
+    modified_at: string;
+}
+
+app.get("/product.html/allproducts", async (req, res) => {
+    try {
+        const categories = convertStr2Arr(req.query.category)
+        const colors = convertStr2Arr(req.query.product_color)
+        const queryResult = await client.query(
+            `SELECT categories_name, product_name, product_color, selling_price, image_one, products.modified_at
+            from categories inner join products on categories.id = products.category_id`)
+        let products: products[] = queryResult.rows
+        if (categories) {
+            products = products.filter((product) => categories?.includes(product.categories_name))
         }
-        res.send(results.rows);
-    })
-});
+        if (colors) {
+            products = products.filter((product) => colors?.includes(product.product_color))
+        }
+        res.send(products);
+    } catch (e) {
+        res.status(400).send({ message: "error occurred" });
+    }
+})
+
 
 // this is the route for the product page for the product with the id Fm KDL
 app.get("product/:id", async (req, res) => {

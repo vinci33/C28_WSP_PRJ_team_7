@@ -8,30 +8,30 @@ window.onload = () => {
 
 async function initCategorySelect() {
   const selectEle = document.querySelector("#category-select");
-  const resp = await fetch("/product_categories");
+  const resp = await fetch("/product.html/product_categories");
   const categories = await resp.json();
   for (const category of categories) {
     selectEle.innerHTML += `<option value="${category.categories_name}">${category.categories_name}</option>`;
   }
   selectEle.addEventListener("change", async () => {
-    window.location = `/?category=${selectEle.value}`;
+    window.location = `/product.html?category=${selectEle.value}`;
   });
 }
 
 async function initColorSelect() {
   const selectEle = document.querySelector("#color-select");
-  const resp = await fetch("/product_colors");
+  const resp = await fetch("/product.html/product_colors");
   const colors = await resp.json();
   for (const color of colors) {
     selectEle.innerHTML += `<option value="${color}">${color}</option>`;
   }
   selectEle.addEventListener("change", async () => {
-    window.location = `/?product_color=${selectEle.value}`;
+    window.location = `/product.html?product_color=${selectEle.value}`;
   });
 }
 
 async function initProducts(searchParams) {
-  const resp = await fetch("/products?" + searchParams);
+  const resp = await fetch("/product.html/allproducts?" + searchParams);
   const products = await resp.json();
 
   const productContainerEle = document.querySelector(".product-container");
