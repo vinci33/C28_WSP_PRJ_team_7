@@ -60,11 +60,11 @@ small {
 }
 
 
-.container {
-    margin-top: 50px;
+.product-detail-card-container {
+    margin: 50px 80px;
 }
 
-.image-left {
+.product-image-left {
     background-image: url("https://via.placeholder.com/600x400");
     background-size: cover;
     background-position: center;
@@ -79,7 +79,7 @@ small {
     margin-bottom: 20px;
 }
 
-.text-wrapper {
+.product-name {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 10px;
@@ -91,7 +91,7 @@ small {
     border: none;
 }
 
-.p {
+.product-detail {
     font-size: 16px;
     line-height: 1.5;
     margin-bottom: 20px;
@@ -169,12 +169,12 @@ small {
     margin: 0 10px;
 }
 
-.button-medium {
+/* .button-medium {
     flex: 1;
-}
+}*/
 
-.button {
-    background-color: #000;
+.add-to-card-btn {
+    background-color: var(--accent);
     color: #fff;
     border: none;
     padding: 10px 20px;

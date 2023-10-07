@@ -81,19 +81,27 @@ app.get("/product.html/allproducts", async (req, res) => {
 
 
 // this is the route for the product page for the product with the id Fm KDL
-app.get("product/:id", async (req, res) => {
-    try {
-        const id = parseInt(req.params.id);
-        if (isNaN(id)) {
-            res.status(400).json({ success: false, msg: "id is not a number" });
-            return
-        }
-        const results = await client.query(/*sql*/ `SELECT * FROM products WHERE id = $1`, [id]);
-        res.send(results.rows[0]);
-    } catch (err) {
-        res.status(400).json({ success: false, msg: `unable to retrieve product with id ${req.params.id}` });
-    }
-});
+// app.get("/proDetail.html/products/:id", async (req, res) => {
+//     try {
+//         const id = parseInt(req.params.id);
+//         if (isNaN(id)) {
+//             res.status(400).json({ success: false, msg: "id is not a number" });
+//             return
+//         }
+//         const results = await client.query(/*sql*/ `SELECT * FROM products WHERE id = $1`, [id]);
+//         console.log(results.rows[0]);
+//         res.send(results.rows[0]);
+//     } catch (err) {
+//         res.status(400).json({ success: false, msg: `unable to retrieve product with id ${req.params.id}` });
+//     }
+// });
+
+app.get("/products.html/:id/", async (req, res) => {
+    const results = await client.query(/*sql*/ `SELECT * FROM products WHERE id = $1`, [req.params.id]);
+    let result = results.rows
+    console.log(result)
+    res.send(results.rows[0]);
+})
 
 
 app.use(express.static(path.join(__dirname, 'public')))
