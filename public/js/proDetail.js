@@ -1,26 +1,10 @@
 
-// const product = document.querySelector("product");
-// const productDetails = document.querySelector("#productDetails");
-
-// product.addEventListener("click", async (event) => {
-//     event.preventDefault();
-//     const productId = document.querySelector("#productId").value;
-//     const response = await fetch(`/product/${productId}`);
-//     const data = await response.json();
-//     if (data.success) {
-//         const product = data;
-//         productDetails.innerHTML = `
-//       <h2>${product.name}</h2>
-//       <p>${product.description}</p>
-//       <p>Price: $${product.price}</p>
-//     `;
-//     } else {
-//         productDetails.innerHTML = `<p>${data.msg}</p>`;
-//     }
-// });
-window.onload = () => {
+window.onload = async () => {
+    const paramsString = window.location.search;
+    const searchParams = new URLSearchParams(paramsString);
+    const id = parseInt(searchParams.get("id"))
+    await initProductDetail(id);
     initAddToCart()
-    initProductsV2(2)
 }
 
 
@@ -47,56 +31,24 @@ function initAddToCart() {
         quantity++;
         quantityEle.innerHTML = quantity;
     });
-
-    //     addToCartBtn.addEventListener("click", async () => {
-    //         const addToCartBtn = document.querySelector(".add-to-cart-btn");
-    //         const productId = document.querySelector("#productId").value;
-    //         const response = await fetch(`/product/${productId}`);
-    //         const data = await response.json();
-    //         if (data.success) {
-    //             const product = data;
-    //             const { name, price, image } = product;
-    //             const cartItem = {
-    //                 name,
-    //                 price,
-    //                 image,
-    //                 quantity,
-    //             };
-    //             const response = await fetch("/cart", {
-    //                 method: "POST",
-    //                 headers: {
-    //                     "Content-Type": "application/json",
-    //                 },
-    //                 body: JSON.stringify(cartItem),
-    //             });
-    //             const data = await response.json();
-    //             if (data.success) {
-    //                 alert("Add to cart successfully");
-    //             } else {
-    //                 alert(data.msg);
-    //             }
-    //         } else {
-    //             alert(data.msg);
-    //         }
-    //     });
-
 }
 
 
-async function initProductsV2(searchParams) {
-    const resp = await fetch("/proDetail.html/products?" + searchParams);
-    const products = await resp.json();
-    console.log(products);
+async function initProductDetail(id) {
+    const resp = await fetch("/proDetail.html/" + id);
+    const product = await resp.json();
+    console.log(product.product_name);
     const productContainerEle = document.querySelector(".product-detail-card");
     const templateEle = document.querySelector("#product-detail-card-container-template");
-
-    // for (const product of products) {
-    //     const productClone = templateEle.content.cloneNode(true);
-    //     productClone.querySelector("img").src = products.image_one;
-    //     productClone.querySelector(".product-name").textContent = products.product_name;
-    //     productClone.querySelector(".product-detail").textContent = products.product_details;
-    //     productContainerEle.appendChild(productClone);
-    // }
+    console.log(templateEle);
+    const productClone = templateEle.content.cloneNode(true);
+    productClone.querySelector("img").src = product.image_one;
+    productClone.querySelector(".product-name").textContent = product.product_name.replace(/_/g, " ");
+    productClone.querySelector(".product-detail").textContent = product.product_details.replace(/_/g, " ");
+    productClone.querySelector(".subtitle-colour").textContent = product.product_color;
+    productClone.querySelector(".subtitle-storage").textContent = product.product_size;
+    productClone.querySelector(".product-price-value").textContent = `$${product.selling_price}`;
+    productContainerEle.appendChild(productClone);
 }
 
 

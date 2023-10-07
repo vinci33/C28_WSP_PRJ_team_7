@@ -38,7 +38,7 @@
                         <a class="nav-link" aria-current="page" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Mobile</a>
+                        <a class="nav-link" href="./product.html">Mobile</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Phone Case</a>
@@ -58,69 +58,66 @@
             </div>
         </div>
     </nav>
-    <section class="product-detail-card-container container">
+    <section class="container">
+        <div class="product-detail-card pro-detail-card-container"></div>
         <template id="product-detail-card-container-template">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="product-image-left mt-4">
+                        <img class="img-fluid" width="400" height="auto" alt="product-image">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="description">
+                        <div class="description-text">
+                            <div class="product-name text-capitalize">Description</div>
+                            <div class="frame">
+                                <div class="div">
+                                    <p class="product-detail">
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit quidem rem
+                                        debitis ad
+                                        cumque, amet quae maxime ducimus atque saepe. Sunt ducimus optio rerum
+                                        consequatur
+                                        iure ipsum perferendis aut corrupti!
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="specs">
+                            <div class="specs-text">
+                                <div class="specs-title">Specs</div>
+                                <div class="metrics">
+                                    <div class="div-2">
+                                        <div class="specs-subtitle colour">Colour</div>
+                                        <div class="subtitle-colour subtitle-value text-capitalize"></div>
+                                    </div>
+                                    <div class="div-2">
+                                        <div class="specs-subtitle storage">Storage</div>
+                                        <div class="subtitle-storage subtitle-value text-uppercase"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="amount">
+                            <div class="quantity">
+                                <div class="amount-title">Amount:</div>
+                                <div class="stepper">
+                                    <div class="reduce">-</div>
+                                    <div class="number-of-quantity" data-quantity="1">1</div>
+                                    <div class="add">+</div>
+                                </div>
+                            </div>
+                            <button class="btn add-to-card-btn mt-3">Add to cart</button>
+                        </div>
+                        <div class="frame-2">
+                            <div class="product-price-title">Price</div>
+                            <div class="product-price-value"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </template>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="product-image-left mt-4">
-                    <img src="" alt="product-image">
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="description">
-                    <div class="description-text">
-                        <div class="product-name">Description</div>
-                        <div class="frame">
-                            <div class="div">
-                                <p class="product-detail">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit quidem rem debitis ad
-                                    cumque, amet quae maxime ducimus atque saepe. Sunt ducimus optio rerum consequatur
-                                    iure ipsum perferendis aut corrupti!
-                                </p>
-                                <p class="premium-material">Premium material<br />Handmade upholstery<br />Quality
-                                    timeless classic</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="dimensions">
-                        <div class="dimensions-text">
-                            <div class="text-wrapper">Dimensions</div>
-                            <div class="metrics">
-                                <div class="div-2">
-                                    <div class="text-wrapper-2">Height</div>
-                                    <div class="text-wrapper-3">110cm</div>
-                                </div>
-                                <div class="div-2">
-                                    <div class="text-wrapper-2">Width</div>
-                                    <div class="text-wrapper-3">75cm</div>
-                                </div>
-                                <div class="div-2">
-                                    <div class="text-wrapper-2">Depth</div>
-                                    <div class="text-wrapper-3">50cm</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="amount">
-                        <div class="quantity">
-                            <div class="text-wrapper-4">Amount:</div>
-                            <div class="stepper">
-                                <div class="reduce">-</div>
-                                <div class="number-of-quantity" data-quantity="1">1</div>
-                                <div class="add">+</div>
-                            </div>
-                        </div>
-                        <button class="btn add-to-card-btn">Add to cart</button>
-                    </div>
-                    <div class="frame-2">
-                        <div class="text-wrapper-7">The Dandy Chair</div>
-                        <div class="text-wrapper-8">£250</div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </section>
 
 

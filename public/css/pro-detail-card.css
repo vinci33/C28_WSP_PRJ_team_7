@@ -65,7 +65,6 @@ small {
 }
 
 .product-image-left {
-    background-image: url("https://via.placeholder.com/600x400");
     background-size: cover;
     background-position: center;
     height: 400px;
@@ -98,17 +97,19 @@ small {
 
 }
 
-.premium-material {
-    font-size: 14px;
-    line-height: 1.5;
-    margin-top: 20px;
-}
 
-.dimensions {
+
+.specs {
     margin-bottom: 20px;
 }
 
-.dimensions-text {
+.specs-text {
+    margin-bottom: 10px;
+}
+
+.title-specs {
+    font-size: 16px;
+    font-weight: bold;
     margin-bottom: 10px;
 }
 
@@ -123,13 +124,13 @@ small {
     text-align: center;
 }
 
-.text-wrapper-2 {
+.specs-subtitle {
     font-size: 14px;
     font-weight: bold;
     margin-bottom: 5px;
 }
 
-.text-wrapper-3 {
+.subtitle-value {
     font-size: 14px;
 }
 
@@ -144,7 +145,7 @@ small {
     margin-right: 20px;
 }
 
-.text-wrapper-4 {
+.amount-title {
     font-size: 14px;
     font-weight: bold;
     margin-bottom: 5px;
@@ -164,6 +165,7 @@ small {
 }
 
 .number-of-quantity {
+    min-width: 20px;
     font-size: 24px;
     font-weight: bold;
     margin: 0 10px;
@@ -188,17 +190,16 @@ small {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 1px solid #ccc;
     padding: 20px;
     margin-bottom: 20px;
 }
 
-.text-wrapper-7 {
-    font-size: 24px;
+.product-price-title {
+    font-size: 20px;
     font-weight: bold;
 }
 
-.text-wrapper-8 {
+.product-price-value {
     font-size: 24px;
     font-weight: bold;
 }
