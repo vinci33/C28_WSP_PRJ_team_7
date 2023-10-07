@@ -31,9 +31,8 @@
       referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="../css/product.css" />
-    <title>View All Products</title>
+    <title>Shopping Cart</title>
   </head>
-
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light py-3">
       <div class="container-fluid">
@@ -71,44 +70,14 @@
             </li>
             <li class="nav-item">
               <i class="fa-solid fa-magnifying-glass"></i>
-              <a href="./shoppingCart.html"
-                ><i class="fa-solid fa-cart-shopping"></i
-              ></a>
+              <i class="fa-solid fa-cart-shopping"></i>
             </li>
           </ul>
         </div>
       </div>
     </nav>
 
-    <div class="product-headers-container">
-      <h3>View All Products</h3>
-
-      <div class="filter">
-        <div class="left-button-box">
-          <div class="button-box">
-            <select id="category-select">
-              <option value="all-products">All Products</option>
-            </select>
-          </div>
-
-          <div class="button-box">
-            <select id="color-select">
-              <option value="all-colors">All Colors</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="button-box">
-          <label for="date-order">Sorting by:</label>
-          <select id="date-order">
-            <option value="newest">Newest to Oldest</option>
-            <option value="oldest">Oldest to Newest</option>
-          </select>
-        </div>
-      </div>
-    </div>
-
-    <div class="product-container"></div>
+    <!-- TODO: Needa continue -->
 
     <footer class="mt-5 py-5">
       <div class="row container mx-auto pt-5">
@@ -170,18 +139,6 @@
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
-    <script src="../js/product.js"></script>
+    <script src="../js/shoppingCart.js"></script>
   </body>
-  <template id="product-template">
-    <div class="product card">
-      <a href="">
-        <img src="" alt="Avatar" height="375" width="100%" />
-        <div class="container">
-          <p class="product-title"></p>
-          <p class="product-price"></p>
-          <p class="post-date"></p>
-        </div>
-      </a>
-    </div>
-  </template>
 </html>

@@ -4,6 +4,7 @@ import path from 'path';
 import { Client } from "pg";
 import dotenv from "dotenv";
 import { convertStr2Arr } from './utils';
+import { Colors, Products } from './model';
 
 const app = express();
 
@@ -35,10 +36,6 @@ app.get("/product.html/product_categories", (req, res) => {
     });
 })
 
-interface Colors {
-    product_color: string;
-}
-
 app.get("/product.html/product_colors", async (req, res) => {
     try {
         const results = await client.query(/*sql*/ `SELECT product_color FROM products`);
@@ -49,24 +46,14 @@ app.get("/product.html/product_colors", async (req, res) => {
     }
 });
 
-// Query: Filter
-interface products {
-    categories_name: string;
-    product_name: string;
-    product_color: string;
-    selling_price: number;
-    image_one: string;
-    modified_at: string;
-}
-
-app.get("/product.html/allproducts", async (req, res) => {
+app.get("/product.html/all_products", async (req, res) => {
     try {
         const categories = convertStr2Arr(req.query.category)
         const colors = convertStr2Arr(req.query.product_color)
-        const queryResult = await client.query(
-            `SELECT categories_name, product_name, product_color, selling_price, image_one, products.modified_at
-            from categories inner join products on categories.id = products.category_id`)
-        let products: products[] = queryResult.rows
+        const queryResult = await client.query(/*sql*/
+            `SELECT products.id, categories_name, product_name, product_color, selling_price, image_one, products.modified_at
+            from categories inner join products on categories.id = products.category_id order by products.modified_at desc`)
+        let products: Products[] = queryResult.rows
         if (categories) {
             products = products.filter((product) => categories?.includes(product.categories_name))
         }
