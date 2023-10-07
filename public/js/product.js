@@ -4,7 +4,7 @@ window.onload = () => {
   initProducts(searchParams);
   initCategorySelect();
   initColorSelect();
-  // initDateSort();
+  handleSortingChange();
 };
 
 async function initCategorySelect() {
@@ -12,10 +12,20 @@ async function initCategorySelect() {
   const resp = await fetch("/product.html/product_categories");
   const categories = await resp.json();
   for (const category of categories) {
-    selectEle.innerHTML += `<option value="${category.categories_name}">${category.categories_name}</option>`;
+    if (
+      decodeURIComponent(window.location.search) ===
+      `?category=${category.categories_name}`
+    ) {
+      selectEle.innerHTML += `<option value="${category.categories_name}" selected='${category.categories_name}'>${category.categories_name}</option>`;
+    } else {
+      selectEle.innerHTML += `<option value="${category.categories_name}">${category.categories_name}</option>`;
+    }
   }
   selectEle.addEventListener("change", async () => {
     window.location = `/product.html?category=${selectEle.value}`;
+    if (selectEle.value === "all-products") {
+      window.location = "/product.html";
+    }
   });
 }
 
@@ -24,15 +34,24 @@ async function initColorSelect() {
   const resp = await fetch("/product.html/product_colors");
   const colors = await resp.json();
   for (const color of colors) {
-    selectEle.innerHTML += `<option value="${color}">${color}</option>`;
+    if (
+      decodeURIComponent(window.location.search) === `?product_color=${color}`
+    ) {
+      selectEle.innerHTML += `<option value="${color}" selected='${color}'>${color}</option>`;
+    } else {
+      selectEle.innerHTML += `<option value="${color}">${color}</option>`;
+    }
   }
   selectEle.addEventListener("change", async () => {
     window.location = `/product.html?product_color=${selectEle.value}`;
+    if (selectEle.value === "all-colors") {
+      window.location = "/product.html";
+    }
   });
 }
 
 async function initProducts(searchParams) {
-  const resp = await fetch("/product.html/allproducts?" + searchParams);
+  const resp = await fetch("/product.html/all_products?" + searchParams);
   const products = await resp.json();
 
   const productContainerEle = document.querySelector(".product-container");
@@ -64,6 +83,15 @@ async function initProducts(searchParams) {
   }
 }
 
-// function initDateSort (){
-
-// }
+function handleSortingChange() {
+  const productContainer = document.querySelector(".product-container");
+  const selectElement = document.querySelector("#date-order");
+  selectElement.addEventListener("change", function () {
+    const productCards = Array.from(document.querySelectorAll(".product"));
+    productCards.reverse();
+    productContainer.innerHTML = "";
+    for (const card of productCards) {
+      productContainer.appendChild(card);
+    }
+  });
+}
