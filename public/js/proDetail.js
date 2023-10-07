@@ -47,10 +47,10 @@ async function initProductDetail(id) {
         productClone.querySelector(".product-name").textContent = product.product_name.replace(/_/g, " ");
         productClone.querySelector(".product-detail").textContent = product.product_details.replace(/_/g, " ");
         productClone.querySelector(".subtitle-colour").textContent = product.product_color;
-        if (product.product_size === null) {
-            productClone.querySelector(".storage-div").classList.add("hidden");
+        if (product.product_size === "null") {
+            productClone.querySelector(".storage, subtitle-storage").classList.add("hidden");
         } else {
-            productClone.querySelector(".storage-div, .subtitle-storage").classList.remove("hidden");
+            productClone.querySelector(".storage, .subtitle-storage").classList.remove("hidden");
             productClone.querySelector(".subtitle-storage").textContent = product.product_size;
         }
         console.log(product.product_size);

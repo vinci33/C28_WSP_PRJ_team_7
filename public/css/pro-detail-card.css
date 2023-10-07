@@ -131,12 +131,12 @@ small {
 }
 
 .subtitle-storage,
-.storage-div {
+.storage {
     display: block;
 }
 
 .subtitle-storage.hidden,
-.storage-div.hidden {
+.storage.hidden {
     display: none;
 }
 
