@@ -35,20 +35,30 @@ function initAddToCart() {
 
 
 async function initProductDetail(id) {
-    const resp = await fetch("/proDetail.html/" + id);
-    const product = await resp.json();
-    console.log(product.product_name);
-    const productContainerEle = document.querySelector(".product-detail-card");
-    const templateEle = document.querySelector("#product-detail-card-container-template");
-    console.log(templateEle);
-    const productClone = templateEle.content.cloneNode(true);
-    productClone.querySelector("img").src = product.image_one;
-    productClone.querySelector(".product-name").textContent = product.product_name.replace(/_/g, " ");
-    productClone.querySelector(".product-detail").textContent = product.product_details.replace(/_/g, " ");
-    productClone.querySelector(".subtitle-colour").textContent = product.product_color;
-    productClone.querySelector(".subtitle-storage").textContent = product.product_size;
-    productClone.querySelector(".product-price-value").textContent = `$${product.selling_price}`;
-    productContainerEle.appendChild(productClone);
+    try {
+        const resp = await fetch("/proDetail.html/" + id);
+        const product = await resp.json();
+        console.log(product.product_name);
+        const productContainerEle = document.querySelector(".product-detail-card");
+        const templateEle = document.querySelector("#product-detail-card-container-template");
+        console.log(templateEle);
+        const productClone = templateEle.content.cloneNode(true);
+        productClone.querySelector("img").src = product.image_one;
+        productClone.querySelector(".product-name").textContent = product.product_name.replace(/_/g, " ");
+        productClone.querySelector(".product-detail").textContent = product.product_details.replace(/_/g, " ");
+        productClone.querySelector(".subtitle-colour").textContent = product.product_color;
+        if (product.product_size === null) {
+            productClone.querySelector(".storage-div").classList.add("hidden");
+        } else {
+            productClone.querySelector(".storage-div, .subtitle-storage").classList.remove("hidden");
+            productClone.querySelector(".subtitle-storage").textContent = product.product_size;
+        }
+        console.log(product.product_size);
+        productClone.querySelector(".product-price-value").textContent = `$${product.selling_price}`;
+        productContainerEle.appendChild(productClone);
+    } catch (err) {
+        console.error("initializing product detail:", err);
+    }
 }
 
 
