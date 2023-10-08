@@ -68,6 +68,29 @@
   flex: 1;
 }
 
+.container > img {
+  flex: 2;
+}
+
+.product-details {
+  flex: 4;
+  text-align: left;
+}
+
+.product-quantity {
+  flex: 2;
+  text-align: left;
+}
+
+.product-total-price {
+  flex: 2;
+  text-align: left;
+}
+
+.remove-button {
+  flex: 1;
+}
+
 .checkout-btn {
   background-color: var(--accent);
   color: #fff;

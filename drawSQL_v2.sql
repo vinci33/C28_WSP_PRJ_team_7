@@ -51,15 +51,16 @@ CREATE TABLE "orders"(
 CREATE TABLE "shopping_cart"(
     "id" SERIAL primary key,
     "user_id" INTEGER NOT NULL,
-    "product_name" VARCHAR(255) NOT NULL,
     "product_id" INTEGER NOT NULL,
-    "product_color" VARCHAR(255) NOT NULL,
-    "product_size" VARCHAR(255) NULL,
     "product_quantity" INTEGER NOT NULL,
-    "selling_price" INTEGER NOT NULL,
-    "total_amount" INTEGER , /* able to null will be SUM  b4 Insert by ID*/
     "created_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     "modified_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL
+    -- Not Added to the table:
+    -- "product_name" VARCHAR(255) NOT NULL,
+    -- "product_color" VARCHAR(255) NOT NULL,
+    -- "product_size" VARCHAR(255) NULL,
+    -- "selling_price" INTEGER NOT NULL,
+    -- "total_amount" INTEGER , /* able to null will be SUM  b4 Insert by ID*/
 );
 CREATE TABLE "products"(
     "id" SERIAL primary key,
@@ -106,7 +107,7 @@ VALUES
 (3,'ipad_pro','ipad_pro 128gb 11inch wifi','grey','128gb',6499,'../asset/product-img/ipad_pro/ipad_pro1.jpg','../asset/product-img/ipad_pro/ipad_pro2.jpg','../asset/product-img/ipad_pro/ipad_pro3.jpg','2023-10-01T18:29:40.000Z','2023-10-01T18:29:40.000Z'),
 (2,'airpods','airpods 3rd gen','white','null',1499,'../asset/product-img/airpods/airpods1.jpeg','../asset/product-img/airpods/airpods2.jpeg','../asset/product-img/airpods/airpods3.jpeg','2023-10-02T18:29:40.000Z','2023-10-02T18:29:40.000Z'),
 (2,'airpods_pro','airpods 2nd gen','white','null',1849,'../asset/product-img/airpods_pro/airpods_pro1.jpeg','../asset/product-img/airpods_pro/airpods_pro2.jpeg','../asset/product-img/airpods_pro/airpods_pro3.jpeg','2023-10-02T18:29:40.000Z','2023-10-02T18:29:40.000Z');
-INSERT INTO shopping_cart (user_id,product_name,product_id,product_color,product_size,product_quantity,selling_price,created_at,modified_at)
+INSERT INTO shopping_cart (user_id,product_id,product_quantity,created_at,modified_at)
 VALUES
-(1,'iphone_15',1,'blue','128gb',2,6899,'2023-10-08T18:29:40.000Z','2023-10-08T18:29:40.000Z'),
-(1,'ipad_air',5,'blue','256gb',3,5999,'2023-10-08T18:29:40.000Z','2023-10-08T18:29:40.000Z');
+(1,1,2,'2023-10-08T18:29:40.000Z','2023-10-08T18:29:40.000Z'),
+(1,5,3,'2023-10-08T18:29:40.000Z','2023-10-08T18:29:40.000Z');

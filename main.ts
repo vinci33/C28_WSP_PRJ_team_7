@@ -67,6 +67,15 @@ app.get("/product.html/all_products", async (req, res) => {
 })
 
 
+// 仲未加check user ID
+app.get('/shoppingCart.html/products', (req, res) => {
+    try {
+        const queryResult = await client.query(/*sql*/
+            `SELECT products.image_one, products.product_name, products.categories_name, products.product_details, products.product_color, products.product_size, products.selling_price, products.image_one,
+        from shopping_cart inner join products on shopping_cart.product_id = products.id order by products.modified_at`)
+    }
+})
+
 app.get("/proDetail.html/:id", async (req, res) => {
     try {
         const id = parseInt(req.params.id);

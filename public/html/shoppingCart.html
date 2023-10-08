@@ -85,6 +85,7 @@
           <div class="product-item-total">Total</div>
           <div class="product-item-delete"></div>
         </div>
+        <div class="product-container"></div>
       </div>
     </div>
     <div>
@@ -152,4 +153,17 @@
     ></script>
     <script src="../js/shoppingCart.js"></script>
   </body>
+  <template id="product-template">
+    <div class="product card">
+      <div class="container">
+        <div><img src="" alt="Avatar" height="375" width="100%" /></div>
+        <div class="product-details"></div>
+        <div class="product-quantity"></div>
+        <div class="product-total-price"></div>
+        <div class="remove-button">
+          <i class="fa-solid fa-xmark"> <b>Remove</b></i>
+        </div>
+      </div>
+    </div>
+  </template>
 </html>
