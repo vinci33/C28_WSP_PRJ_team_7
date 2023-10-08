@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS "order_items" ,
 DROP TABLE IF EXISTS "categories" ,"order_detail_items",
 "users","orders" ,
 "shopping_cart" ,"products" CASCADE; /*drop all table and insert all new data */
+
 CREATE TABLE "categories"(
     "id" SERIAL primary key,
     "categories_name" VARCHAR(255) NOT NULL,
