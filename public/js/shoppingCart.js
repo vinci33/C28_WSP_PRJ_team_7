@@ -1,5 +1,6 @@
 window.onload = () => {
   initProducts();
+  // deleteItems();
 };
 
 async function initProducts() {
@@ -12,16 +13,29 @@ async function initProducts() {
   for (const product of products) {
     const productClone = templateEle.content.cloneNode(true);
 
-    productClone.querySelector("img").src = product["image_one"];
+    productClone.querySelector("img").src = product.image_one;
 
     productClone.querySelector(
-      ".product-title"
-    ).textContent = `${product["product_name"]} (${product["product_color"]})`;
-
+      ".product-details"
+    ).textContent = `${product.product_details} (${product.product_color})`;
     productClone.querySelector(
-      ".product-price"
-    ).textContent = `$ ${product["selling_price"]}`;
+      ".product-selling-price"
+    ).textContent = `$ ${product.selling_price}`;
+    productClone.querySelector(
+      ".product-quantity"
+    ).textContent = `${product.product_quantity}`;
+
+    productClone.querySelector(".product-total-price").textContent = `$ ${
+      product.selling_price * product.product_quantity
+    }`;
 
     productContainerEle.appendChild(productClone);
   }
 }
+
+// function deleteItems() {
+//   document.addEventListener(".remove-button", async function('click', (e) => {
+
+//   })
+
+//   )}

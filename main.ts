@@ -62,19 +62,31 @@ app.get("/product.html/all_products", async (req, res) => {
         }
         res.send(products);
     } catch (err) {
-        res.status(400).send({ success: false, msg: "error occurred" });
+        res.status(400).json({ success: false, msg: "error occurred" });
     }
 })
 
 
 // 仲未加check user ID
-app.get('/shoppingCart.html/products', (req, res) => {
+app.get('/shoppingCart.html/products', async (req, res) => {
     try {
         const queryResult = await client.query(/*sql*/
-            `SELECT products.image_one, products.product_name, products.categories_name, products.product_details, products.product_color, products.product_size, products.selling_price, products.image_one,
-        from shopping_cart inner join products on shopping_cart.product_id = products.id order by products.modified_at`)
+            `SELECT products.image_one as image_one, products.product_name as product_name,
+             products.product_details as product_details, products.product_color as product_color,
+             products.product_size as product_size, products.selling_price as selling_price, 
+             products.image_one as image_one, product_quantity from shopping_cart inner join products
+             on shopping_cart.product_id = products.id order by shopping_cart.modified_at`)
+        res.json(queryResult.rows)
+    } catch (err) {
+        res.status(400).json({ success: false, msg: "error occurred" });
     }
 })
+
+// 仲未加user id
+// app.delete('/shoppingCart.html', async (req, res) => {
+
+// }
+
 
 app.get("/proDetail.html/:id", async (req, res) => {
     try {

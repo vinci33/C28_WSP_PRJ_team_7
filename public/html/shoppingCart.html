@@ -80,10 +80,10 @@
     <div class="shopping-cart-container">
       <div class="summary-container">
         <div class="products-header">
-          <div class="product-item-product">Product</div>
-          <div class="product-item-quantity">Quantity</div>
-          <div class="product-item-total">Total</div>
-          <div class="product-item-delete"></div>
+          <div class="product-header-product">Product</div>
+          <div class="product-header-quantity">Quantity</div>
+          <div class="product-header-total">Total</div>
+          <div class="product-header-delete"></div>
         </div>
         <div class="product-container"></div>
       </div>
@@ -156,12 +156,21 @@
   <template id="product-template">
     <div class="product card">
       <div class="container">
-        <div><img src="" alt="Avatar" height="375" width="100%" /></div>
-        <div class="product-details"></div>
-        <div class="product-quantity"></div>
+        <div>
+          <img src="" alt="Avatar" height="200" width="100%" />
+        </div>
+        <div class="product-description">
+          <div class="product-details"></div>
+          <div class="product-selling-price"></div>
+        </div>
+        <div class="stepper">
+          <div class="reduce">-</div>
+          <div class="product-quantity"></div>
+          <div class="add">+</div>
+        </div>
         <div class="product-total-price"></div>
         <div class="remove-button">
-          <i class="fa-solid fa-xmark"> <b>Remove</b></i>
+          <i class="fa-solid fa-xmark"></i> <b>Remove</b>
         </div>
       </div>
     </div>

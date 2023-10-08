@@ -41,45 +41,61 @@
 .summary-container {
   padding: 30px 25px;
   width: 100%;
-  border-bottom: solid 1px #17b9a4;
 }
 
 .products-header {
   display: flex;
   flex-wrap: wrap;
+  padding: 20px;
+  border-bottom: solid 1px #17b9a4;
 }
 
-.product-item-product {
+.product-header-product {
   flex: 6;
   text-align: left;
 }
 
-.product-item-quantity {
+.product-header-quantity {
   flex: 2;
   text-align: left;
 }
 
-.product-item-total {
+.product-header-total {
   flex: 2;
   text-align: left;
 }
 
-.product-item-delete {
+.product-header-delete {
   flex: 1;
+}
+
+.card {
+  border: none;
+  padding: 0px 20px;
+}
+
+.container {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .container > img {
   flex: 2;
 }
 
-.product-details {
+.product-description {
   flex: 4;
-  text-align: left;
 }
 
-.product-quantity {
+.stepper {
   flex: 2;
   text-align: left;
+  display: flex;
+  align-items: center;
 }
 
 .product-total-price {
@@ -89,6 +105,7 @@
 
 .remove-button {
   flex: 1;
+  cursor: pointer;
 }
 
 .checkout-btn {
