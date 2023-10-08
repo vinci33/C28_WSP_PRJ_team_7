@@ -41,6 +41,7 @@
 
 .filter {
   display: flex;
+  flex-wrap: wrap;
   width: 80%;
   padding: 8px 24px;
   justify-content: space-between;

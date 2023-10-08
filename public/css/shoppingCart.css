@@ -30,6 +30,55 @@
   filter: drop-shadow(0 0 0.5rem var(--primary));
 }
 
+.shopping-cart-container {
+  display: flex;
+  width: 100%;
+  padding: 84px 80px;
+  justify-content: center;
+  align-items: center;
+}
+
+.summary-container {
+  padding: 30px 25px;
+  width: 100%;
+  border-bottom: solid 1px #17b9a4;
+}
+
+.products-header {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.product-item-product {
+  flex: 6;
+  text-align: left;
+}
+
+.product-item-quantity {
+  flex: 2;
+  text-align: left;
+}
+
+.product-item-total {
+  flex: 2;
+  text-align: left;
+}
+
+.product-item-delete {
+  flex: 1;
+}
+
+.checkout-btn {
+  background-color: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+}
+
 /* navbar and footer css */
 :root {
   --text: #010403;

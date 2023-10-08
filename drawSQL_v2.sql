@@ -6,7 +6,7 @@ CREATE TABLE "categories"(
 );
 ALTER TABLE
     "categories" ADD CONSTRAINT "categories_categories_name_unique" UNIQUE("categories_name");
-CREATE TABLE "order_items"(
+CREATE TABLE "order_detail_items"(
     "id" SERIAL primary key,
     "order_id" BIGINT NOT NULL,
     "product_id" BIGINT NOT NULL,
@@ -34,7 +34,7 @@ ALTER TABLE
     "users" ADD CONSTRAINT "users_user_name_unique" UNIQUE("user_name");
 ALTER TABLE
     "users" ADD CONSTRAINT "users_email_unique" UNIQUE("email");
-CREATE TABLE "order"(
+CREATE TABLE "orders"(
     "id" SERIAL primary key,
     "user_id" BIGINT NOT NULL,
     "total_amount" BIGINT NOT NULL,
@@ -50,8 +50,6 @@ CREATE TABLE "shopping_cart"(
     "product_size" VARCHAR(255) NULL,
     "product_quantity" BIGINT NOT NULL,
     "selling_price" BIGINT NOT NULL,
-    "product_total_price" BIGINT NOT NULL,
-    "total_amount" BIGINT NOT NULL,
     "created_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     "modified_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL
 );
@@ -70,9 +68,9 @@ CREATE TABLE "products"(
     "modified_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL
 );
 ALTER TABLE
-    "order" ADD CONSTRAINT "order_user_id_foreign" FOREIGN KEY("user_id") REFERENCES "users"("id");
+    "orders" ADD CONSTRAINT "orders_user_id_foreign" FOREIGN KEY("user_id") REFERENCES "users"("id");
 ALTER TABLE
-    "order_items" ADD CONSTRAINT "order_items_product_id_foreign" FOREIGN KEY("product_id") REFERENCES "products"("id");
+    "order_detail_items" ADD CONSTRAINT "order_detail_items_product_id_foreign" FOREIGN KEY("product_id") REFERENCES "products"("id");
 ALTER TABLE
     "products" ADD CONSTRAINT "product_category_id_foreign" FOREIGN KEY("category_id") REFERENCES "categories"("id");
 ALTER TABLE
@@ -80,7 +78,7 @@ ALTER TABLE
 ALTER TABLE
     "shopping_cart" ADD CONSTRAINT "shopping_cart_product_id_foreign" FOREIGN KEY("product_id") REFERENCES "products"("id");
 ALTER TABLE
-    "order_items" ADD CONSTRAINT "order_items_order_id_foreign" FOREIGN KEY("order_id") REFERENCES "order"("id");
+    "order_detail_items" ADD CONSTRAINT "order_detail_items_order_id_foreign" FOREIGN KEY("order_id") REFERENCES "orders"("id");
 INSERT INTO categories (categories_name,created_at,modified_at)
 VALUES 
 ('iphone',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
@@ -100,3 +98,7 @@ VALUES
 (3,'ipad_pro','ipad_pro 128gb 11inch wifi','grey','128gb',6499,'../asset/product-img/ipad_pro/ipad_pro1.jpg','../asset/product-img/ipad_pro/ipad_pro2.jpg','../asset/product-img/ipad_pro/ipad_pro3.jpg','2023-10-01T18:29:40.000Z','2023-10-01T18:29:40.000Z'),
 (2,'airpods','airpods 3rd gen','white','null',1499,'../asset/product-img/airpods/airpods1.jpeg','../asset/product-img/airpods/airpods2.jpeg','../asset/product-img/airpods/airpods3.jpeg','2023-10-02T18:29:40.000Z','2023-10-02T18:29:40.000Z'),
 (2,'airpods_pro','airpods 2nd gen','white','null',1849,'../asset/product-img/airpods_pro/airpods_pro1.jpeg','../asset/product-img/airpods_pro/airpods_pro2.jpeg','../asset/product-img/airpods_pro/airpods_pro3.jpeg','2023-10-02T18:29:40.000Z','2023-10-02T18:29:40.000Z');
+INSERT INTO shopping_cart (user_id,product_name,product_id,product_color,product_size,product_quantity,selling_price,created_at,modified_at)
+VALUES
+(1,'iphone_15',1,'blue','128gb',2,6899,'2023-10-08T18:29:40.000Z','2023-10-08T18:29:40.000Z'),
+(1,'ipad_air',5,'blue','256gb',3,5999,'2023-10-08T18:29:40.000Z','2023-10-08T18:29:40.000Z');

@@ -42,7 +42,7 @@ app.get("/product.html/product_colors", async (req, res) => {
         const colors: Colors[] = results.rows;
         res.send(Array.from(new Set(colors.map((elem) => elem.product_color))));
     } catch (err) {
-        res.status(400).send({ message: "error occurred" });
+        res.status(400).send({ success: false, msg: "error occurred" });
     }
 });
 
@@ -61,8 +61,8 @@ app.get("/product.html/all_products", async (req, res) => {
             products = products.filter((product) => colors?.includes(product.product_color))
         }
         res.send(products);
-    } catch (e) {
-        res.status(400).send({ message: "error occurred" });
+    } catch (err) {
+        res.status(400).send({ success: false, msg: "error occurred" });
     }
 })
 
