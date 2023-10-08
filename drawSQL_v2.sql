@@ -1,3 +1,9 @@
+/* can use `psql -U username -W -d db_name -f file.sql` to run this file */
+DROP TABLE IF EXISTS "order_items" ,
+"order"  CASCADE;  /*drop old table name if exist*/
+DROP TABLE IF EXISTS "categories" ,"order_detail_items",
+"users","orders" ,
+"shopping_cart" ,"products" CASCADE; /*drop all table and insert all new data */
 CREATE TABLE "categories"(
     "id" SERIAL primary key,
     "categories_name" VARCHAR(255) NOT NULL,
@@ -37,19 +43,20 @@ ALTER TABLE
 CREATE TABLE "orders"(
     "id" SERIAL primary key,
     "user_id" BIGINT NOT NULL,
-    "total_amount" BIGINT NOT NULL,
+    "total_amount" INTEGER NOT NULL,
     "created_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     "modified_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL
 );
 CREATE TABLE "shopping_cart"(
     "id" SERIAL primary key,
-    "user_id" BIGINT NOT NULL,
+    "user_id" INTEGER NOT NULL,
     "product_name" VARCHAR(255) NOT NULL,
-    "product_id" BIGINT NOT NULL,
+    "product_id" INTEGER NOT NULL,
     "product_color" VARCHAR(255) NOT NULL,
     "product_size" VARCHAR(255) NULL,
-    "product_quantity" BIGINT NOT NULL,
-    "selling_price" BIGINT NOT NULL,
+    "product_quantity" INTEGER NOT NULL,
+    "selling_price" INTEGER NOT NULL,
+    "total_amount" INTEGER , /* able to null will be SUM  b4 Insert by ID*/
     "created_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     "modified_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL
 );
