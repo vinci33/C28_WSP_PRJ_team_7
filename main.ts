@@ -4,7 +4,8 @@ import path from 'path';
 import { Client } from "pg";
 import dotenv from "dotenv";
 import { convertStr2Arr } from './utils';
-import { Colors, Products } from './model';
+import { Colors, Products, ShoppingCart } from './model';
+import { v4 as uuidv4 } from "uuid";
 
 const app = express();
 
@@ -26,6 +27,14 @@ const client = new Client({
     password: process.env.DB_PASSWORD,
 });
 client.connect();
+
+declare module 'express-session' {
+    interface SessionData {
+        tempUserId?: string
+        UserId?: string
+        cartCount?: number
+    }
+}
 
 app.get("/product.html/product_categories", (req, res) => {
     client.query(/*sql*/ `select categories_name from categories`, function (err, results) {
@@ -88,7 +97,8 @@ app.get('/shoppingCart.html/products', async (req, res) => {
 // }
 
 
-app.get("/proDetail.html/:id", async (req, res) => {
+
+app.get("/productDetail/:id", async (req, res) => {
     try {
         const id = parseInt(req.params.id);
         if (isNaN(id)) {
@@ -96,19 +106,36 @@ app.get("/proDetail.html/:id", async (req, res) => {
             return
         }
         const results = await client.query(/*sql*/ `SELECT * FROM products WHERE id = $1`, [id]);
+        const tempUserId = uuidv4()
+        req.session['tempUserId'] = tempUserId
         res.send(results.rows[0])
     } catch (err) {
         res.status(400).json({ success: false, msg: `unable to retrieve product with id ${req.params.id}` });
     }
 });
 
-// app.get("/products.html/:id/", async (req, res) => {
-//     const results = await client.query(/*sql*/ `SELECT * FROM products WHERE id = $1`, [req.params.id]);
-//     let result = results.rows
-//     console.log(result)
-//     res.send(results.rows[0]);
-// })
+app.post("/cartItem", async (req, res) => {
+    try {
+        const cartItem: ShoppingCart = await req.body;
+        console.log(cartItem)
+        console.log(cartItem.product_id, cartItem.product_quantity, req.session.tempUserId)
+        await client.query(/*sql*/ `INSERT INTO shopping_cart (user_id, product_id, product_quantity) VALUES ($1, $2, $3)`,
+            [req.session.tempUserId, cartItem.product_id, cartItem.product_quantity]);
+        req.session.cartCount = req.session.cartCount ? req.session.cartCount + 1 : 1
+        res.json({ success: true, msg: "item added to cart" })
+    } catch (err) {
+        res.status(400).json({ success: false, msg: "unable to add item to cart" });
+    }
+})
 
+app.get("/cartCount", async (req, res) => {
+    try {
+        res.json({ success: true, cartCount: req.session.cartCount })
+    } catch (err) {
+        res.status(400).json({ success: false, msg: "unable to get cart count" });
+    }
+
+})
 
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.static(path.join(__dirname, 'public/html')))

@@ -185,13 +185,28 @@ small {
     flex: 1;
 }*/
 
-.add-to-card-btn {
+.add-to-cart-btn {
     background-color: var(--accent);
     color: #fff;
     border: none;
     padding: 10px 20px;
     font-size: 16px;
     font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+}
+
+.add-to-cart-btn:hover {
+    background-color: var(--secondary);
+}
+
+.add-to-cart-btn:disabled {
+    background-color: #ccc;
+    color: #fff;
+    border: none;
+    /* padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold; */
     cursor: pointer;
     width: 100%;
 }

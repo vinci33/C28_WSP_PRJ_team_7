@@ -10,3 +10,9 @@ export interface Products {
     image_one: string;
     modified_at: string;
 }
+
+export interface ShoppingCart {
+    user_id: string;
+    product_id: string;
+    product_quantity: number;
+}
