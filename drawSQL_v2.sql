@@ -53,8 +53,8 @@ CREATE TABLE "shopping_cart"(
     "user_id" INTEGER NOT NULL,
     "product_id" INTEGER NOT NULL,
     "product_quantity" INTEGER NOT NULL,
-    "created_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
-    "modified_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL
+    "created_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    "modified_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 CREATE TABLE "products"(
     "id" SERIAL primary key,
@@ -67,8 +67,8 @@ CREATE TABLE "products"(
     "image_one" VARCHAR(255) NOT NULL,
     "image_two" VARCHAR(255) NULL,
     "image_three" VARCHAR(255) NULL,
-    "created_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
-    "modified_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL
+    "created_at" TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    "modified_at" TIMESTAMP WITHOUT TIME ZONE NOT NULL
 );
 ALTER TABLE
     "orders" ADD CONSTRAINT "orders_user_id_foreign" FOREIGN KEY("user_id") REFERENCES "users"("id");

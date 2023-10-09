@@ -5,7 +5,6 @@ import { Client } from "pg";
 import dotenv from "dotenv";
 import { convertStr2Arr } from './utils';
 import { Colors, Products, ShoppingCart } from './model';
-import { v4 as uuidv4 } from "uuid";
 
 const app = express();
 
@@ -29,7 +28,6 @@ client.connect();
 
 declare module 'express-session' {
     interface SessionData {
-        tempUserId?: string
         userId?: number
         cartCount?: number
     }
@@ -84,7 +82,7 @@ app.get("/product.html/all_products", async (req, res) => {
 // 加左product id
 app.get('/shoppingCart.html/products', async (req, res) => {
     try {
-        const user_id = req.params.user
+        // const user_id = req.params.user
         const queryResult = await client.query(/*sql*/
             `SELECT products.image_one as image_one, products.product_name as product_name,
              products.product_details as product_details, products.product_color as product_color,
@@ -119,9 +117,6 @@ app.get("/productDetail/:id", async (req, res) => {
             return
         }
         const results = await client.query(/*sql*/ `SELECT * FROM products WHERE id = $1`, [id]);
-        const tempUserId = uuidv4()
-        req.session['tempUserId'] = tempUserId
-        console.log(tempUserId)
         res.send(results.rows[0])
     } catch (err) {
         res.status(400).json({ success: false, msg: `unable to retrieve product with id ${req.params.id}` });
@@ -131,11 +126,10 @@ app.get("/productDetail/:id", async (req, res) => {
 app.post("/cartItem", async (req, res) => {
     try {
         const cartItem: ShoppingCart = await req.body;
-        console.log(cartItem)
-        console.log(cartItem.product_id, cartItem.product_quantity, req.session.tempUserId)
-        const user_id = await client.query(/*sql*/ `insert into users (user_name) values ($1) returning id`, [req.session.tempUserId])
-        await client.query(/*sql*/ `INSERT INTO shopping_cart (user_id, product_id, product_quantity) VALUES ($1, $2, $3)`,
-            [user_id, cartItem.product_id, cartItem.product_quantity]);
+        // console.log(cartItem, req.session.userId)
+        let shoppingCartId = await client.query(/*sql*/ `INSERT INTO shopping_cart (user_id, product_id, product_quantity ) VALUES ($1, $2, $3) RETURNING id `,
+            [req.session.userId, cartItem.product_id, cartItem.product_quantity]);
+        console.log(shoppingCartId.rows[0]);
         req.session.cartCount = req.session.cartCount ? req.session.cartCount + 1 : 1
         res.json({ success: true, msg: "item added to cart" })
     } catch (err) {
