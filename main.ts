@@ -127,10 +127,12 @@ app.post("/cartItem", async (req, res) => {
     try {
         const cartItem: ShoppingCart = await req.body;
         // console.log(cartItem, req.session.userId)
-        let shoppingCartId = await client.query(/*sql*/ `INSERT INTO shopping_cart (user_id, product_id, product_quantity ) VALUES ($1, $2, $3) RETURNING id `,
+        let shoppingCartId = await client.query(/*sql*/ `INSERT INTO shopping_cart (user_id, product_id, product_quantity ) 
+            VALUES ($1, $2, $3) RETURNING id `,
             [req.session.userId, cartItem.product_id, cartItem.product_quantity]);
         console.log(shoppingCartId.rows[0]);
         req.session.cartCount = req.session.cartCount ? req.session.cartCount + 1 : 1
+        console.log(req.session.cartCount)
         res.json({ success: true, msg: "item added to cart" })
     } catch (err) {
         res.status(400).json({ success: false, msg: "unable to add item to cart" });

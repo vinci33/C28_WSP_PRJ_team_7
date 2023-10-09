@@ -8,8 +8,8 @@ DROP TABLE IF EXISTS "categories" ,"order_detail_items",
 CREATE TABLE "categories"(
     "id" SERIAL primary key,
     "categories_name" VARCHAR(255) NOT NULL,
-    "created_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
-    "modified_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL
+    "created_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    "modified_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 ALTER TABLE
     "categories" ADD CONSTRAINT "categories_categories_name_unique" UNIQUE("categories_name");
@@ -23,8 +23,8 @@ CREATE TABLE "order_detail_items"(
     "product_quantity" BIGINT NOT NULL,
     "selling_price" BIGINT NOT NULL,
     "product_total_price" BIGINT NOT NULL,
-    "created_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
-    "modified_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL
+    "created_at"  TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    "modified_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 CREATE TABLE "users"(
     "id" SERIAL primary key,
@@ -34,8 +34,8 @@ CREATE TABLE "users"(
     "last_name" VARCHAR(255) ,
     "phone" VARCHAR(255) NULL,
     "email" VARCHAR(255) NULL,
-    "created_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
-    "modified_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL
+    "created_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    "modified_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 ALTER TABLE
     "users" ADD CONSTRAINT "users_user_name_unique" UNIQUE("user_name");
@@ -45,8 +45,8 @@ CREATE TABLE "orders"(
     "id" SERIAL primary key,
     "user_id" BIGINT NOT NULL,
     "total_amount" INTEGER NOT NULL,
-    "created_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
-    "modified_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL
+    "created_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    "modified_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 CREATE TABLE "shopping_cart"(
     "id" SERIAL primary key,
@@ -67,8 +67,8 @@ CREATE TABLE "products"(
     "image_one" VARCHAR(255) NOT NULL,
     "image_two" VARCHAR(255) NULL,
     "image_three" VARCHAR(255) NULL,
-    "created_at" TIMESTAMP WITHOUT TIME ZONE NOT NULL,
-    "modified_at" TIMESTAMP WITHOUT TIME ZONE NOT NULL
+    "created_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    "modified_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 ALTER TABLE
     "orders" ADD CONSTRAINT "orders_user_id_foreign" FOREIGN KEY("user_id") REFERENCES "users"("id");
