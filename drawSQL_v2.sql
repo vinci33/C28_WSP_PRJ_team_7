@@ -55,12 +55,6 @@ CREATE TABLE "shopping_cart"(
     "product_quantity" INTEGER NOT NULL,
     "created_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     "modified_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL
-    -- Not Added to the table:
-    -- "product_name" VARCHAR(255) NOT NULL,
-    -- "product_color" VARCHAR(255) NOT NULL,
-    -- "product_size" VARCHAR(255) NULL,
-    -- "selling_price" INTEGER NOT NULL,
-    -- "total_amount" INTEGER , /* able to null will be SUM  b4 Insert by ID*/
 );
 CREATE TABLE "products"(
     "id" SERIAL primary key,

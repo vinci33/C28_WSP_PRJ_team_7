@@ -9,7 +9,6 @@ import { v4 as uuidv4 } from "uuid";
 
 const app = express();
 
-
 app.use(express.json());
 app.use(
     expressSession({
@@ -81,15 +80,17 @@ app.get("/product.html/all_products", async (req, res) => {
 })
 
 
-// 仲未加check user ID
+// 仲未加check user ID && user id
+// 加左product id
 app.get('/shoppingCart.html/products', async (req, res) => {
     try {
+        const user_id = req.params.user
         const queryResult = await client.query(/*sql*/
             `SELECT products.image_one as image_one, products.product_name as product_name,
              products.product_details as product_details, products.product_color as product_color,
              products.product_size as product_size, products.selling_price as selling_price, 
-             products.image_one as image_one, product_quantity from shopping_cart inner join products
-             on shopping_cart.product_id = products.id order by shopping_cart.modified_at`)
+             products.image_one as image_one, product_id, product_quantity from shopping_cart inner join products
+             on shopping_cart.product_id = products.id order by shopping_cart.modified_at where shopping_cart.used_name = `)
         res.json(queryResult.rows)
     } catch (err) {
         res.status(400).json({ success: false, msg: "error occurred" });
@@ -97,9 +98,16 @@ app.get('/shoppingCart.html/products', async (req, res) => {
 })
 
 // 仲未加user id
-// app.delete('/shoppingCart.html', async (req, res) => {
-
-// }
+app.delete('/shoppingCart.html', async (req, res) => {
+    try {
+        const product_id = req.body.product_id;
+        const sql = `delete from shopping_cart where product_id = $1`
+        await client.query(sql, [product_id])
+        res.json({ success: true, msg: "success" })
+    } catch (err) {
+        res.status(400).json({ success: false, msg: "error occurred" });
+    }
+})
 
 
 
@@ -113,6 +121,7 @@ app.get("/productDetail/:id", async (req, res) => {
         const results = await client.query(/*sql*/ `SELECT * FROM products WHERE id = $1`, [id]);
         const tempUserId = uuidv4()
         req.session['tempUserId'] = tempUserId
+        console.log(tempUserId)
         res.send(results.rows[0])
     } catch (err) {
         res.status(400).json({ success: false, msg: `unable to retrieve product with id ${req.params.id}` });
