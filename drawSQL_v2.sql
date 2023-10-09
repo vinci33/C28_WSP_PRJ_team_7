@@ -29,11 +29,11 @@ CREATE TABLE "order_detail_items"(
 CREATE TABLE "users"(
     "id" SERIAL primary key,
     "user_name" VARCHAR(255) NOT NULL,
-    "password" VARCHAR(255) NOT NULL,
-    "first_name" VARCHAR(255) NOT NULL,
-    "last_name" VARCHAR(255) NOT NULL,
+    "password" VARCHAR(255) ,
+    "first_name" VARCHAR(255) ,
+    "last_name" VARCHAR(255) ,
     "phone" VARCHAR(255) NULL,
-    "email" VARCHAR(255) NOT NULL,
+    "email" VARCHAR(255) NULL,
     "created_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     "modified_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL
 );

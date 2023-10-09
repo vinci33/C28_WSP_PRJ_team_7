@@ -31,10 +31,15 @@ client.connect();
 declare module 'express-session' {
     interface SessionData {
         tempUserId?: string
-        UserId?: string
+        userId?: number
         cartCount?: number
     }
 }
+
+app.use((req, _res, next) => {
+    req.session.userId = 1
+    next()
+});
 
 app.get("/product.html/product_categories", (req, res) => {
     client.query(/*sql*/ `select categories_name from categories`, function (err, results) {
@@ -119,8 +124,9 @@ app.post("/cartItem", async (req, res) => {
         const cartItem: ShoppingCart = await req.body;
         console.log(cartItem)
         console.log(cartItem.product_id, cartItem.product_quantity, req.session.tempUserId)
+        const user_id = await client.query(/*sql*/ `insert into users (user_name) values ($1) returning id`, [req.session.tempUserId])
         await client.query(/*sql*/ `INSERT INTO shopping_cart (user_id, product_id, product_quantity) VALUES ($1, $2, $3)`,
-            [req.session.tempUserId, cartItem.product_id, cartItem.product_quantity]);
+            [user_id, cartItem.product_id, cartItem.product_quantity]);
         req.session.cartCount = req.session.cartCount ? req.session.cartCount + 1 : 1
         res.json({ success: true, msg: "item added to cart" })
     } catch (err) {
