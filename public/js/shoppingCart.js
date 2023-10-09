@@ -20,7 +20,7 @@ async function initProducts() {
     ).textContent = `${product.product_details} (${product.product_color})`;
     productClone.querySelector(
       ".product-selling-price"
-    ).textContent = `$ ${product.selling_price}`;
+    ).textContent = `$ ${product.selling_price.toLocaleString()}`;
     productClone.querySelector(
       ".product-quantity"
     ).textContent = `${product.product_quantity}`;

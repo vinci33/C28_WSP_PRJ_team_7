@@ -50,7 +50,7 @@
   border-bottom: solid 1px #17b9a4;
 }
 
-.product-header-product {
+.product-header-description {
   flex: 6;
   text-align: left;
 }
@@ -75,7 +75,7 @@
 }
 
 .container {
-  width: 100%;
+  min-width: 100%;
   margin: 0;
   padding: 0;
   display: flex;
@@ -83,12 +83,12 @@
   align-items: center;
 }
 
-.container > img {
-  flex: 2;
+.img-fluid {
+  flex: 1.5;
 }
 
 .product-description {
-  flex: 4;
+  flex: 4.5;
 }
 
 .stepper {
