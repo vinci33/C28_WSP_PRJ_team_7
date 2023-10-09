@@ -5,7 +5,6 @@ import { Client } from "pg";
 import dotenv from "dotenv";
 import { convertStr2Arr } from './utils';
 import { Colors, Products, ShoppingCart } from './model';
-import { v4 as uuidv4 } from "uuid";
 // import { isLoggedIn } from './guards'
 
 const app = express();
