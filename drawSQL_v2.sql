@@ -28,10 +28,10 @@ CREATE TABLE "order_detail_items"(
 );
 CREATE TABLE "users"(
     "id" SERIAL primary key,
-    "user_name" VARCHAR(255) NOT NULL,
+    "user_name" VARCHAR(255) NULL,
     "password" VARCHAR(255) NOT NULL,
-    "first_name" VARCHAR(255) NOT NULL,
-    "last_name" VARCHAR(255) NOT NULL,
+    "first_name" VARCHAR(255) NULL,
+    "last_name" VARCHAR(255) NULL,
     "phone" VARCHAR(255) NULL,
     "email" VARCHAR(255) NOT NULL,
     "created_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,

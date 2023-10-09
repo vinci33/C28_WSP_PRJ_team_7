@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import { convertStr2Arr } from './utils';
 import { Colors, Products, ShoppingCart } from './model';
 import { v4 as uuidv4 } from "uuid";
+// import { isLoggedIn } from './guards'
 
 const app = express();
 
@@ -35,6 +36,27 @@ declare module 'express-session' {
         cartCount?: number
     }
 }
+
+app.post('/create-account', (req, res) => {
+    const { email, password } = req.body;
+
+    // Insert the user registration information into the "users" table
+    const query = 'INSERT INTO users (email, password, created_at, modified_at) VALUES ($1, $2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) RETURNING *';
+    const values = [email, password];
+
+    client
+        .query(query, values)
+        .then((result) => {
+            res.status(200).json({ message: 'Account created!', user: result.rows[0] });
+        })
+        .catch((err) => {
+            console.error('Error creating account:', err);
+            res.status(500).json({ message: 'Error creating account' });
+        });
+});
+
+
+
 
 app.get("/product.html/product_categories", (req, res) => {
     client.query(/*sql*/ `select categories_name from categories`, function (err, results) {
@@ -148,3 +170,5 @@ const PORT = 8080
 app.listen(PORT, () => {
     console.log(`Server is listening on ${PORT}`)
 })
+
+export { Client };

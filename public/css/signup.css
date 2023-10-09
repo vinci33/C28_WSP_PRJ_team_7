@@ -145,6 +145,15 @@ footer {
     font-size: 15px;
 }
 
+#confirmPassword {
+    height: 50px;
+    width: 400px;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    padding: 20px;
+    font-size: 15px;
+}
+
 .fa-regular {
     display: flex;
     align-items: center;
@@ -187,13 +196,13 @@ footer {
     text-align: left;
 }
 
-.sign-in-btn {
+.signupbtn {
     display: flex;
     justify-content: center;
     margin-top: 30px;
 }
 
-#sign-in-btn {
+#signupbtn {
     display: flex;
     justify-content: center;
     height: 50px;
@@ -215,7 +224,7 @@ footer {
     font-size: 15px;
 }
 
-.loginbtn {
+.signupbtn {
     color: var(--primary);
 }
 

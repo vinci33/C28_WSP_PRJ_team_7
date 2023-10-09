@@ -170,13 +170,13 @@ body {
     text-align: left;
 }
 
-.sign-in-btn {
+.loginbtn {
     display: flex;
     justify-content: center;
     margin-top: 30px;
 }
 
-#sign-in-btn {
+#loginbtn {
     display: flex;
     justify-content: center;
     height: 50px;
