@@ -25,17 +25,35 @@ async function initProducts() {
       ".product-quantity"
     ).textContent = `${product.product_quantity}`;
 
-    productClone.querySelector(".product-total-price").textContent = `$ ${
+    productClone.querySelector(".product-total-price").textContent = `$ ${(
       product.selling_price * product.product_quantity
-    }`;
+    ).toLocaleString()}`;
 
     productContainerEle.appendChild(productClone);
   }
 }
 
-// function deleteItems() {
+// 需要定義番product_id 及 user_id
+// 執行initProducts()時，要delete all div????
+//1:00:00
+// async function deleteItems(pid) {
+//   const res = await fetch("/shoppingCart.html"),
+//     {
+//       method: "DELETE",
+//       body: json.stringify({
+//         product_id: pid,
+//       }),
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//     };
+//     if (res.ok){
+//       initProducts()
+//     } else {
+//       alert('Error when loading the page')
+//     }
+
 //   document.addEventListener(".remove-button", async function('click', (e) => {
 
 //   })
-
-//   )}
+// }
