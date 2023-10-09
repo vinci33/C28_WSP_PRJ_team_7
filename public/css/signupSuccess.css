@@ -8,14 +8,6 @@
 
 @import url('https://fonts.googleapis.com/css?family=Poppins:400|Noto Sans:700');
 
-
-.container-fluid {
-    width: 100%;
-    padding-right: 0px;
-    padding-left: 0px;
-    margin-right: auto;
-    margin-left: auto;
-}
 body {
     font-family: 'poppins', sans-serif;
     font-weight: 400;
@@ -25,13 +17,8 @@ footer {
 }
 
 
-/* Nar Bar */
+/* Nav Bar */
 .logo-img {
-    height: 100px;
-    padding-left: 80px;
-}
-
-.logo-div .logo-img {
     height: 100px;
     padding-left: 80px;
 }
@@ -41,7 +28,6 @@ footer {
 }
 
 .navbar-light .navbar-nav .nav-item .nav-link {
-    padding: 0 20px;
     color: var(--text);
     transition: 0.3 ease-in-out;
 }
@@ -99,126 +85,45 @@ footer {
     font-weight: bolder;
 }
 
-.google {
-    display: flex;
-    justify-content: center;
-    border-radius: 8px;
-    background: white;
-    appearance: none;
-    margin-top: 12px;
-}
-
-.googlebtn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: white;
-    border: 1px solid lightgrey;
-    height: 60px;
-    width: 380px;
-    margin-top: 20px;
-    border: 1px solid lightgrey;
-    border-radius: 5px;
-}
-
-.or {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.email {
-    display: flex;
-    justify-content: center;
-    align-items: left;
-    margin-top: 20px;
-    font-size: 15px;
-}
-
-.emailbox {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-#email {
-    height: 50px;
-    width: 400px;
-    border: 1px solid lightgrey;
-    border-radius: 5px;
-    padding: 20px;
-    font-size: 15px;
-}
-
-#password {
-    height: 50px;
-    width: 400px;
-    border: 1px solid lightgrey;
-    border-radius: 5px;
-    padding: 20px;
-    font-size: 15px;
-}
-
-#confirmPassword {
-    height: 50px;
-    width: 400px;
-    border: 1px solid lightgrey;
-    border-radius: 5px;
-    padding: 20px;
-    font-size: 15px;
-}
-
-.fa-regular {
-    display: flex;
-    align-items: center;
-}
-
-.password {
-    display: flex;
-    justify-content: center;
-    margin-top: 40px;
-    font-size: 15px;
-}
-
-.pwbox {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-
-}
-
-.confirm-password {
-    display: flex;
-    justify-content: center;
-    margin-top: 40px;
-    font-size: 15px;
-}
-
-.conpwbox {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.placeholder {
-    font-size: 5px;
-}
-
-.input-label {
-    width: 400px;
-    padding-left: 12px;
-    text-align: left;
-}
-
-.signupbtn {
+.intro1 {
+    color: var(--neutral-gray-1, #303030);
+    font-family: Poppins;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%;
+    letter-spacing: 0.72px;
     display: flex;
     justify-content: center;
     margin-top: 30px;
+    font-family: Poppins;
 }
 
-#signupbtn {
+.intro2 {
+    color: var(--neutral-gray-1, #303030);
+    font-family: Poppins;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%;
+    letter-spacing: 0.72px;
     display: flex;
     justify-content: center;
+    margin-top: 30px;
+    font-family: Poppins;
+}
+
+.goshopbtn {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    text-decoration: none;
+}
+
+#goshopbtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 50px;
     width: 430px;
     background: var(--primary);
@@ -228,27 +133,11 @@ footer {
     color: white;
     font-size: 15px;
     margin-top: 20px;
+    text-decoration: none;
 }
 
-.loginbox {
-    display: flex;
-    justify-content: center;
-    margin-top: 15px;
-    margin-bottom: 30px;
-    color: rgb(187, 187, 187);
-    font-size: 15px;
-}
-
-.signupbtn {
+.goshopbtn {
     color: var(--primary);
-}
-
-input:focus {
-    box-shadow: 2px 2px 2px 2px lightgrey;
-}
-
-input:hover {
-    box-shadow: 2px 2px 2px 2px lightgrey;
 }
 
 /* Footer */

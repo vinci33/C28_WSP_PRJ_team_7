@@ -16,3 +16,8 @@ export interface ShoppingCart {
     product_id: string;
     product_quantity: number;
 }
+
+export interface users {
+    email: string;
+    password: string;
+}
