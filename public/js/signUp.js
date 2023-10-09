@@ -32,7 +32,7 @@ document.getElementById("createAccountForm").addEventListener("submit", function
       console.log("Account created!");
 
       // Redirect to the success page
-      window.location.href = "/success-page.html";
+      window.location.href = "/signupSuccess.html";
     } else {
       // Handle error response
       console.error("Error creating account");

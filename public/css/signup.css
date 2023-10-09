@@ -8,6 +8,14 @@
 
 @import url('https://fonts.googleapis.com/css?family=Poppins:400|Noto Sans:700');
 
+
+.container-fluid {
+    width: 100%;
+    padding-right: 0px;
+    padding-left: 0px;
+    margin-right: auto;
+    margin-left: auto;
+}
 body {
     font-family: 'poppins', sans-serif;
     font-weight: 400;
@@ -17,8 +25,13 @@ footer {
 }
 
 
-/* Nav Bar */
+/* Nar Bar */
 .logo-img {
+    height: 100px;
+    padding-left: 80px;
+}
+
+.logo-div .logo-img {
     height: 100px;
     padding-left: 80px;
 }
@@ -28,6 +41,7 @@ footer {
 }
 
 .navbar-light .navbar-nav .nav-item .nav-link {
+    padding: 0 20px;
     color: var(--text);
     transition: 0.3 ease-in-out;
 }
@@ -220,6 +234,7 @@ footer {
     display: flex;
     justify-content: center;
     margin-top: 15px;
+    margin-bottom: 30px;
     color: rgb(187, 187, 187);
     font-size: 15px;
 }
