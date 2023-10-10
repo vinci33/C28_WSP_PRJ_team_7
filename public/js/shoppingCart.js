@@ -47,6 +47,9 @@ async function initProducts() {
         ) {
           const pid = e.target.parentNode.getAttribute("pid");
           deleteItems(pid);
+        } else {
+          const pid = e.target.getAttribute("pid");
+          deleteItems(pid);
         }
       });
 
