@@ -1,9 +1,13 @@
 /* can use `psql -U username -W -d db_name -f file.sql` to run this file */
-DROP TABLE IF EXISTS "order_items" ,
-"order"  CASCADE;  /*drop old table name if exist*/
-DROP TABLE IF EXISTS "categories" ,"order_detail_items",
-"users","orders" ,
-"shopping_cart" ,"products" CASCADE; /*drop all table and insert all new data */
+DROP TABLE IF EXISTS "order_items"   CASCADE;
+DROP TABLE IF EXISTS "order"  CASCADE;  /*drop old table name if exist*/
+
+DROP TABLE IF EXISTS "categories"  CASCADE; /*drop all table and insert all new data */
+DROP TABLE IF EXISTS "order_detail_items" CASCADE;
+DROP TABLE IF EXISTS "users" CASCADE;
+DROP TABLE IF EXISTS "orders" CASCADE;
+DROP TABLE IF EXISTS "shopping_cart"  CASCADE;
+DROP TABLE IF EXISTS "products" CASCADE;
 
 CREATE TABLE "categories"(
     "id" SERIAL primary key,
@@ -26,6 +30,7 @@ CREATE TABLE "order_detail_items"(
     "created_at"  TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     "modified_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
+-- TODO: add  User adderss table fk user_id
 CREATE TABLE "users"(
     "id" SERIAL primary key,
     "user_name" VARCHAR(255) NULL,

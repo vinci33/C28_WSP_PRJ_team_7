@@ -156,7 +156,8 @@ app.post("/cartItem", async (req, res) => {
         req.session.cartCount = req.session.cartCount ? req.session.cartCount + 1 : 1
         console.log(req.session.cartCount)
         res.json({ success: true, msg: "item added to cart" })
-    } catch (err) {
+    } catch (err: any) {
+        console.error(err.message);
         res.status(400).json({ success: false, msg: "unable to add item to cart" });
     }
 })
@@ -169,6 +170,8 @@ app.get("/cartCount", async (req, res) => {
     }
 
 })
+
+
 
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.static(path.join(__dirname, 'public/html')))
@@ -184,4 +187,4 @@ app.listen(PORT, () => {
 
 
 
-// export { Client };
+export { client };
