@@ -73,7 +73,7 @@ async function initProducts(searchParams) {
     ].toLocaleString()}`;
 
     let difference =
-      new Date().getTime() - new Date(product["modified_at"]).getTime();
+      new Date().getTime() - new Date(product["created_at"]).getTime();
     productClone.querySelector(
       ".post-date"
     ).textContent = `Posted On: ${Math.floor(
