@@ -5,6 +5,8 @@ import { Client } from "pg";
 import dotenv from "dotenv";
 import { convertStr2Arr } from './utils';
 import { Colors, Products, ShoppingCart } from './model';
+import * as bcrypt from 'bcryptjs'
+
 // import { isLoggedIn } from './guards'
 
 const app = express();
@@ -52,21 +54,28 @@ app.post('/create-account', (req, res) => {
         });
 });
 
+
+
 app.post('/login', async (req, res) => {
-    console.log(req.body);
+    try {
+      console.log(req.body);
+  
+      const result = await client.query(`SELECT users.id, users.email, users.password FROM users WHERE users.email = $1`, [req.body.email]);
+    const user = result.rows[0];
 
-    const result = await client.query(`SELECT users.email, users.password FROM users WHERE users.email = $1`, [req.body.email]);
-    const userList: user = result.rows[0];
-
-    if (
-        userList.some(
-            (user) => user.password === req.body.password
-        )
-    ){
-        console.log(`login success`);
-        req.session.userId = userList[0].id;
+    if (!user || !(await bcrypt.compare(req.body.password, user.password))) {
+      console.log('Invalid login');
+      return res.status(401).json({ error: 'Invalid credentials' });
     }
-});
+
+    console.log('Login success');
+    req.session.userId = user.id;
+    return res.json({ message: 'Login successful', userId: user.id });
+  } catch (error) {
+    console.error('An error occurred during login:', error);
+    return res.status(500).json({ error: 'An error occurred during login' });
+    }
+  });
 
 
 

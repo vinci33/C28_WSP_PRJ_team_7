@@ -17,7 +17,8 @@ export interface ShoppingCart {
     product_quantity: number;
 }
 
-export interface users {
+export interface Users {
+    id: number;
     email: string;
     password: string;
 }
