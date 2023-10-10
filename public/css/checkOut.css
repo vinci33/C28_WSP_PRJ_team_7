@@ -72,6 +72,17 @@ h5 {
     gap: 10px;
 }
 
+.name-input {
+    display: flex;
+    gap: 10px;
+}
+
+.form-alert {
+    color: red;
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
 .checkout-login-btn {
     width: 100%;
     background-color: var(--primary);
@@ -86,4 +97,17 @@ h5 {
 .checkout-login-btn:hover {
     background-color: var(--secondary);
     color: var(--text);
+}
+
+.client-detail {
+    width: 600px;
+}
+
+.product-summary {
+    color: #f9f9f9;
+    font-size: 5rem;
+    background-color: black;
+    box-shadow: #4eb7b0 0px 0px 40px 0px;
+    width: 600px;
+    height: 700px;
 }
