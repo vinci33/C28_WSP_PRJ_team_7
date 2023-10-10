@@ -1,6 +1,5 @@
 window.onload = () => {
   initProducts();
-  // deleteItems();
 };
 
 async function initProducts() {
@@ -9,6 +8,9 @@ async function initProducts() {
 
   const productContainerEle = document.querySelector(".product-container");
   const templateEle = document.querySelector("#product-template");
+  productContainerEle.innerHTML = "";
+
+  let totalAmount = 0;
 
   for (const product of products) {
     const productClone = templateEle.content.cloneNode(true);
@@ -20,7 +22,7 @@ async function initProducts() {
     ).textContent = `${product.product_details} (${product.product_color})`;
     productClone.querySelector(
       ".product-selling-price"
-    ).textContent = `$ ${product.selling_price.toLocaleString()}`;
+    ).textContent = `$ ${product.selling_price.toLocaleString()}`; //*pls use this for all price .toLocaleString()
     productClone.querySelector(
       ".product-quantity"
     ).textContent = `${product.product_quantity}`;
@@ -29,31 +31,41 @@ async function initProducts() {
       product.selling_price * product.product_quantity
     ).toLocaleString()}`;
 
+    totalAmount += product.selling_price * product.product_quantity;
+
+    productClone
+      .querySelector(".remove-button")
+      .setAttribute("pid", product.product_id);
+
+    //e.target 出現問題
+    productClone
+      .querySelector(".remove-button")
+      .addEventListener("click", function (e) {
+        const pid = e.target.getAttribute("pid");
+        deleteItems(pid);
+      });
+
     productContainerEle.appendChild(productClone);
   }
+
+  document.querySelector(
+    ".product-footer-total"
+  ).textContent = `$ ${totalAmount.toLocaleString()}`;
 }
 
-// 需要定義番product_id 及 user_id
-// 執行initProducts()時，要delete all div????
-//1:00:00
-// async function deleteItems(pid) {
-//   const res = await fetch("/shoppingCart.html"),
-//     {
-//       method: "DELETE",
-//       body: json.stringify({
-//         product_id: pid,
-//       }),
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//     };
-//     if (res.ok){
-//       initProducts()
-//     } else {
-//       alert('Error when loading the page')
-//     }
-
-//   document.addEventListener(".remove-button", async function('click', (e) => {
-
-//   })
-// }
+async function deleteItems(pid) {
+  const res = await fetch("/shoppingCart.html", {
+    method: "DELETE",
+    body: JSON.stringify({
+      product_id: pid,
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  if (res.ok) {
+    initProducts();
+  } else {
+    alert("Error when loading the page");
+  }
+}

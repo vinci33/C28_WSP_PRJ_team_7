@@ -45,8 +45,7 @@
 
 .products-header {
   display: flex;
-  flex-wrap: wrap;
-  padding: 20px;
+  padding: 30px;
   border-bottom: solid 1px #17b9a4;
 }
 
@@ -69,9 +68,13 @@
   flex: 1;
 }
 
+.product-container {
+  padding: 30px;
+  border-bottom: solid 1px #17b9a4;
+}
+
 .card {
   border: none;
-  padding: 0px 20px;
 }
 
 .container {
@@ -108,6 +111,33 @@
   cursor: pointer;
 }
 
+.product-footer {
+  min-width: 100%;
+  display: flex;
+  padding: 30px;
+}
+
+.product-footer-description {
+  flex: 6;
+  text-align: left;
+}
+
+.product-footer-subtotal {
+  flex: 2;
+  text-align: left;
+}
+
+.product-footer-total {
+  flex: 3;
+  text-align: left;
+}
+
+.checkout-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0px 50px 0px;
+}
+
 .checkout-btn {
   background-color: var(--accent);
   color: #fff;
@@ -116,7 +146,6 @@
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
-  width: 100%;
 }
 
 /* navbar and footer css */
