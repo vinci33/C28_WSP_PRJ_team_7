@@ -9,6 +9,12 @@ DROP TABLE IF EXISTS "orders" CASCADE;
 DROP TABLE IF EXISTS "shopping_cart"  CASCADE;
 DROP TABLE IF EXISTS "products" CASCADE;
 
+-- TODO: Drop Table start
+DROP TABLE IF EXISTS "user_address" CASCADE;
+DROP TABLE IF EXISTS "delivery" CASCADE;
+-- TODO: Drop Table end
+
+
 CREATE TABLE "categories"(
     "id" SERIAL primary key,
     "categories_name" VARCHAR(255) NOT NULL,
@@ -30,7 +36,7 @@ CREATE TABLE "order_detail_items"(
     "created_at"  TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     "modified_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
--- TODO: add  User adderss table fk user_id
+
 CREATE TABLE "users"(
     "id" SERIAL primary key,
     "user_name" VARCHAR(255) NULL,
@@ -46,6 +52,36 @@ ALTER TABLE
     "users" ADD CONSTRAINT "users_user_name_unique" UNIQUE("user_name");
 ALTER TABLE
     "users" ADD CONSTRAINT "users_email_unique" UNIQUE("email");
+
+-- TODO: add  User adderss table fk user_id
+CREATE TABLE "user_address"(
+    "id" SERIAL primary key,
+    "user_id" BIGINT NOT NULL,
+    "address1" VARCHAR(255) NOT NULL,
+    "address2" VARCHAR(255) NULL,
+    "street" VARCHAR(255) NULL,
+    "city" VARCHAR(255) NULL,
+    "postal_code" INTEGER,
+    "country"  VARCHAR(255) NULL,
+    "created_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    "modified_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+ALTER TABLE
+    "user_address" ADD CONSTRAINT "user_address_user_id_foreign" FOREIGN KEY("user_id") REFERENCES "users"("id");
+CREATE TABLE "delivery"(
+    "id" SERIAL primary key,
+    "user_id" BIGINT NOT NULL,
+    "address1" VARCHAR(255) NOT NULL,
+    "address2" VARCHAR(255) NULL,
+    "street" VARCHAR(255) NULL,
+    "city" VARCHAR(255) NULL,
+    "postal_code" INTEGER,
+    "country"  VARCHAR(255) NULL,
+    "created_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    "modified_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+-- TODO: End of adding
+
 CREATE TABLE "orders"(
     "id" SERIAL primary key,
     "user_id" BIGINT NOT NULL,
