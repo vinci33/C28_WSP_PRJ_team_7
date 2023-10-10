@@ -28,7 +28,7 @@ async function checkOut() {
                 });
                 const result = await resp.json();
                 if (result.success) {
-                    window.location.href = '/thankyou';
+                    window.location.href = './product.html';
                 }
             } catch (err) {
                 console.error(`Unable to submit check out info: ${err}`);

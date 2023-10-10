@@ -192,6 +192,15 @@ app.get("/cartCount", async (req, res) => {
 
 })
 
+app.post("/checkout", async (req, res) => {
+    try {
+        const checkoutDetail = req.body;
+        console.log(checkoutDetail)
+        res.json({ success: true, msg: "checkout success" })
+    } catch (err) {
+        res.status(400).json({ success: false, msg: "unable to checkout" });
+    }
+})
 
 
 app.use(express.static(path.join(__dirname, 'public')))
