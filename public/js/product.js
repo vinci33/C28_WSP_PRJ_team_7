@@ -68,9 +68,9 @@ async function initProducts(searchParams) {
       ".product-title"
     ).textContent = `${product["product_name"]} (${product["product_color"]})`;
 
-    productClone.querySelector(
-      ".product-price"
-    ).textContent = `$ ${product["selling_price"]}`;
+    productClone.querySelector(".product-price").textContent = `$ ${product[
+      "selling_price"
+    ].toLocaleString()}`;
 
     let difference =
       new Date().getTime() - new Date(product["modified_at"]).getTime();
