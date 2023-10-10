@@ -60,57 +60,42 @@
         </div>
     </nav>
     <section>
-        <div class="container chech-out-countainer">countainer
+        <div class="container chech-out-countainer">
             <div class="row container mx-auto">
-                <div class="col-lg-6 col-md-6 col-12 my-auto">
+                <div class="col-lg-6 col-md-6 col-12 my-auto client-detail">
                     <div class="form container">
                         <h2 class="heading">Check Out</h2>
-                        <p class="text my-4">Contact</p>
-                        <form>
-                            <div>
+                        <p class="text my-4">Contact</p><span class="contact-alert form-alert"
+                            style="display: none;">"Please fill
+                            in all the
+                            blanks"</span>
+                        <form class="check-out-form">
+                            <div class="name-input">
                                 <input class="form-control" type="text" id="first-name" placeholder="First Name">
                                 <input class="form-control" type="text" id="last-name" placeholder="Last Name">
                             </div>
-                            <input class="form-control" type="tel" id="tel" placeholder="Contact Number">
-                        </form>
-                        <p class="text my-4">Delivery Address</p>
-                        <form>
-                            <input class="form-control" type="text" id="address" placeholder="Address">
-                            <input class="form-control" type="text" id="street" placeholder="Street">
+                            <input class="form-control" type="email" id="email" placeholder="Enter Email">
+                            <input class="form-control" type="tel" id="phone" placeholder="Contact Number">
+                            <p class="text my-4">Delivery Address</p><span class="address-alert form-alert"
+                                style="display: none;">"Please fill
+                                in all the
+                                blanks"</span>
+                            <input class="form-control" type="text" id="address1" placeholder="Address 1">
+                            <input class="form-control" type="text" id="address2" placeholder="Address 2">
                             <div class="three-input-container">
+                                <input class="form-control" type="text" id="street" placeholder="Street">
                                 <input class="form-control" type="text" id="city" placeholder="City">
-                                <input class="form-control" type="text" id="state" placeholder="State">
-                                <input class="form-control" type="text" id="postal-code" placeholder="Postal Code">
+                                <input class="form-control" type="text" pattern="[0-9]{5}" id="postal-code"
+                                    placeholder="Five Digit Postal Code">
                             </div>
-                            <input class="form-control" type="text" id="Country" placeholder="Country">
-                            <button class="checkout-login-btn btn mt-3">Check Out</button>
+                            <input class="form-control" type="text" id="country" placeholder="Country">
+                            <button type="button" class="checkout-login-btn btn mt-3">Check Out</button>
                         </form>
                     </div>
 
                 </div>
-                <div class="col-lg-6 col-md-6 col-12 my-auto">
-                    <template id="product-template">
-                        <div class="product card">
-                            <div class="container">
-                                <div class="img-fluid" width="400">
-                                    <img src="" alt="Avatar" height="200" width="100%" />
-                                </div>
-                                <div class="product-description">
-                                    <div class="product-details"></div>
-                                    <div class="product-selling-price"></div>
-                                </div>
-                                <div class="stepper">
-                                    <div class="reduce">-</div>
-                                    <div class="product-quantity"></div>
-                                    <div class="add">+</div>
-                                </div>
-                                <div class="product-total-price"></div>
-                                <div class="remove-button">
-                                    <i class="fa-solid fa-xmark"></i> <b>Remove</b>
-                                </div>
-                            </div>
-                        </div>
-                    </template>
+                <div class="col-lg-6 col-md-6 col-12 my-auto product-summary">
+                    Product Summary
                 </div>
             </div>
         </div>
@@ -170,6 +155,5 @@
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
 <script type="text/javascript" src="../js/checkOut.js"></script>
-<script type="text/javascript" src="../js/shoppingCart.js"></script>
 
 </html>
