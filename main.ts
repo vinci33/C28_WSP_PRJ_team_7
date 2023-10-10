@@ -52,21 +52,21 @@ app.post('/create-account', (req, res) => {
         });
 });
 
-app.post('/login', async (req, res) => {
-    console.log(req.body);
+// app.post('/login', async (req, res) => {
+//     console.log(req.body);
 
-    const result = await client.query(`SELECT users.email, users.password FROM users WHERE users.email = $1`, [req.body.email]);
-    const userList: user = result.rows[0];
+//     const result = await client.query(`SELECT users.email, users.password FROM users WHERE users.email = $1`, [req.body.email]);
+//     const userList: user = result.rows[0];
 
-    if (
-        userList.some(
-            (user) => user.password === req.body.password
-        )
-    ){
-        console.log(`login success`);
-        req.session.userId = userList[0].id;
-    }
-});
+//     if (
+//         userList.some(
+//             (user) => user.password === req.body.password
+//         )
+//     ){
+//         console.log(`login success`);
+//         req.session.userId = userList[0].id;
+//     }
+// });
 
 
 
