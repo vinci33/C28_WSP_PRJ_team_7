@@ -124,7 +124,7 @@ app.get('/shoppingCart.html/products', async (req, res) => {
              products.product_details as product_details, products.product_color as product_color,
              products.product_size as product_size, products.selling_price as selling_price, 
              products.image_one as image_one, product_id, product_quantity from shopping_cart inner join products
-             on shopping_cart.product_id = products.id order by shopping_cart.modified_at where shopping_cart.user_id = $1`, [user_id])
+             on shopping_cart.product_id = products.id where user_id = $1 order by shopping_cart.modified_at`, [user_id])
         res.json(queryResult.rows)
     } catch (err) {
         res.status(400).json({ success: false, msg: "error occurred" });
