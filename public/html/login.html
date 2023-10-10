@@ -58,34 +58,34 @@
     <!-- Body -->
     <div class="container-fluid mb-5">
         <div class="greeting">Hi, Welcome Back!</div>
-        <div class="google"><button class="googlebtn" type="button">
-                <i class="fa-brands fa-google"></i>&nbsp;&nbsp;&nbsp;Sign in with Google</button></div>
+        <form action="/action_page.php"></form>
+        <div class="google">
+            <button class="googlebtn" type="button">
+                <i class="fa-brands fa-google"></i>&nbsp;&nbsp;&nbsp;Sign in with Google
+            </button>
+        </div>
         <div class="or">or</div>
-        <form>
             <div class="email">
                 <div class="input-label">Email address</div>
             </div>
             <div class="emailbox">
-                <form action="/action_page.php">
-                    <i class="fa-regular fa-envelope"></i>&nbsp;&nbsp;
-                    <input type="email" id="email" name="email" placeholder="Enter your email">
-                </form>
+                <i class="fa-regular fa-envelope"></i>&nbsp;&nbsp;
+                <input type="email" id="email" name="email" placeholder="Enter your email">
             </div>
             <div class="password">
                 <div class="input-label">Password</div>
             </div>
             <div class="pwbox">
-                <form action="/action_page.php">
-                    <i class="fa-solid fa-lock"></i>&nbsp;
-                    <input type="password" id="password" name="password" placeholder="Enter your password">
-                </form>
+                <i class="fa-solid fa-lock"></i>&nbsp;
+                <input type="password" id="password" name="password" placeholder="Enter your password">
             </div>
-            <div class="loginbtn"><input id="loginbtn" name="signin" type="submit"></div>
-        </form>
+            <div class="loginbtn">
+                <input id="loginbtn" name="login" type="submit" value="Log In">
+            </div>
         <div class="loginbox">
-            <div class="already">Not register yet?&nbsp;&nbsp;<a href="signup.html" class="createaccbtn">Create an
-                    Account</a></div>
+            <div class="already">Not registered yet?&nbsp;&nbsp;<a href="signup.html" class="createaccbtn">Create an Account</a></div>
         </div>
+    </form>
     </div>
     <!-- Footer -->
     <footer class="py-5">

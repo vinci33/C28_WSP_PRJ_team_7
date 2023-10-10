@@ -37,7 +37,7 @@ declare module 'express-session' {
 app.post('/create-account', (req, res) => {
     const { email, password } = req.body;
 
-    // Insert the user registration information into the "users" table
+    // Insert the user database into the "users" table
     const query = 'INSERT INTO users (email, password, created_at, modified_at) VALUES ($1, $2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) RETURNING *';
     const values = [email, password];
 
@@ -50,6 +50,22 @@ app.post('/create-account', (req, res) => {
             console.error('Error creating account:', err);
             res.status(500).json({ message: 'Error creating account' });
         });
+});
+
+app.post('/login', async (req, res) => {
+    console.log(req.body);
+
+    const result = await client.query(`SELECT users.email, users.password FROM users WHERE users.email = $1`, [req.body.email]);
+    const userList: user = result.rows[0];
+
+    if (
+        userList.some(
+            (user) => user.password === req.body.password
+        )
+    ){
+        console.log(`login success`);
+        req.session.userId = userList[0].id;
+    }
 });
 
 
@@ -108,11 +124,7 @@ app.get('/shoppingCart.html/products', async (req, res) => {
              products.product_details as product_details, products.product_color as product_color,
              products.product_size as product_size, products.selling_price as selling_price, 
              products.image_one as image_one, product_id, product_quantity from shopping_cart inner join products
-<<<<<<< HEAD
              on shopping_cart.product_id = products.id where user_id = $1 order by shopping_cart.modified_at`, [user_id])
-=======
-             on shopping_cart.product_id = products.id order by shopping_cart.modified_at where shopping_cart.user_id = $1`, [req.session.userId])
->>>>>>> 4040fcecf678421cfa23c627427cfef2401d8c44
         res.json(queryResult.rows)
     } catch (err) {
         res.status(400).json({ success: false, msg: "error occurred" });
