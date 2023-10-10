@@ -12,6 +12,7 @@ export interface Products {
 }
 
 export interface ShoppingCart {
+    id: number;
     user_id: string;
     product_id: string;
     product_quantity: number;

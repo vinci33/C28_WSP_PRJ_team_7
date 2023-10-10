@@ -30,6 +30,7 @@ client.connect();
 declare module 'express-session' {
     interface SessionData {
         userId?: number
+        shoppingCartId?: number
         cartCount?: number
     }
 }
@@ -173,9 +174,9 @@ app.post("/cartItem", async (req, res) => {
         let shoppingCartId = await client.query(/*sql*/ `INSERT INTO shopping_cart (user_id, product_id, product_quantity ) 
             VALUES ($1, $2, $3) RETURNING id `,
             [req.session.userId, cartItem.product_id, cartItem.product_quantity]);
-        console.log(shoppingCartId.rows[0]);
         req.session.cartCount = req.session.cartCount ? req.session.cartCount + 1 : 1
-        console.log(req.session.cartCount)
+        req.session.shoppingCartId = shoppingCartId.rows[0].id
+        console.log(`this is the shopping_cart_id:${req.session.shoppingCartId}`)
         res.json({ success: true, msg: "item added to cart" })
     } catch (err: any) {
         console.error(err.message);
@@ -194,8 +195,68 @@ app.get("/cartCount", async (req, res) => {
 
 app.post("/checkout", async (req, res) => {
     try {
-        const checkoutDetail = req.body;
-        console.log(checkoutDetail)
+        const { address, contact } = req.body;
+        console.log(address, contact);
+        await client.query(/*sql*/`INSERT INTO delivery (
+            user_id,
+            address1,
+            address2,
+            street,
+            city,
+            postal_code,
+            country
+        ) VALUES ( $1, $2, $3, $4, $5, $6, $7 )`,
+            [req.session.userId, address.address1,
+            address.address2, address.street,
+            address.city, address.postal_code,
+            address.country]);
+        await client.query(/*sql*/`INSERT INTO users (
+        ) VALUES ()`);
+        await client.query(/*sql*/`WITH cart_items AS (
+            SELECT
+              user_id,
+              product_id,
+              product_quantity
+            FROM shopping_cart
+            WHERE
+              shopping_cart.user_id = $1
+          ), product_details AS (
+            SELECT
+              cart_items.product_id,
+              products.product_name,
+              products.product_color,
+              products.product_size,
+              products.selling_price
+            FROM cart_items
+              JOIN products ON cart_items.product_id = products.id
+          ), inserted_order AS (
+            INSERT INTO orders (user_id, total_amount)
+            SELECT
+              user_id,
+              SUM(product_quantity * selling_price) AS total_amount
+            FROM cart_items
+              JOIN product_details ON product_details.product_id = cart_items.product_id
+            GROUP BY
+              user_id
+            RETURNING id, user_id
+          )
+          INSERT INTO order_detail_items (order_id, product_id, product_name, product_color, product_size, product_quantity, selling_price, product_total_price)
+          SELECT
+            inserted_order.id AS order_id,
+            cart_items.product_id,
+            product_details.product_name,
+            product_details.product_color,
+            product_details.product_size,
+            cart_items.product_quantity,
+            product_details.selling_price,
+            cart_items.product_quantity * product_details.selling_price AS product_total_price
+          FROM
+            cart_items
+            JOIN product_details ON cart_items.product_id = product_details.product_id
+            JOIN inserted_order ON cart_items.user_id = inserted_order.user_id;`,
+            [req.session.userId])
+
+
         res.json({ success: true, msg: "checkout success" })
     } catch (err) {
         res.status(400).json({ success: false, msg: "unable to checkout" });
