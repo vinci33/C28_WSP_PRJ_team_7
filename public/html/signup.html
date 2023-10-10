@@ -21,7 +21,7 @@
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../css/signUp.css">
-    <title> Three-Signup</title>
+    <title>SignUp</title>
 </head>
 
 <body>
@@ -37,16 +37,19 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="index.html">Home</a>
+                        <a class="nav-link" aria-current="page" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="product.html">Mobile</a>
+                        <a class="nav-link" href="#">Mobile</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Phone Case</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">LogIn/SignUp</a>
                     </li>
                     <li class="nav-item">
                         <i class="fa-solid fa-magnifying-glass"></i>
@@ -57,47 +60,22 @@
             </div>
         </div>
     </nav>
-    <!-- Body -->
-    <div class="container-fluid mb-5">
-        <div class="greeting">Hi, Nice to see you here!</div>
-        <div class="form-container"></div>
-        <div class="google"><button class="googlebtn" type="button">
-                <i class="fa-brands fa-google"></i>&nbsp;&nbsp;&nbsp;Sign in with Google</button></div>
+    <div class="container-fluid">
+        <div class="greeting">Hi, Good To See You Here!</div>
+        <button class="google" type="button" onclick="alert('Hello world!')">Sign in with Google</button>
         <div class="or">or</div>
-        <form id="createAccountForm">
-            <div class="email">
-                <div class="input-label">Enter your Email address</div>
-            </div>
-            <div class="emailbox">
-                <i class="fa-regular fa-envelope"></i>&nbsp;&nbsp;
-                <input type="email" id="email" name="email" placeholder="Enter your email">
-            </div>
-            <div class="password">
-                <div class="input-label">Enter your Password</div>
-            </div>
-            <div class="pwbox">
-                <i class="fa-solid fa-lock"></i>&nbsp;
-                <input type="password" id="password" name="password" placeholder="Enter your password">
-            </div>
-            <div class="password">
-                <div class="input-label">Confirm your Password</div>
-            </div>
-            <div class="pwbox">
-                <i class="fa-solid fa-lock"></i>&nbsp;
-                <input type="password" id="confirmPassword" name="confirm_password"
-                    placeholder="Re-Enter your password">
-            </div>
-            <div class="signupbtn">
-                <input id="signupbtn" name="signup" type="submit" value="Create Account">
-            </div>
-            <div class="loginbox">
-                <div class="already">Already have an account?&nbsp;&nbsp;<a href="login.html"
-                        class="createaccbtn">Login</a></div>
-            </div>
-        </form>
+        <div class="email">Email address</div>
+        <div class="emailbox">
+            <form action="/action_page.php">
+                <input type="email" id="email" name="email">
+                <input type="submit">
+            </form>
+        </div>
     </div>
-    <!-- Footer -->
-    <footer class="py-5">
+
+
+
+    <footer class="mt-5 py-5">
         <div class="row container mx-auto pt-5">
             <div class="footer-one col-lg-4 col-md-6 col-12 mb-3">
                 <img class="footer-img" src="../asset/logo-three/white.png" alt="">
@@ -126,7 +104,7 @@
                 </div>
                 <div>
                     <h6 class="text-uppercase ">Email</h6>
-                    <a class="teckyemail" href="http://tecky.io">
+                    <a class="email" href="http://tecky.io">
                         <p>hello@tecky.io</p>
                     </a>
                 </div>
