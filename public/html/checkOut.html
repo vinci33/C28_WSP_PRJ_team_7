@@ -18,7 +18,7 @@
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../css/proDetail.css">
-    <link rel="stylesheet" href="../css/pro-detail-card.css" />
+    <link rel="stylesheet" href="../css/checkOut.css">
     <title>THREE</title>
 </head>
 
@@ -59,66 +59,62 @@
             </div>
         </div>
     </nav>
-    <section class="container">
-        <div class="product-detail-card pro-detail-card-container"></div>
-        <template id="product-detail-card-container-template">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="product-image-left mt-4">
-                        <img class="img-fluid" width="400" height="auto" alt="product-image">
+    <section>
+        <div class="container chech-out-countainer">countainer
+            <div class="row container mx-auto">
+                <div class="col-lg-6 col-md-6 col-12 my-auto">
+                    <div class="form container">
+                        <h2 class="heading">Check Out</h2>
+                        <p class="text my-4">Contact</p>
+                        <form>
+                            <div>
+                                <input class="form-control" type="text" id="first-name" placeholder="First Name">
+                                <input class="form-control" type="text" id="last-name" placeholder="Last Name">
+                            </div>
+                            <input class="form-control" type="tel" id="tel" placeholder="Contact Number">
+                        </form>
+                        <p class="text my-4">Delivery Address</p>
+                        <form>
+                            <input class="form-control" type="text" id="address" placeholder="Address">
+                            <input class="form-control" type="text" id="street" placeholder="Street">
+                            <div class="three-input-container">
+                                <input class="form-control" type="text" id="city" placeholder="City">
+                                <input class="form-control" type="text" id="state" placeholder="State">
+                                <input class="form-control" type="text" id="postal-code" placeholder="Postal Code">
+                            </div>
+                            <input class="form-control" type="text" id="Country" placeholder="Country">
+                            <button class="checkout-login-btn btn mt-3">Check Out</button>
+                        </form>
                     </div>
+
                 </div>
-                <div class="col-md-6">
-                    <div class="description">
-                        <div class="description-text">
-                            <div class="product-name text-capitalize">Description</div>
-                            <div class="frame">
-                                <div class="div">
-                                    <p class="product-detail">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit quidem rem
-                                        debitis ad
-                                        cumque, amet quae maxime ducimus atque saepe. Sunt ducimus optio rerum
-                                        consequatur
-                                        iure ipsum perferendis aut corrupti!
-                                    </p>
+                <div class="col-lg-6 col-md-6 col-12 my-auto">
+                    <template id="product-template">
+                        <div class="product card">
+                            <div class="container">
+                                <div class="img-fluid" width="400">
+                                    <img src="" alt="Avatar" height="200" width="100%" />
                                 </div>
-                            </div>
-                        </div>
-                        <div class="specs">
-                            <div class="specs-text">
-                                <div class="specs-title">Specs</div>
-                                <div class="metrics">
-                                    <div class="div-2">
-                                        <div class="specs-subtitle colour">Colour</div>
-                                        <div class="subtitle-colour subtitle-value text-capitalize"></div>
-                                    </div>
-                                    <div class="div-2 storage-div">
-                                        <div class="specs-subtitle storage">Storage</div>
-                                        <div class="subtitle-storage subtitle-value text-uppercase"></div>
-                                    </div>
+                                <div class="product-description">
+                                    <div class="product-details"></div>
+                                    <div class="product-selling-price"></div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="amount">
-                            <div class="quantity">
-                                <div class="amount-title">Amount:</div>
                                 <div class="stepper">
                                     <div class="reduce">-</div>
-                                    <div class="number-of-quantity" data-quantity="1">1</div>
+                                    <div class="product-quantity"></div>
                                     <div class="add">+</div>
                                 </div>
+                                <div class="product-total-price"></div>
+                                <div class="remove-button">
+                                    <i class="fa-solid fa-xmark"></i> <b>Remove</b>
+                                </div>
                             </div>
-                            <button class="add-to-cart-btn btn  mt-3">Add to cart</button>
                         </div>
-                        <div class="frame-2">
-                            <div class="product-price-title">Price</div>
-                            <div class="product-price-value"></div>
-                        </div>
-                    </div>
+                    </template>
                 </div>
             </div>
+        </div>
 
-        </template>
     </section>
     <footer class="mt-5 py-5">
         <div class="row container mx-auto pt-5">
@@ -169,10 +165,11 @@
                 </div>
             </div>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
-    <script type="text/javascript" src="../js/proDetail.js"></script>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+<script type="text/javascript" src="../js/checkOut.js"></script>
+<script type="text/javascript" src="../js/shoppingCart.js"></script>
 
 </html>

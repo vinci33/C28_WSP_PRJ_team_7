@@ -108,7 +108,11 @@ app.get('/shoppingCart.html/products', async (req, res) => {
              products.product_details as product_details, products.product_color as product_color,
              products.product_size as product_size, products.selling_price as selling_price, 
              products.image_one as image_one, product_id, product_quantity from shopping_cart inner join products
+<<<<<<< HEAD
              on shopping_cart.product_id = products.id where user_id = $1 order by shopping_cart.modified_at`, [user_id])
+=======
+             on shopping_cart.product_id = products.id order by shopping_cart.modified_at where shopping_cart.user_id = $1`, [req.session.userId])
+>>>>>>> 4040fcecf678421cfa23c627427cfef2401d8c44
         res.json(queryResult.rows)
     } catch (err) {
         res.status(400).json({ success: false, msg: "error occurred" });
@@ -161,7 +165,8 @@ app.post("/cartItem", async (req, res) => {
         req.session.cartCount = req.session.cartCount ? req.session.cartCount + 1 : 1
         console.log(req.session.cartCount)
         res.json({ success: true, msg: "item added to cart" })
-    } catch (err) {
+    } catch (err: any) {
+        console.error(err.message);
         res.status(400).json({ success: false, msg: "unable to add item to cart" });
     }
 })
@@ -175,6 +180,8 @@ app.get("/cartCount", async (req, res) => {
 
 })
 
+
+
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.static(path.join(__dirname, 'public/html')))
 
@@ -187,4 +194,6 @@ app.listen(PORT, () => {
     console.log(`Server is listening on ${PORT}`)
 })
 
-export { Client };
+
+
+export { client };

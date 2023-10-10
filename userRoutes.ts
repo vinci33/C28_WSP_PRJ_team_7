@@ -1,13 +1,13 @@
 import express, { Request, Response } from 'express'
 import { checkPassword } from './hash'
-import { Client } from './main'
+import { client } from './main'
 
 export const userRoutes = express.Router()
 userRoutes.post('/login', login)
 
 async function login(req: Request, res: Response) {
   const { email, password } = req.body
-  const result = await Client.query(
+  const result = await client.query(
     `SELECT * FROM users WHERE users.email = $1`,
     [email],
   )

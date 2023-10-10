@@ -1,0 +1,89 @@
+:root {
+    --text: #010403;
+    --background: #f1f9f9;
+    --primary: #67c1bb;
+    --secondary: #caeceb;
+    --accent: #4eb7b0;
+}
+
+
+@import url('https://fonts.googleapis.com/css?family=Poppins:400|Noto Sans:700');
+
+body {
+    font-family: 'poppins', sans-serif;
+    font-weight: 400;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: 'Poppins';
+    font-weight: 700;
+}
+
+html {
+    font-size: 100%;
+}
+
+/* 16px */
+
+h1 {
+    font-size: 4.210rem;
+    /* 67.36px */
+}
+
+h2 {
+    font-size: 3.158rem;
+    /* 50.56px */
+}
+
+h3 {
+    font-size: 2.369rem;
+    /* 37.92px */
+}
+
+h4 {
+    font-size: 1.777rem;
+    /* 28.48px */
+}
+
+h5 {
+    font-size: 1.333rem;
+    /* 21.28px */
+}
+
+/* delivery form */
+.form {
+    width: 100%;
+    padding: 30px 30px;
+    border-radius: 15px;
+}
+
+.form input {
+    width: 100%;
+    background-color: #f8f8f8;
+    margin: 10px 0px;
+}
+
+.three-input-container {
+    display: flex;
+    gap: 10px;
+}
+
+.checkout-login-btn {
+    width: 100%;
+    background-color: var(--primary);
+    color: var(--background);
+    border: none;
+    border-radius: 5px;
+    padding: 10px 0px;
+    margin: 10px 0px;
+    transition: 0.3s ease-in-out;
+}
+
+.checkout-login-btn:hover {
+    background-color: var(--secondary);
+    color: var(--text);
+}
