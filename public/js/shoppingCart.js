@@ -41,8 +41,13 @@ async function initProducts() {
     productClone
       .querySelector(".remove-button")
       .addEventListener("click", function (e) {
-        const pid = e.target.getAttribute("pid");
-        deleteItems(pid);
+        if (
+          e.target.classList.contains("fa-xmark") ||
+          e.target.tagName === "B"
+        ) {
+          const pid = e.target.parentNode.getAttribute("pid");
+          deleteItems(pid);
+        }
       });
 
     productContainerEle.appendChild(productClone);
