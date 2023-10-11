@@ -70,14 +70,14 @@
             </div>
             <div class="emailbox">
                 <i class="fa-regular fa-envelope"></i>&nbsp;&nbsp;
-                <input type="email" id="email" name="email" placeholder="Enter your email">
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
             </div>
             <div class="password">
                 <div class="input-label">Enter your Password</div>
             </div>
             <div class="pwbox">
                 <i class="fa-solid fa-lock"></i>&nbsp;
-                <input type="password" id="password" name="password" placeholder="Enter your password">
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
             </div>
             <div class="password">
                 <div class="input-label">Confirm your Password</div>
@@ -85,8 +85,9 @@
             <div class="pwbox">
                 <i class="fa-solid fa-lock"></i>&nbsp;
                 <input type="password" id="confirmPassword" name="confirm_password"
-                    placeholder="Re-Enter your password">
+                    placeholder="Re-Enter your password" required>
             </div>
+            <div id="passworderror"></div>
             <div class="signupbtn">
                 <input id="signupbtn" name="signup" type="submit" value="Create Account">
             </div>

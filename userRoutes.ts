@@ -28,9 +28,7 @@ async function login(req: Request, res: Response) {
     return res.status(412).json({ error: 'Missing request session' })
   }
 
-  req.session.user = {
-    id: user.id,
-  }
+  req.session.userId
 
   return res.redirect('/') // To the protected page.
 }

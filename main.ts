@@ -1,15 +1,17 @@
 import express from 'express';
 import expressSession from 'express-session';
+// import { Router } from 'express';
 import path from 'path';
 import { Client } from "pg";
 import dotenv from "dotenv";
 import { convertStr2Arr } from './utils';
 import { Colors, Products, ShoppingCart } from './model';
-import * as bcrypt from 'bcryptjs'
-
 // import { isLoggedIn } from './guards'
+import { checkPassword } from './hash';
+// import { userRoutes } from './userRoutes';
 
 const app = express();
+
 
 app.use(express.json());
 app.use(
@@ -43,8 +45,9 @@ app.post('/create-account', (req, res) => {
     const query = 'INSERT INTO users (email, password, created_at, modified_at) VALUES ($1, $2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) RETURNING *';
     const values = [email, password];
 
-    client
-        .query(query, values)
+
+    
+    client.query(query, values)
         .then((result) => {
             res.status(200).json({ message: 'Account created!', user: result.rows[0] });
         })
@@ -58,24 +61,43 @@ app.post('/create-account', (req, res) => {
 
 app.post('/login', async (req, res) => {
     try {
-      console.log(req.body);
-  
-      const result = await client.query(`SELECT users.id, users.email, users.password FROM users WHERE users.email = $1`, [req.body.email]);
-    const user = result.rows[0];
+        console.log(req.body);
 
-    if (!user || !(await bcrypt.compare(req.body.password, user.password))) {
-      console.log('Invalid login');
-      return res.status(401).json({ error: 'Invalid credentials' });
-    }
+        const result = await client.query(
+            `SELECT users.id, users.email, users.password FROM users WHERE users.email = $1`,
+            [req.body.email]
+        );
+        const user = result.rows[0];
 
-    console.log('Login success');
-    req.session.userId = user.id;
-    return res.json({ message: 'Login successful', userId: user.id });
-  } catch (error) {
-    console.error('An error occurred during login:', error);
-    return res.status(500).json({ error: 'An error occurred during login' });
+        if (!user || !(await checkPassword({ plainPassword: req.body.password, hashedPassword: user.password }))) {
+            console.log('Invalid login');
+            return res.status(401).json({ error: 'Invalid credentials' });
+        }
+
+        console.log('Login success');
+        req.session.userId = user.id;
+        return res.json({ message: 'Login successful', userId: user.id });
+    } catch (error) {
+        console.error('An error occurred during login:', error);
+        return res.status(500).json({ error: 'An error occurred during login' });
     }
-  });
+});
+
+// const router = Router();
+
+// // Protected route example
+// router.get('/protected-route', isLoggedIn, (req, res) => {
+//     // This route will only be accessible if the user is logged in
+//     res.send('You are logged in!');
+// });
+
+// export default router;
+
+// app.use('/', userRoutes)
+// app.use('/resources', isLoggedIn) // protected resources
+
+// app.use(express.static('public'))
+// app.use(isLoggedIn, express.static('frontend'))
 
 
 
