@@ -1,3 +1,7 @@
+.new-arrival {
+  padding: 28px 80px 20px 80px;
+}
+
 .product-container {
   display: flex;
   flex-wrap: wrap;
@@ -9,6 +13,7 @@
 
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  width: 275px;
   transition: 0.3s;
   cursor: pointer;
 }
@@ -22,6 +27,11 @@ a {
   text-decoration: none !important;
 }
 
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
 .view-all-products-btn {
   background-color: var(--accent);
   color: #fff;
@@ -30,11 +40,7 @@ a {
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
-  width: 100%;
-}
-
-.view-all-products-btn {
-  background-color: var(--secondary);
+  width: 25%;
 }
 
 :root {
