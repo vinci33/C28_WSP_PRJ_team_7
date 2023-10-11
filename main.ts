@@ -32,7 +32,7 @@ client.connect();
 
 declare module 'express-session' {
     interface SessionData {
-        userId?: string;
+        userId?: number;
         email?: string;
         shoppingCartId?: number
         cartCount?: number
@@ -82,7 +82,7 @@ app.post('/login', async (req, res) => {
         }
 
         console.log('Login success');
-        req.session.userId
+        req.session.userId = user.id;
         return res.json({ message: 'Login successful', userId: user.id });
     } catch (error) {
         console.error('An error occurred during login:', error);
@@ -90,21 +90,7 @@ app.post('/login', async (req, res) => {
     }
 });
 
-const router = Router();
-// Protected route example
-router.get('/protected-route', isLoggedIn, (req, res) => {
-    // This route will only be accessible if the user is logged in
-    res.send('You are logged in!');
-});
 
-
-
-export default router;
-
-// app.use('/', userRoutes)
-app.use('/resources', isLoggedIn) // protected resources
-
-app.use(express.static('public'))
 
 
 // // Remember to delete it
@@ -186,7 +172,9 @@ app.delete('/shoppingCart.html', async (req, res) => {
     }
 })
 
-app.get("/productDetail/:id", async (req, res) => {
+app.get("/proDetail.html",  isLoggedIn, async (req, res,next) => {next()})
+
+app.get("/productDetail/:id",  isLoggedIn, async (req, res) => {
     try {
         const id = parseInt(req.params.id);
         if (isNaN(id)) {
@@ -297,10 +285,24 @@ app.post("/checkout", async (req, res) => {
     }
 })
 
+const router = Router();
+// Protected route example
+router.get('/protected-route', isLoggedIn, (req, res) => {
+    // This route will only be accessible if the user is logged in
+    res.send('You are logged in!');
+});
+
+export default router;
+
+// app.use('/', userRoutes)
+app.use('/resources', isLoggedIn) // protected resources
+
+// app.use(express.static('public'))
+
 
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.static(path.join(__dirname, 'public', "html")))
-app.use(isLoggedIn, express.static('frontend'))
+// app.use(isLoggedIn, express.static('frontend'))
 
 
 app.use((_req, res) => {
