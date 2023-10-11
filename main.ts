@@ -47,7 +47,7 @@ app.post('/create-account', (req, res) => {
     const values = [email, password];
 
 
-    
+
     client.query(query, values)
         .then((result) => {
             res.status(200).json({ message: 'Account created!', user: result.rows[0] });
@@ -107,6 +107,28 @@ app.use((req, _res, next) => {
     req.session.userId = 1
     next()
 });
+
+
+app.get("/products", async (req, res) => {
+    try {
+        const categories = convertStr2Arr(req.query.category)
+        const colors = convertStr2Arr(req.query.product_color)
+        const queryResult = await client.query(/*sql*/
+            `SELECT products.id, categories_name, product_name, product_color, selling_price, image_one, products.created_at
+            from categories inner join products on categories.id = products.category_id order by products.created_at desc limit 4`)
+        let products: Products[] = queryResult.rows
+        if (categories) {
+            products = products.filter((product) => categories?.includes(product.categories_name))
+        }
+        if (colors) {
+            products = products.filter((product) => colors?.includes(product.product_color))
+        }
+        res.send(products);
+    } catch (err) {
+        res.status(400).json({ success: false, msg: "error occurred" });
+    }
+})
+
 
 app.get("/product.html/product_categories", (req, res) => {
     client.query(/*sql*/ `select categories_name from categories`, function (err, results) {

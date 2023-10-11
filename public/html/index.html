@@ -59,6 +59,8 @@
             </div>
         </div>
     </nav>
+    <h1>HOME</h1>
+
     <section id=" home">
         <div class="hero-blocks">
             <div class="container">
@@ -75,8 +77,12 @@
         </div>
     </section>
 
+    <div class="new-arrival">
+        <h3>New Arrival</h3>
+        <div class="product-container"></div>
+        <button class="view-all-products-btn btn  mt-3">View All Products</button>
+    </div>
 
-    <h1>HOME</h1>
     <footer class="mt-5 py-5">
         <div class="row container mx-auto pt-5">
             <div class="footer-one col-lg-4 col-md-6 col-12 mb-3">
@@ -131,5 +137,15 @@
         crossorigin="anonymous"></script>
     <script type="text/javascript" src="../js/index.js"></script>
 </body>
-
+<template id="product-template">
+    <div class="product card">
+      <a href="">
+        <img src="" alt="Avatar" height="200" width="100%" />
+        <div class="container">
+          <p class="product-title"></p>
+          <p class="product-price"></p>
+        </div>
+      </a>
+    </div>
+  </template>
 </html>
