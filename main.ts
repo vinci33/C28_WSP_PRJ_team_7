@@ -1,14 +1,14 @@
 import express from 'express';
 import expressSession from 'express-session';
-// import { Router } from 'express';
+import { Router } from 'express';
 import path from 'path';
 import { Client } from "pg";
 import dotenv from "dotenv";
 import { convertStr2Arr } from './utils';
 import { Colors, Products, ShoppingCart } from './model';
-// import { isLoggedIn } from './guards'
-import { checkPassword } from './hash';
-// import { userRoutes } from './userRoutes';
+import { isLoggedIn } from './guards'
+import { hashPassword, checkPassword } from './hash';
+import { userRoutes } from './userRoutes';
 
 const app = express();
 
@@ -39,21 +39,33 @@ declare module 'express-session' {
     }
 }
 
+
+app.use((rqe, _res, next) => {
+    console.log(`Request path: ${rqe.path}, method: ${rqe.method}`);
+    next();
+})
+
 app.post('/create-account', (req, res) => {
     const { email, password } = req.body;
 
-    // Insert the user database into the "users" table
-    const query = 'INSERT INTO users (email, password, created_at, modified_at) VALUES ($1, $2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) RETURNING *';
-    const values = [email, password];
+    // Generate a hashed password
+    hashPassword(password)
+        .then((hashedPassword) => {
+            // Insert the user database into the "users" table
+            const query = 'INSERT INTO users (email, password, created_at, modified_at) VALUES ($1, $2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) RETURNING *';
+            const values = [email, hashedPassword];
 
-
-    
-    client.query(query, values)
-        .then((result) => {
-            res.status(200).json({ message: 'Account created!', user: result.rows[0] });
+            client.query(query, values)
+                .then((result) => {
+                    res.status(200).json({ message: 'Account created!', user: result.rows[0] });
+                })
+                .catch((err) => {
+                    console.error('Error creating account:', err);
+                    res.status(500).json({ message: 'Error creating account' });
+                });
         })
         .catch((err) => {
-            console.error('Error creating account:', err);
+            console.error('Error hashing password:', err);
             res.status(500).json({ message: 'Error creating account' });
         });
 });
@@ -84,22 +96,20 @@ app.post('/login', async (req, res) => {
     }
 });
 
-// const router = Router();
+const router = Router();
 
-// // Protected route example
-// router.get('/protected-route', isLoggedIn, (req, res) => {
-//     // This route will only be accessible if the user is logged in
-//     res.send('You are logged in!');
-// });
+// Protected route example
+router.get('/protected-route', isLoggedIn, (req, res) => {
+    // This route will only be accessible if the user is logged in
+    res.send('You are logged in!');
+});
 
-// export default router;
+export default router;
 
-// app.use('/', userRoutes)
-// app.use('/resources', isLoggedIn) // protected resources
+app.use('/', userRoutes)
+app.use('/resources', isLoggedIn) // protected resources
 
-// app.use(express.static('public'))
-// app.use(isLoggedIn, express.static('frontend'))
-
+app.use(express.static('public'))
 
 
 // Remember to delete it
@@ -296,7 +306,9 @@ app.post("/checkout", async (req, res) => {
 
 
 app.use(express.static(path.join(__dirname, 'public')))
-app.use(express.static(path.join(__dirname, 'public/html')))
+app.use(express.static(path.join(__dirname, 'public', "html")))
+app.use(isLoggedIn, express.static('frontend'))
+
 
 app.use((_req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'html', '404.html'))
