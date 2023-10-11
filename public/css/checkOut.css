@@ -81,6 +81,13 @@ h5 {
     color: red;
     font-size: 1rem;
     margin-bottom: 10px;
+    text-decoration: none;
+}
+
+.postal-code:invalid {
+    pointer-events: none;
+    background-color: #f80606e1;
+
 }
 
 .checkout-login-btn {

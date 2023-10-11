@@ -229,7 +229,7 @@ app.post("/checkout", async (req, res) => {
     try {
         const { address, contact } = req.body;
         console.log(address, contact);
-        console.log()
+        console.log(1)
         await client.query(/*sql*/`WITH d_contacts AS(
             INSERT INTO delivery_contacts (
                 user_id,
@@ -245,9 +245,14 @@ app.post("/checkout", async (req, res) => {
             street,
             city,
             postal_code,
-            country
-        ) VALUES ( $1, $2, $3, $4, $5, $6, $7 )`,
-            [req.session.userId, address.address1,
+            country,
+            delivery_contact_id
+        ) VALUES ( $6, $7, $8, $9, $10, $11, 
+            (SELECT id FROM d_contacts AS delivery_contact_id))`,
+            [req.session.userId, contact.first_name,
+            contact.last_name, contact.phone,
+            contact.email,
+            address.address1,
             address.address2, address.street,
             address.city, address.postal_code,
             address.country]);
@@ -272,9 +277,12 @@ app.post("/checkout", async (req, res) => {
             FROM cart_items
               JOIN products ON cart_items.product_id = products.id
           ), inserted_order AS (
-            INSERT INTO orders (user_id, total_amount)
+            INSERT INTO orders (user_id, product_id, product_quantity, 
+                total_amount, payment_status, payment_method)
             SELECT
               user_id,
+              product_id,
+              product_quantity,
               SUM(product_quantity * selling_price) AS total_amount
             FROM cart_items
               JOIN product_details ON product_details.product_id = cart_items.product_id
@@ -323,38 +331,39 @@ app.use('/resources', isLoggedIn) // protected resources
 
 
 
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+// const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-const DOMAIN = process.env.DOMAIN;
+// const DOMAIN = process.env.DOMAIN;
 
+// console.log(DOMAIN, stripe)
 
-app.post('/create-checkout-session', async (req, res) => {
-    const products = await client.query(/*sql*/`SELECT * FROM products`);
-    const storeProducts = products.rows;
-    console.log(storeProducts)
-    const session = await stripe.checkout.sessions.create({
-        payment_method_types: ['card'],
-        mode: 'payment',
-        line_items: req.body.items.map((item: any) => {
-            // const storeItem = storeItems.get(item.id);
-            return {
-                // price_data: {
-                //     currency: 'hkd',
-                //     product_data: {
-                //         name: storeItem.name,
-                //         images: [storeItem.image],
-                //     },
-                //     unit_amount: storeItem.price,
-                // },
-                // quantity: item.quantity,
-            };
-        }),
-        success_url: `${DOMAIN}/success.html`,
-        cancel_url: `${DOMAIN}/cancel.html`,
-    });
+// app.post('/create-checkout-session', async (req, res) => {
+//     const products = await client.query(/*sql*/`SELECT * FROM products`);
+//     const storeProducts = products.rows;
+//     console.log(storeProducts)
+//     const session = await stripe.checkout.sessions.create({
+//         payment_method_types: ['card'],
+//         mode: 'payment',
+//         line_items: req.body.items.map((item: any) => {
+//             // const storeItem = storeItems.get(item.id);
+//             return {
+//                 // price_data: {
+//                 //     currency: 'hkd',
+//                 //     product_data: {
+//                 //         name: storeItem.name,
+//                 //         images: [storeItem.image],
+//                 //     },
+//                 //     unit_amount: storeItem.price,
+//                 // },
+//                 // quantity: item.quantity,
+//             };
+//         }),
+//         success_url: `${DOMAIN}/success.html`,
+//         cancel_url: `${DOMAIN}/cancel.html`,
+//     });
 
-    res.redirect(303, session.url);
-});
+//     res.redirect(303, session.url);
+// });
 
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.static(path.join(__dirname, 'public', "html")))

@@ -1,7 +1,7 @@
 const contactAlert = document.querySelector('.contact-alert')
 const addressAlert = document.querySelector('.address-alert')
 
-window.onload = function () {
+window.onload = async function () {
     checkOut();
 
     document.querySelectorAll('.check-out-form input').forEach(function (e) {

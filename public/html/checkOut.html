@@ -85,11 +85,13 @@
                             <div class="three-input-container">
                                 <input class="form-control" type="text" id="street" placeholder="Street">
                                 <input class="form-control" type="text" id="city" placeholder="City">
-                                <input class="form-control" type="number" maxlength="5" pattern="[0-9]{5}"
-                                    id="postal-code" placeholder="Postal Code">
+                                <input class="form-control postal-code [&::-webkit-inner-spin-button]:appearance-none"
+                                    type="number" maxlength="5" pattern="[0-9]{5}" id="postal-code"
+                                    placeholder="5 Digit Postal Code">
                             </div>
                             <input class="form-control" type="text" id="country" placeholder="Country">
                             <button type="button" class="checkout-login-btn btn mt-3">Check Out</button>
+                            <input type="text" inputmode="numeric" pattern="\d*" />
                         </form>
                     </div>
 
