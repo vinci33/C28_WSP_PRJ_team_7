@@ -210,6 +210,15 @@ footer {
     text-align: left;
 }
 
+#passworderror {
+    color: red;
+    font-size: 15px;
+    margin-top: 10px;
+    display: none;
+    display: flex;
+    text-align: center;
+}
+
 .signupbtn {
     display: flex;
     justify-content: center;
