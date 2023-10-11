@@ -35,6 +35,20 @@ async function checkOut() {
             }
         }
     });
+    const resp = await fetch("/shoppingCart.html/products");
+    const products = await resp.json();
+    const productPost = await fetch("/create-checkout-session", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(products),
+    });
+    const result = await productPost.json();
+    if (result.success) {
+        window.location.href = 'url';
+    }
+
 }
 
 function getCheckOutInfo() {

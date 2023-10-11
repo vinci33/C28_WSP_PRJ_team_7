@@ -1,28 +1,25 @@
-import * as bcrypt from 'bcryptjs'
+import bcrypt from 'bcryptjs';
 
-const SALT_ROUNDS = 10
+const SALT_ROUNDS = 10;
 
 /**
- * @params plainPassword: supplied when signup
+ * @param plainPassword: supplied when signup
  */
 // PlainText -> Hashed Password
 export async function hashPassword(plainPassword: string) {
-  const hash: string = await bcrypt.hash(plainPassword, SALT_ROUNDS)
-  return hash
+  const hashedPassword = await bcrypt.hash(plainPassword, SALT_ROUNDS);
+  return hashedPassword;
 }
 
 /**
- * @params options.plainPassword: supplied when login
- * @params options.hashedPassword: looked up from database
+ * @param options.plainPassword: supplied when login
+ * @param options.hashedPassword: looked up from the database
  */
 // PlainText -> (Check with) Hashed Password
-export async function checkPassword(options: {
-  plainPassword: string
-  hashedPassword: string
-}) {
-  const isMatched: boolean = await bcrypt.compare(
+export async function checkPassword(options: { plainPassword: any; hashedPassword: any; }) {
+  const isMatched = await bcrypt.compare(
     options.plainPassword,
     options.hashedPassword,
-  )
-  return isMatched
+  );
+  return isMatched;
 }

@@ -48,6 +48,7 @@ function initAddToCart(id) {
     addToCartBtn.disabled = true;
   });
 }
+
 async function initCartCounter() {
   const cartCounter = document.querySelector("#cart-count");
   const resp = await fetch("/cartCount");
