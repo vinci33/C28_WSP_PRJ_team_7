@@ -12,6 +12,8 @@ DROP TABLE IF EXISTS "products" CASCADE;
 -- TODO: Drop Table start
 DROP TABLE IF EXISTS "user_address" CASCADE;
 DROP TABLE IF EXISTS "delivery" CASCADE;
+DROP TABLE IF EXISTS "delivery_address" CASCADE;
+DROP TABLE IF EXISTS "delivery_contacts" CASCADE;
 -- TODO: Drop Table end
 
 
@@ -68,9 +70,10 @@ CREATE TABLE "user_address"(
 );
 ALTER TABLE
     "user_address" ADD CONSTRAINT "user_address_user_id_foreign" FOREIGN KEY("user_id") REFERENCES "users"("id");
-CREATE TABLE "delivery"(
+
+CREATE TABLE "delivery_address"(
     "id" SERIAL primary key,
-    "user_id" BIGINT NOT NULL,
+    "delivery_contact_id" INTEGER NOT NULL,
     "address1" VARCHAR(255) NOT NULL,
     "address2" VARCHAR(255) NULL,
     "street" VARCHAR(255) NULL,
@@ -78,11 +81,25 @@ CREATE TABLE "delivery"(
     "postal_code" INTEGER,
     "country"  VARCHAR(255) NULL,
     "created_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    "modified_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP
+    "modified_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY("delivery_contact_id") REFERENCES "delivery_contacts"("id")
 );
+
+CREATE TABLE "delivery_contacts"(
+    "id" SERIAL primary key,
+    "user_id" INTEGER NOT NULL,
+    "first_name" VARCHAR(255) NULL,
+    "last_name" VARCHAR(255) NULL,
+    "phone" VARCHAR(255) NULL,
+    "email" VARCHAR(255) NULL,
+    "created_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    "modified_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY("user_id") REFERENCES "users"("id")
+);
+
 -- TODO: End of adding
 
-CREATE TABLE "orders"(
+CREATE TABLE "`orders`"(
     "id" SERIAL primary key,
     "user_id" BIGINT NOT NULL,
     "total_amount" INTEGER NOT NULL,

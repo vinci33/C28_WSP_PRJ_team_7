@@ -37,7 +37,7 @@ async function initProducts() {
       .querySelector(".remove-button")
       .setAttribute("pid", product.product_id);
 
-    //e.target 出現問題
+
     productClone
       .querySelector(".remove-button")
       .addEventListener("click", function (e) {
