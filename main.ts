@@ -40,10 +40,10 @@ declare module 'express-session' {
 }
 
 
-app.use((rqe, _res, next) => {
-    console.log(`Request path: ${rqe.path}, method: ${rqe.method}`);
-    next();
-})
+// app.use((rqe, _res, next) => {
+//     console.log(`Request path: ${rqe.path}, method: ${rqe.method}`);
+//     next();
+// })
 
 app.post('/create-account', (req, res) => {
     const { email, password } = req.body;
@@ -166,7 +166,7 @@ app.get('/shoppingCart.html/products', async (req, res) => {
              products.product_details as product_details, products.product_color as product_color,
              products.product_size as product_size, products.selling_price as selling_price, 
              products.image_one as image_one, product_id, product_quantity from shopping_cart inner join products
-             on shopping_cart.product_id = products.id where user_id = $1 order by shopping_cart.modified_at`, [user_id])
+             on shopping_cart.product_id = products.id where user_id = $1 order by shopping_cart.created_at`, [user_id])
         res.json(queryResult.rows)
     } catch (err) {
         res.status(400).json({ success: false, msg: "error occurred" });
@@ -238,21 +238,38 @@ app.post("/checkout", async (req, res) => {
     try {
         const { address, contact } = req.body;
         console.log(address, contact);
-        await client.query(/*sql*/`INSERT INTO delivery (
-            user_id,
+        console.log()
+        await client.query(/*sql*/`WITH d_contacts AS(
+            INSERT INTO delivery_contacts (
+                user_id,
+                first_name,
+                last_name,
+                phone,
+                email
+            ) VALUES ( $1, $2, $3, $4, $5 )
+            RETURNING id
+            )INSERT INTO delivery_address (
             address1,
             address2,
             street,
             city,
             postal_code,
-            country
-        ) VALUES ( $1, $2, $3, $4, $5, $6, $7 )`,
-            [req.session.userId, address.address1,
+            country, 
+            delivery_contact_id
+            ) VALUES ( $6, $7, $8, $9, $10, $11, 
+            (SELECT 
+            d_contacts.id AS delivery_contact_id
+            FROM d_contacts))
+            `,
+            [req.session.userId, contact.first_name,
+            contact.last_name, contact.phone,
+            contact.email, address.address1,
             address.address2, address.street,
             address.city, address.postal_code,
             address.country]);
-        await client.query(/*sql*/`INSERT INTO users (
-        ) VALUES ()`);
+
+        console.log(2)
+
         await client.query(/*sql*/`WITH cart_items AS (
             SELECT
               user_id,
@@ -281,6 +298,7 @@ app.post("/checkout", async (req, res) => {
               user_id
             RETURNING id, user_id
           )
+
           INSERT INTO order_detail_items (order_id, product_id, product_name, product_color, product_size, product_quantity, selling_price, product_total_price)
           SELECT
             inserted_order.id AS order_id,
@@ -299,11 +317,46 @@ app.post("/checkout", async (req, res) => {
 
 
         res.json({ success: true, msg: "checkout success" })
-    } catch (err) {
+    } catch (err: any) {
+        console.error(err.message)
         res.status(400).json({ success: false, msg: "unable to checkout" });
     }
 })
 
+
+
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+
+const DOMAIN = process.env.DOMAIN;
+
+
+app.post('/create-checkout-session', async (req, res) => {
+    const products = await client.query(/*sql*/`SELECT * FROM products`);
+    const storeProducts = products.rows;
+    console.log(storeProducts)
+    const session = await stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        mode: 'payment',
+        line_items: req.body.items.map((item: any) => {
+            // const storeItem = storeItems.get(item.id);
+            return {
+                // price_data: {
+                //     currency: 'hkd',
+                //     product_data: {
+                //         name: storeItem.name,
+                //         images: [storeItem.image],
+                //     },
+                //     unit_amount: storeItem.price,
+                // },
+                // quantity: item.quantity,
+            };
+        }),
+        success_url: `${DOMAIN}/success.html`,
+        cancel_url: `${DOMAIN}/cancel.html`,
+    });
+
+    res.redirect(303, session.url);
+});
 
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.static(path.join(__dirname, 'public', "html")))
