@@ -1,9 +1,3 @@
-
-
-console.log("JavaScript file loaded");
-
-
-
 // Make an AJAX request to check the login status
 fetch('/login-status')
     .then(response => response.json())

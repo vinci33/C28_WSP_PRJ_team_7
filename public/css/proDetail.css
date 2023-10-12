@@ -10,6 +10,9 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:400|Noto Sans:700');
 
 body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     font-family: 'poppins', sans-serif;
     font-weight: 400;
 }
@@ -111,15 +114,17 @@ small {
     color: var(--primary);
 }
 
+/* Footer */
 .footer-img {
     height: 100px;
     margin-bottom: 15px;
 }
 
 footer {
+    margin-top:auto;
+    width: 100%;
     background-color: var(--accent);
 }
-
 
 footer h5 {
     color: var(--background);
@@ -153,13 +158,15 @@ footer p {
     font-size: 0.9rem;
 }
 
-footer .email p {
+footer .teckyemail p {
     text-decoration: none;
     transition: 0.3 ease-in-out;
+    display: flex;
+    align-items: left;
 }
 
-footer .email p:hover,
-footer .email p:active {
+footer .teckyemail p:hover,
+footer .teckyemail p:active {
     text-decoration: none;
 }
 
