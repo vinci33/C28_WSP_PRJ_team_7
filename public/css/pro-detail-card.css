@@ -185,11 +185,11 @@ small {
     flex: 1;
 }*/
 
-.add-to-cart-btn,
-.buy-now-btn {
+.add-to-cart-btn {
     background-color: var(--accent);
     color: #fff;
-    border: none;
+    border: 5px solid var(--accent);
+    border-radius: 40px;
     padding: 10px 20px;
     font-size: 16px;
     font-weight: bold;
@@ -200,9 +200,13 @@ small {
 .add-to-cart-btn:hover,
 .buy-now-btn:hover {
     background-color: var(--secondary);
+    border: 5px solid var(--secondary);
+    border-radius: 40px;
 }
 
 .add-to-cart-btn:disabled {
+    border: 5px solid var(--accent);
+    border-radius: 40px;
     background-color: #ccc;
     color: #fff;
     border: none;
@@ -215,15 +219,20 @@ small {
 
 .buy-now-btn-con {
     display: flex;
-    flex-direction: row-reverse;
+    justify-content: space-between;
 
 }
+
+/* .buy-now-btn-empty-div {
+    width: 400px;
+} */
 
 .buy-now-btn {
     width: 100%;
     background-color: var(--accent);
     color: #fff;
-    border: none;
+    border: 5px solid var(--accent);
+    border-radius: 40px;
     padding: 10px 20px;
     font-size: 16px;
     font-weight: bold;

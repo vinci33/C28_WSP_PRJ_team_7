@@ -75,7 +75,7 @@ ALTER TABLE
 
 CREATE TABLE "delivery_contacts"(
     "id" SERIAL primary key,
-    "user_id" INTEGER NOT NULL,
+    "order_id" INTEGER NOT NULL,
     "first_name" VARCHAR(255) NULL,
     "last_name" VARCHAR(255) NULL,
     "phone" VARCHAR(255) NULL,
@@ -103,8 +103,6 @@ CREATE TABLE "delivery_address"(
 CREATE TABLE "orders"(
     "id" SERIAL primary key,
     "user_id" BIGINT NOT NULL,
-    "product_id" INTEGER NOT NULL,
-    "product_quantity" INTEGER NOT NULL,
     "total_amount" INTEGER NOT NULL,
     "payment_status" VARCHAR(255) NOT NULL,
     "payment_method" VARCHAR(255) NOT NULL,
