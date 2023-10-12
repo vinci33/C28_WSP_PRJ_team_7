@@ -82,7 +82,7 @@ CREATE TABLE "delivery_contacts"(
     "email" VARCHAR(255) NULL,
     "created_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     "modified_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY("user_id") REFERENCES "users"("id")
+    FOREIGN KEY("order_id") REFERENCES "order"("id")
 );
 
 CREATE TABLE "delivery_address"(
@@ -150,7 +150,7 @@ VALUES
 ('iphone',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
 ('airpods',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
 ('ipad',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
-INSERT INTO users (user_name,password,first_name,last_name,phone,email,created_at,modified_at)
+INSERT INTO users (user_name,password,first_na` me,last_name,phone,email,created_at,modified_at)
 VALUES
 ('john','0000','john','chan','99229922','john@gmail.com',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
 ('ken','0000','ken','lai','11111','111@gmail.com',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);

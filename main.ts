@@ -44,6 +44,12 @@ declare module 'express-session' {
 //     console.log(`Request path: ${rqe.path}, method: ${rqe.method}`);
 //     next();
 // })
+app.use((req, res, next) => {
+    req.session.userId = 1;
+    next();
+})
+
+
 
 app.post('/create-account', (req, res) => {
     const { email, password } = req.body;
@@ -229,6 +235,7 @@ app.post("/checkout", async (req, res) => {
     try {
         const { address, contact } = req.body;
         console.log(address, contact);
+        console.log(req.session.userId)
         console.log(1)
         await client.query(/*sql*/`WITH d_contacts AS(
             INSERT INTO delivery_contacts (
@@ -279,15 +286,18 @@ app.post("/checkout", async (req, res) => {
           ), inserted_order AS (
             INSERT INTO orders (user_id, product_id, product_quantity, 
                 total_amount, payment_status, payment_method)
-            SELECT
-              user_id,
-              product_id,
-              product_quantity,
-              SUM(product_quantity * selling_price) AS total_amount
+            VALUES (
+            (SELECT
+              cart_items.user_id,
+              cart_items.product_id,
+              cart_items.product_quantity,
+              SUM(product_quantity * selling_price) AS total_amount,
+              'pending' AS payment_status,
+              'credit card' AS payment_method
             FROM cart_items
               JOIN product_details ON product_details.product_id = cart_items.product_id
             GROUP BY
-              user_id
+              user_id,cart_items.product_id))
             RETURNING id, user_id
           )
 
