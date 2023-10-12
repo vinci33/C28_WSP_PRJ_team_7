@@ -8,7 +8,7 @@ import { convertStr2Arr } from './utils';
 import { Colors, Products, ShoppingCart } from './model';
 import { isLoggedIn } from './guards'
 import { hashPassword, checkPassword } from './hash';
-// import { userRoutes } from './userRoutes';
+
 
 const app = express();
 
@@ -94,14 +94,37 @@ app.post('/login', async (req, res) => {
     }
 });
 
+app.get('/logout', (req, res) => {
+    req.session.destroy((error) => {
+        console.log('out of session');
+      if (error) {
+        console.error('Error occurred during session destruction:', error);
+        return res.status(500).json({ message: 'Internal Server Error' });
+      }
+  
+      console.log('Logged out');
+      res.redirect('/');
+      console.log('isLoggedOut');
+      return;
+    });
+  });
 
 
-
-// // Remember to delete it
-// app.use((req, _res, next) => {
-//     req.session.userId = 1
-//     next()
-// });
+// Changing the Login Button to Logout Button
+app.get('/login-status', (req, res) => {
+    try {
+        if (req.session.userId) {
+            // User is logged in
+            res.json({ isLoggedIn: true });
+          } else {
+            // User is not logged in
+            res.json({ isLoggedIn: false });
+          }
+    } catch (error) {
+      console.error('An error occurred:', error);
+      res.status(500).json({ error: 'An error occurred' });
+    }
+  });
 
 app.get("/product.html/product_categories", (req, res) => {
     client.query(/*sql*/ `select categories_name from categories`, function (err, results) {
@@ -176,9 +199,8 @@ app.delete('/shoppingCart.html', async (req, res) => {
     }
 })
 
-app.get("/proDetail.html",  isLoggedIn, async (req, res,next) => {next()})
-
-app.get("/productDetail/:id",  isLoggedIn, async (req, res) => {
+app.get("/proDetail.html", isLoggedIn, async (req, res, next) => { next() })
+app.get("/productDetail/:id", isLoggedIn, async (req, res) => {
     try {
         const id = parseInt(req.params.id);
         if (isNaN(id)) {
@@ -317,42 +339,41 @@ app.use('/resources', isLoggedIn) // protected resources
 
 
 
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+// const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-const DOMAIN = process.env.DOMAIN;
+// const DOMAIN = process.env.DOMAIN;
 
 
-app.post('/create-checkout-session', async (req, res) => {
-    const products = await client.query(/*sql*/`SELECT * FROM products`);
-    const storeProducts = products.rows;
-    console.log(storeProducts)
-    const session = await stripe.checkout.sessions.create({
-        payment_method_types: ['card'],
-        mode: 'payment',
-        line_items: req.body.items.map((item: any) => {
-            // const storeItem = storeItems.get(item.id);
-            return {
-                // price_data: {
-                //     currency: 'hkd',
-                //     product_data: {
-                //         name: storeItem.name,
-                //         images: [storeItem.image],
-                //     },
-                //     unit_amount: storeItem.price,
-                // },
-                // quantity: item.quantity,
-            };
-        }),
-        success_url: `${DOMAIN}/success.html`,
-        cancel_url: `${DOMAIN}/cancel.html`,
-    });
+// app.post('/create-checkout-session', async (req, res) => {
+//     const products = await client.query(/*sql*/`SELECT * FROM products`);
+//     const storeProducts = products.rows;
+//     console.log(storeProducts)
+//     const session = await stripe.checkout.sessions.create({
+//         payment_method_types: ['card'],
+//         mode: 'payment',
+//         line_items: req.body.items.map((item: any) => {
+//             // const storeItem = storeItems.get(item.id);
+//             return {
+//                 // price_data: {
+//                 //     currency: 'hkd',
+//                 //     product_data: {
+//                 //         name: storeItem.name,
+//                 //         images: [storeItem.image],
+//                 //     },
+//                 //     unit_amount: storeItem.price,
+//                 // },
+//                 // quantity: item.quantity,
+//             };
+//         }),
+//         success_url: `${DOMAIN}/success.html`,
+//         cancel_url: `${DOMAIN}/cancel.html`,
+//     });
 
-    res.redirect(303, session.url);
-});
+//     res.redirect(303, session.url);
+// });
 
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.static(path.join(__dirname, 'public', "html")))
-// app.use(isLoggedIn, express.static('frontend'))
 
 
 app.use((_req, res) => {
