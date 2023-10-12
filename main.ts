@@ -104,17 +104,17 @@ app.post('/login', async (req, res) => {
 app.get('/logout', (req, res) => {
     req.session.destroy((error) => {
         console.log('out of session');
-      if (error) {
-        console.error('Error occurred during session destruction:', error);
-        return res.status(500).json({ message: 'Internal Server Error' });
-      }
-  
-      console.log('Logged out');
-      res.redirect('/');
-      console.log('isLoggedOut');
-      return;
+        if (error) {
+            console.error('Error occurred during session destruction:', error);
+            return res.status(500).json({ message: 'Internal Server Error' });
+        }
+
+        console.log('Logged out');
+        res.redirect('/');
+        console.log('isLoggedOut');
+        return;
     });
-  });
+});
 
 
 // Changing the Login Button to Logout Button
@@ -123,15 +123,15 @@ app.get('/login-status', (req, res) => {
         if (req.session.userId) {
             // User is logged in
             res.json({ isLoggedIn: true });
-          } else {
+        } else {
             // User is not logged in
             res.json({ isLoggedIn: false });
-          }
+        }
     } catch (error) {
-      console.error('An error occurred:', error);
-      res.status(500).json({ error: 'An error occurred' });
+        console.error('An error occurred:', error);
+        res.status(500).json({ error: 'An error occurred' });
     }
-  });
+});
 app.get("/products", async (req, res) => {
     try {
         const queryResult = await client.query(/*sql*/
@@ -244,8 +244,6 @@ app.post("/cartItem", async (req, res) => {
             [req.session?.userId, cartItem.product_id, cartItem.product_quantity]);
         req.session.cartCount = req.session.cartCount ? req.session.cartCount + 1 : 1
         req.session.shoppingCartId = shoppingCartId.rows[0].id
-        console.log(`this is the shopping_cart_id:${req.session.shoppingCartId}`)
-        console.log(`this is the user_id:${req.session.userId}`)
         res.json({ success: true, msg: "item added to cart" })
     } catch (err: any) {
         console.error(err.message);
@@ -357,6 +355,15 @@ cart_items
         res.status(400).json({ success: false, msg: "unable to checkout" });
     }
 })
+
+// async function insertOrder(shopping_cart_id) {
+//     await client.query(/*sql*/`SELECT 
+//     user_id,
+//     product_id,
+//     INSERT INTO orders (
+//         user_id, total_amount, payment_status, payment_method)
+//         VALUES ($1, $2, $3, $4) RETURNING id`, [])
+// }
 
 const router = Router();
 // Protected route example
