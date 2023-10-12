@@ -53,6 +53,54 @@ async function initProducts() {
         }
       });
 
+    // productClone
+    //   .querySelector(".reduce")
+    //   .setAttribute("pid", product.product_id);
+
+    // productClone
+    //   .querySelector(".add")
+    //   .setAttribute("pid", product.product_id);
+
+    productClone
+      .querySelector(".reduce")
+      .addEventListener("click", function (e) {
+        let quantity = parseInt(
+          e.target.parentNode.querySelector(".product-quantity").textContent
+        );
+        // const id = e.target.getAttribute("pid");
+        console.log(quantity);
+        //  const reduce = quantity - 1;
+        if (quantity <= 1) {
+          return;
+        }
+        else {
+          reduce = quantity - 1;
+          e.target.parentNode.querySelector(
+            ".product-quantity"
+          ).textContent = reduce;
+          console.log(quantity);
+          updateProductQuantity(reduce);
+        }
+      });
+
+    productClone
+      .querySelector(".add")
+      .addEventListener("click", function (e) {
+        let quantity = parseInt(
+          e.target.parentNode.querySelector(".product-quantity").textContent
+        );
+        // const id = e.target.getAttribute("pid");
+        console.log(quantity);
+        add = quantity + 1;
+        e.target.parentNode.querySelector(
+          ".product-quantity"
+        ).textContent = reduce;
+        console.log(quantity);
+        updateProductQuantity(add);
+
+      });
+
+
     productContainerEle.appendChild(productClone);
   }
 
@@ -72,6 +120,29 @@ async function deleteItems(pid) {
     },
   });
   if (res.ok) {
+    initProducts();
+  } else {
+    alert("Error when loading the page");
+  }
+}
+
+// update quantity kdl
+
+async function updateProductQuantity(quantity) {
+  const resp = await fetch("/getShoppingId", {
+
+  })
+  const res = await fetch("/updateQuantity", {
+    method: "PUT",
+    body: JSON.stringify({
+      product_quantity: quantity,
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  if (res.ok) {
+    console.log(res);
     initProducts();
   } else {
     alert("Error when loading the page");

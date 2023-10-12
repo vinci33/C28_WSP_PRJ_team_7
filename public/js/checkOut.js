@@ -16,7 +16,6 @@ async function checkOut() {
     const checkOutBtn = document.querySelector('.checkout-login-btn');
     checkOutBtn.addEventListener('click', async function (e) {
         let checkOutDetail = getCheckOutInfo();
-        console.log(checkOutDetail, checkOutDetail.success);
         if (checkOutDetail.success) {
             try {
                 const resp = await fetch('/checkOut', {

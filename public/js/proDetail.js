@@ -6,47 +6,60 @@ window.onload = async () => {
   await initAddToCart(id);
 };
 
-function initAddToCart(id) {
-  // event listener for add to cart button
+async function initAddToCart(id) {
+  try {
+    // event listener for add to cart button
+    const reduceBtn = document.querySelector(".reduce");
+    const addBtn = document.querySelector(".add");
+    const quantityEle = document.querySelector(".number-of-quantity");
 
-  const reduceBtn = document.querySelector(".reduce");
-  const addBtn = document.querySelector(".add");
-  const quantityEle = document.querySelector(".number-of-quantity");
-
-  let quantity = parseInt(quantityEle.dataset.quantity);
-  reduceBtn.addEventListener("click", () => {
-    if (quantity > 1) {
-      quantity--;
-      quantityEle.innerHTML = quantity;
+    if (!reduceBtn || !addBtn || !quantityEle) {
+      throw new Error("Missing button elements");
     }
-  });
 
-  addBtn.addEventListener("click", () => {
-    quantity++;
-    quantityEle.innerHTML = quantity;
-    console.log(quantity);
-  });
-
-  const addToCartBtn = document.querySelector(".add-to-cart-btn");
-  addToCartBtn.addEventListener("click", async (e) => {
-    e.preventDefault();
-    const addToCartItem = e.target;
-    const resp = await fetch("/productDetail/" + id);
-    const product = await resp.json();
-    console.log(product);
-    const addToCartItemObj = {};
-    addToCartItemObj.product_id = product.id;
-    addToCartItemObj.product_quantity = quantity;
-    const resp2 = await fetch("/cartItem", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(addToCartItemObj),
+    let quantity = parseInt(quantityEle.dataset.quantity);
+    reduceBtn.addEventListener("click", () => {
+      if (quantity > 1) {
+        quantity--;
+        quantityEle.innerHTML = quantity;
+      }
     });
-    addToCartBtn.innerHTML = "Added to Cart";
-    addToCartBtn.disabled = true;
-  });
+
+    addBtn.addEventListener("click", () => {
+      quantity++;
+      quantityEle.innerHTML = quantity;
+      console.log(quantity);
+    });
+
+    const addToCartBtn = document.querySelector(".add-to-cart-btn");
+    addToCartBtn.addEventListener("click", async (e) => {
+      e.preventDefault();
+      const addToCartItem = e.target;
+      const resp = await fetch("/productDetail/" + id);
+      if (!resp.ok) {
+        throw new Error("Unable to get/fetch product details");
+      }
+      const product = await resp.json();
+      console.log(`${[product]}, this func 1 ${quantity}`);
+      const addToCartItemObj = {};
+      addToCartItemObj.product_id = product.id;
+      addToCartItemObj.product_quantity = quantity;
+      const resp2 = await fetch("/cartItem", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(addToCartItemObj),
+      });
+      if (!resp2.ok) {
+        throw new Error("Unable to post/add item to cart");
+      }
+      addToCartBtn.innerHTML = "Added to Cart";
+      addToCartBtn.disabled = true;
+    });
+  } catch (err) {
+    console.error(`Error in initAddToCart function: ${err.message}`);
+  }
 }
 
 async function initCartCounter() {
