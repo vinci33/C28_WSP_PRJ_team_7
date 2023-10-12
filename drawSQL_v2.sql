@@ -151,6 +151,8 @@ VALUES
 INSERT INTO users (user_name,password,first_name,last_name,phone,email,created_at,modified_at)
 VALUES
 ('john','0000','john','chan','99229922','john@gmail.com',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+INSERT INTO users (user_name,password,first_name,last_name,phone,email,created_at,modified_at)
+VALUES
 ('ken','0000','ken','lai','11111','111@gmail.com',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
 INSERT INTO products (category_id,product_name,product_details,product_color,product_size,selling_price,image_one,image_two,image_three,created_at,modified_at)
 VALUES
