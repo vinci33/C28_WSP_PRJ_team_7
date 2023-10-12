@@ -66,7 +66,8 @@
         <h3>Order History</h3>
     </div>
 
-    <div class="product-container">No Purchase Order</div>
+    <div class="order-container">No Purchase Order</div>
+
     <footer class="mt-5 py-5">
         <div class="row container mx-auto pt-5">
             <div class="footer-one col-lg-4 col-md-6 col-12 mb-3">
@@ -121,14 +122,16 @@
         crossorigin="anonymous"></script>
     <script type="text/javascript" src="../js/shoppingCart.js"></script>
 </body>
-<template id="product-template">
+<template id="order-template">
     <div class="order card">
       <a href="">
         <img src="" alt="Avatar" width="100%" />
         <div class="container">
-          <p class="product-title"></p>
-          <p class="product-price"></p>
-        </div>
+            <div class=""></div>
+          <div class="product_quantity"></div>
+          <div class="payment_status"></div>
+          <div class="product_details"></div>
+          <div class="product_color"></div>
       </a>
     </div>
   </template>
