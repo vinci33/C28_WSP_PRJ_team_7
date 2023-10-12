@@ -171,15 +171,23 @@ VALUES
 (1,5,3,'2023-10-08T18:29:40.000Z','2023-10-08T18:29:40.000Z');
 INSERT INTO orders (user_id,total_amount,payment_status,payment_method) 
 VALUES (1,15647,'successful','credit card'),
+(1,8599,'successful','credit card'),
+(1,8599,'successful','credit card'),
 (1,8599,'successful','credit card');
 INSERT INTO order_detail_items (order_id,product_id,product_name,product_color,
 product_size,product_quantity,selling_price,product_total_price) VALUES 
 (1,1,'iphone_15','blue','128gb',2,6899,13798),
 (1,9,'airpods_pro','white','null',1,1849,1849),
-(2,9,'iphone_15_pro','black','128gb',1,8599,8599);
+(2,9,'iphone_15_pro','black','128gb',1,8599,8599),
+(3,9,'iphone_15_pro','black','128gb',1,8599,8599),
+(4,9,'iphone_15_pro','black','128gb',1,8599,8599);
 INSERT INTO delivery_contacts(order_id,first_name,last_name,phone,email) VALUES
 (1, 'stephen', 'curry', 22222222, 'stephen@gmail.com'),
-(2, 'chris', 'paul', 33333333, 'chris@gmail.com');
+(2, 'chris', 'paul', 33333333, 'chris@gmail.com'),
+(3, 'klay', 'thompson', 33333333, 'klay@gmail.com'),
+(4, 'Andrew', 'Wiggins', 33333333, 'andrew@gmail.com');
 INSERT INTO delivery_address(delivery_contact_id,address1,address2,street,city,postal_code,country) VALUES
-(1, 'Room 20B, 20/F', 'TML Tower', '3 Hoi Shing Road', 'Hong Kong', '000000', 'China'),
-(2, 'Room 23B, 22/F', 'ABC Tower', '3 Tai Shing Road', 'Hong Kong', '000000', 'China');
+(1, 'Room 20B, 20/F, TML Tower, 3 Hoi Shing Road, Hong Kong', null, null, null, '000000', null),
+(2, 'Room 23B, 22/F', 'ABC Tower', '3 Tai Shing Road', 'Hong Kong', '000000', 'China'),
+(3, 'Room 23B, 22/F', 'ABC Tower', '3 Tai Shing Road', 'Hong Kong', '000000', 'China'),
+(4, 'Room 23B, 22/F', 'ABC Tower', '3 Tai Shing Road', 'Hong Kong', '000000', 'China');
