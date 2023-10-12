@@ -244,8 +244,6 @@ app.post("/cartItem", async (req, res) => {
             [req.session?.userId, cartItem.product_id, cartItem.product_quantity]);
         req.session.cartCount = req.session.cartCount ? req.session.cartCount + 1 : 1
         req.session.shoppingCartId = shoppingCartId.rows[0].id
-        console.log(`this is the shopping_cart_id:${req.session.shoppingCartId}`)
-        console.log(`this is the user_id:${req.session.userId}`)
         res.json({ success: true, msg: "item added to cart" })
     } catch (err: any) {
         console.error(err.message);
@@ -375,6 +373,15 @@ cart_items
         res.status(400).json({ success: false, msg: "unable to checkout" });
     }
 })
+
+// async function insertOrder(shopping_cart_id) {
+//     await client.query(/*sql*/`SELECT 
+//     user_id,
+//     product_id,
+//     INSERT INTO orders (
+//         user_id, total_amount, payment_status, payment_method)
+//         VALUES ($1, $2, $3, $4) RETURNING id`, [])
+// }
 
 const router = Router();
 // Protected route example

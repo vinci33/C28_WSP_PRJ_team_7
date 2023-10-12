@@ -11,36 +11,33 @@
         rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="../css/signUp.css">
-    <title> Three-Signup</title>
+    <link rel="stylesheet" href="../css/aboutus.css">
+    <title>THREE-About Us</title>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light py-3">
         <div class="container-fluid">
-
             <a href="./index.html"><img class="logo-img" src="../asset/logo-three/white.png" alt=""></a>
-
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span><i class="fa-solid fa-bars"></i></span>
+                <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="index.html">Home</a>
+                        <a class="nav-link" aria-current="page" href="./">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="product.html">Mobile</a>
+                        <a class="nav-link" href="./product.html">Mobile</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="./phonecase.html">Phone Case</a>
@@ -48,52 +45,64 @@
                     <li class="nav-item">
                         <a class="nav-link" href="./aboutus.html">About Us</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="loginbtn">LogIn/SignUp</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./orderHistory.html">Order History</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="./orderHistory.html" id="profilebtn">
+                            <i class="fa-solid fa-user"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="./shoppingCart.html" id="cartbtn">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
-    <!-- Body -->
-    <div class="container-fluid mb-5">
-        <div class="greeting">Hi, Nice to see you here!</div>
-        <div class="form-container"></div>
-        <div class="google"><button class="googlebtn" type="button">
-                <i class="fa-brands fa-google"></i>&nbsp;&nbsp;&nbsp;Sign up with Google</button></div>
-        <div class="or">or</div>
-        <form id="createAccountForm">
-            <div class="email">
-                <div class="input-label">Enter your Email address</div>
-            </div>
-            <div class="emailbox">
-                <i class="fa-regular fa-envelope"></i>&nbsp;&nbsp;
-                <input type="email" id="email" name="email" placeholder="Enter your email" required>
-            </div>
-            <div class="password">
-                <div class="input-label">Enter your Password</div>
-            </div>
-            <div class="pwbox">
-                <i class="fa-solid fa-lock"></i>&nbsp;
-                <input type="password" id="password" name="password" placeholder="Enter your password" required>
-            </div>
-            <div class="password">
-                <div class="input-label">Confirm your Password</div>
-            </div>
-            <div class="pwbox">
-                <i class="fa-solid fa-lock"></i>&nbsp;
-                <input type="password" id="confirmPassword" name="confirm_password" placeholder="Re-Enter your password"
-                    required>
-            </div>
-            <div id="passworderror"></div>
-            <div class="signupbtn">
-                <input id="signupbtn" name="signup" type="submit" value="Create Account">
-            </div>
-            <div class="loginbox">
-                <div class="already">Already have an account?&nbsp;&nbsp;<a href="login.html"
-                        class="createaccbtn">Login</a></div>
-            </div>
-        </form>
+    <div class="heading">
+        <div>Welcome To <span>three</span></div>
     </div>
-    <!-- Footer -->
-    <footer class="py-5">
+    <div class="container">
+        <div class="title">Our Team:</div>
+        <div class="content">
+            At <span>three</span>, we are a team of highly skilled individuals who have recently graduated from a
+            prestigious coding
+            boot camp. With our combined expertise in programming and a keen understanding of the technology
+            industry, we have identified an exciting trend on the horizon - the increasing demand for Apple
+            products.
+        </div>
+        <div class="title">Our Journey:</div>
+        <div class="content">
+            Our journey began when we embarked on a rigorous and immersive coding boot camp program. Over the course
+            of several months, we honed our coding skills, tackled complex projects, and developed a deep
+            appreciation for the power of technology. We realized that the world of programming extends beyond just
+            writing code; it encompasses the creation and utilization of cutting-edge devices and software.
+        </div>
+        <div class="title">Our Mission:</div>
+        <div class="content">
+            At <span>THREE</span>, our mission is twofold. First and foremost, we aim to empower individuals and
+            businesses with the latest Apple products that will enhance their digital experiences. Whether it's a
+            powerful MacBook for coding, an iPhone for seamless communication, or an iPad for creativity and
+            productivity, we are dedicated to curating a wide range of Apple devices to cater to diverse needs.
+        </div>
+        <div class="title">Our Commitment:</div>
+        <div class="content">
+            We understand that purchasing technology can be overwhelming, especially with the abundance of options
+            available. That's why we are committed to providing exceptional customer service. Our team of experts is
+            readily available to answer your questions, offer personalized recommendations, and guide you through
+            the purchasing process. We value your satisfaction and will go above and beyond to ensure that you have
+            a seamless and enjoyable shopping experience with us.
+        </div>
+    </div>
+    <div class="container"></div>
+
+    <footer class="mt-5 py-5">
         <div class="row container mx-auto pt-5">
             <div class="footer-one col-lg-4 col-md-6 col-12 mb-3">
                 <img class="footer-img" src="../asset/logo-three/white.png" alt="">
@@ -123,7 +132,7 @@
                 </div>
                 <div>
                     <h6 class="text-uppercase ">Email</h6>
-                    <a class="teckyemail" href="http://tecky.io">
+                    <a class="email" href="http://tecky.io">
                         <p>hello@tecky.io</p>
                     </a>
                 </div>
@@ -146,7 +155,19 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
-    <script type="text/javascript" src="../js/signup.js"></script>
+    <script type="text/javascript" src="../js/index.js"></script>
+    <script type="text/javascript" src="../js/navbar.js"></script>
 </body>
+<template id="product-template">
+    <div class="product card">
+        <a href="">
+            <img src="" alt="Avatar" width="100%" />
+            <div class="container">
+                <p class="product-title"></p>
+                <p class="product-price"></p>
+            </div>
+        </a>
+    </div>
+</template>
 
 </html>

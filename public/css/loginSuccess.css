@@ -9,6 +9,9 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:400|Noto Sans:700');
 
 body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     font-family: 'poppins', sans-serif;
     font-weight: 400;
 }
@@ -17,57 +20,58 @@ footer {
 }
 
 
-/* Nav Bar */
 .logo-img {
     height: 100px;
     padding-left: 80px;
-}
-
-.navbar {
+  }
+  
+  .navbar {
     font-size: 16px;
-}
-
-.navbar-light .navbar-nav .nav-item .nav-link {
+  }
+  
+  .navbar-light .navbar-nav .nav-item .nav-link {
+    padding: 0 20px;
     color: var(--text);
     transition: 0.3 ease-in-out;
-}
-
-.navbar-light .navbar-nav .nav-item .nav-link:hover,
-.navbar-light .navbar-nav .nav-item .nav-link:active {
+  }
+  
+  .navbar-light .navbar-nav .nav-item .nav-link:hover,
+  .navbar-light .navbar-nav .nav-item .nav-link:active {
     color: var(--primary);
-}
-
-.navbar i {
+  }
+  
+  .navbar i {
     font-size: 1.2rem;
     padding: 0 9px;
     cursor: pointer;
     transition: 0.3 ease-in-out;
-}
-
-.navbar i:hover .navbar i:active {
+  }
+  
+  .navbar i:hover .navbar i:active {
     color: var(--primary);
     filter: drop-shadow(0 0 0.5rem var(--primary));
-}
-
-/* mobile */
-.navbar-light .navbar-toggler {
+  }
+  
+  /* mobile */
+  .navbar-light .navbar-toggler {
     border: none;
     outline: none;
-}
-
-.navbar-toggler-icon {
+  }
+  
+  .navbar-toggler-icon {
     font-size: 1.5rem;
     padding: 7px;
     cursor: pointer;
     transition: 0.3 ease-in-out;
     border-color: var(--primary);
     /* background-color: var(--accent); */
-}
-
-.navbar-toggler-icon:hover,
-.navbar-toggler-icon:active {
+  }
+  
+  .navbar-toggler-icon:hover,
+  .navbar-toggler-icon:active {
     color: var(--primary);
-}
+  }
+  
 
 /* Body */
 .greeting {
@@ -95,7 +99,7 @@ footer {
     letter-spacing: 0.72px;
     display: flex;
     justify-content: center;
-    margin-top: 30px;
+    margin-top: 80px;
     font-family: Poppins;
 }
 
@@ -116,8 +120,7 @@ footer {
 .goshopbtn {
     display: flex;
     justify-content: center;
-    margin-top: 30px;
-    text-decoration: none;
+    margin-top: 80px;
 }
 
 #goshopbtn {
@@ -147,9 +150,10 @@ footer {
 }
 
 footer {
+    margin-top:auto;
+    width: 100%;
     background-color: var(--accent);
 }
-
 
 footer h5 {
     color: var(--background);
@@ -186,6 +190,8 @@ footer p {
 footer .teckyemail p {
     text-decoration: none;
     transition: 0.3 ease-in-out;
+    display: flex;
+    align-items: left;
 }
 
 footer .teckyemail p:hover,

@@ -35,26 +35,33 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#">Home</a>
+                        <a class="nav-link" aria-current="page" href="/">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="./product.html">Mobile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Phone Case</a>
+                        <a class="nav-link" href="./phonecase.html">Phone Case</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About Us</a>
+                        <a class="nav-link" href="./aboutus.html">About Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">LogIn/SignUp</a>
+                        <a class="nav-link" id="loginbtn">LogIn/SignUp</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./orderHistory.html">Order History</a>
                     </li>
                     <li class="nav-item">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                        <a href="./shoppingCart.html"><i class="fa-solid fa-cart-shopping"></i>
+                        <a href="./orderHistory.html" id="profilebtn">
+                            <i class="fa-solid fa-user"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="./shoppingCart.html" id="cartbtn">
+                            <i class="fa-solid fa-cart-shopping"></i>
                             <span id="cart-count"></span></a>
+                        </a>
                     </li>
-
                 </ul>
             </div>
         </div>
@@ -127,20 +134,21 @@
 
         </template>
     </section>
-    <footer class="mt-5 py-5">
+    <footer class="py-5">
         <div class="row container mx-auto pt-5">
             <div class="footer-one col-lg-4 col-md-6 col-12 mb-3">
                 <img class="footer-img" src="../asset/logo-three/white.png" alt="">
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Excepturi maxime asperiores,
-                    fuga ab voluptatem cumque cupiditate quae, harum pariatur aperiam nulla est repudiandae enim tempora
-                    autem laboriosam, consectetur ducimus voluptatibus.</p>
+                <p>We strive to create a community where technology enthusiasts, programmers, and Apple enthusiasts can
+                    come together to share knowledge, exchange ideas, and stay updated on the latest trends in the tech
+                    world. We believe that fostering this sense of community will spur innovation, collaboration, and
+                    personal growth for all our customers.</p>
             </div>
             <div class="footer-one col-lg-4 col-md-6 col-12 mb-3">
                 <h5 class="pb-2">Featured</h5>
                 <ul class="text-uppercase list-unstyled">
-                    <li><a href="#">Mobile</a></li>
-                    <li><a href="#">Phone Case</a></li>
-                    <li><a href="#">About Us</a></li>
+                    <li><a href="./product.html">Mobile</a></li>
+                    <li><a href="./phonecase.html">Phone Case</a></li>
+                    <li><a href="./aboutus.html">About Us</a></li>
                 </ul>
             </div>
             <div class="footer-one col-lg-4 col-md-6 col-12 mb-3">

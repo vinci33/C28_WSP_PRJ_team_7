@@ -26,9 +26,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light py-3">
         <div class="container-fluid">
-            <div class="logo-div">
-                <img class="logo-img" href="./index.html" src="../asset/logo-three/white.png" alt="">
-            </div>
+            <a href="./index.html"><img class="logo-img" src="../asset/logo-three/white.png" alt=""></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -42,10 +40,10 @@
                         <a class="nav-link" href="./product.html">Mobile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Phone Case</a>
+                        <a class="nav-link" href="./phonecase.html">Phone Case</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About Us</a>
+                        <a class="nav-link" href="./aboutus.html">About Us</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="loginbtn">LogIn/SignUp</a>
@@ -54,17 +52,30 @@
                         <a class="nav-link" href="./orderHistory.html">Order History</a>
                     </li>
                     <li class="nav-item">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                        <a href='./shoppingCart.html'><i class="fa-solid fa-cart-shopping"></i></a>
+                        <a href="./orderHistory.html" id="profilebtn">
+                            <i class="fa-solid fa-user"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="./shoppingCart.html" id="cartbtn">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-    <h1>HOME</h1>
 
     <section id=" home">
-        <div class="hero-blocks">
+        <div class="bannercontainer">
+            <div>
+                <a href="product.html?category=iphone">
+                    <img src="../asset/banner_Img/iphone15probanner.jpg" alt="iPhone15Pro" class="banner">
+                </a>
+            </div>
+        </div>
+
+        <!-- <div class="hero-blocks">
             <div class="container">
                 <div class="right-image"></div>
                 <div class="top-content">
@@ -76,7 +87,7 @@
                     bring innovation right to your fingertips.
                 </p>
             </div>
-        </div>
+        </div> -->
     </section>
 
     <div class="new-arrival">
@@ -93,16 +104,17 @@
         <div class="row container mx-auto pt-5">
             <div class="footer-one col-lg-4 col-md-6 col-12 mb-3">
                 <img class="footer-img" src="../asset/logo-three/white.png" alt="">
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Excepturi maxime asperiores,
-                    fuga ab voluptatem cumque cupiditate quae, harum pariatur aperiam nulla est repudiandae enim tempora
-                    autem laboriosam, consectetur ducimus voluptatibus.</p>
+                <p>We strive to create a community where technology enthusiasts, programmers, and Apple enthusiasts can
+                    come together to share knowledge, exchange ideas, and stay updated on the latest trends in the tech
+                    world. We believe that fostering this sense of community will spur innovation, collaboration, and
+                    personal growth for all our customers.</p>
             </div>
             <div class="footer-one col-lg-4 col-md-6 col-12 mb-3">
                 <h5 class="pb-2">Featured</h5>
                 <ul class="text-uppercase list-unstyled">
-                    <li><a href="#">Mobile</a></li>
-                    <li><a href="#">Phone Case</a></li>
-                    <li><a href="#">About Us</a></li>
+                    <li><a href="./product.html">Mobile</a></li>
+                    <li><a href="./phonecase.html">Phone Case</a></li>
+                    <li><a href="./aboutus.html">About Us</a></li>
                 </ul>
             </div>
             <div class="footer-one col-lg-4 col-md-6 col-12 mb-3">
@@ -146,13 +158,14 @@
 </body>
 <template id="product-template">
     <div class="product card">
-      <a href="">
-        <img src="" alt="Avatar" width="100%" />
-        <div class="container">
-          <p class="product-title"></p>
-          <p class="product-price"></p>
-        </div>
-      </a>
+        <a href="">
+            <img src="" alt="Avatar" width="100%" />
+            <div class="container">
+                <p class="product-title"></p>
+                <p class="product-price"></p>
+            </div>
+        </a>
     </div>
-  </template>
+</template>
+
 </html>
