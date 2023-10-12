@@ -75,14 +75,14 @@ ALTER TABLE
 
 CREATE TABLE "delivery_contacts"(
     "id" SERIAL primary key,
-    "user_id" INTEGER NOT NULL,
+    "order_id" INTEGER NOT NULL,
     "first_name" VARCHAR(255) NULL,
     "last_name" VARCHAR(255) NULL,
     "phone" VARCHAR(255) NULL,
     "email" VARCHAR(255) NULL,
     "created_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     "modified_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY("order_id") REFERENCES "order"("id")
+    FOREIGN KEY("order_id") REFERENCES "orders"("id")
 );
 
 CREATE TABLE "delivery_address"(
@@ -103,8 +103,6 @@ CREATE TABLE "delivery_address"(
 CREATE TABLE "orders"(
     "id" SERIAL primary key,
     "user_id" BIGINT NOT NULL,
-    "product_id" INTEGER NOT NULL,
-    "product_quantity" INTEGER NOT NULL,
     "total_amount" INTEGER NOT NULL,
     "payment_status" VARCHAR(255) NOT NULL,
     "payment_method" VARCHAR(255) NOT NULL,
@@ -150,9 +148,9 @@ VALUES
 ('iphone',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
 ('airpods',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
 ('ipad',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
-INSERT INTO users (user_name,password,first_na` me,last_name,phone,email,created_at,modified_at)
+INSERT INTO users (user_name,password,first_name,last_name,phone,email,created_at,modified_at)
 VALUES
-('john','0000','john','chan','99229922','john@gmail.com',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+('john','0000','john','chan','99229922','john@gmail.com',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
 ('ken','0000','ken','lai','11111','111@gmail.com',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
 INSERT INTO products (category_id,product_name,product_details,product_color,product_size,selling_price,image_one,image_two,image_three,created_at,modified_at)
 VALUES
@@ -169,6 +167,11 @@ INSERT INTO shopping_cart (user_id,product_id,product_quantity,created_at,modifi
 VALUES
 (1,1,2,'2023-10-08T18:29:40.000Z','2023-10-08T18:29:40.000Z'),
 (1,5,3,'2023-10-08T18:29:40.000Z','2023-10-08T18:29:40.000Z');
-INSERT INTO orders (user_id,product_id,product_quantity,total_amount,payment_status,payment_method) 
-VALUES (1,1,5,34495,"successful","credit card"),
-VALUES (1,3,1,8599,"successful","credit card");
+INSERT INTO orders (user_id,total_amount,payment_status,payment_method) 
+VALUES (1,15647,"successful","credit card"),
+(1,8599,"successful","credit card");
+INSERT INTO order_detail_items (order_id,product_id,product_name,product_color,
+product_size,product_quantity,selling_price,product_total_price) VALUES 
+(1,1,'iphone_15','blue','128gb',2,6899,13798),
+(1,9,'airpods_pro','white','null',1,1849,1849),
+(2,9,'iphone_15_pro','black','128gb',1,8599,8599);
