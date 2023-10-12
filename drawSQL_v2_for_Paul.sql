@@ -56,6 +56,38 @@ ALTER TABLE
 ALTER TABLE
     "users" ADD CONSTRAINT "users_email_unique" UNIQUE("email");
 
+CREATE TABLE "orders"(
+    "id" SERIAL primary key,
+    "user_id" BIGINT NOT NULL,
+    "total_amount" INTEGER NOT NULL,
+    "payment_status" VARCHAR(255) NOT NULL,
+    "payment_method" VARCHAR(255) NOT NULL,
+    "created_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    "modified_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+CREATE TABLE "shopping_cart"(
+    "id" SERIAL primary key,
+    "user_id" INTEGER NOT NULL,
+    "product_id" INTEGER NOT NULL,
+    "product_quantity" INTEGER NOT NULL,
+    "created_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    "modified_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+CREATE TABLE "products"(
+    "id" SERIAL primary key,
+    "category_id" INTEGER NOT NULL,
+    "product_name" VARCHAR(255) NOT NULL,
+    "product_details" TEXT NOT NULL,
+    "product_color" VARCHAR(255) NOT NULL,
+    "product_size" VARCHAR(255) NULL,
+    "selling_price" INTEGER NOT NULL,
+    "image_one" VARCHAR(255) NOT NULL,
+    "image_two" VARCHAR(255) NULL,
+    "image_three" VARCHAR(255) NULL,
+    "created_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    "modified_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
 -- TODO: add  User adderss table fk user_id
 CREATE TABLE "user_address"(
     "id" SERIAL primary key,
@@ -100,37 +132,7 @@ CREATE TABLE "delivery_address"(
 );
 -- TODO: End of adding
 
-CREATE TABLE "orders"(
-    "id" SERIAL primary key,
-    "user_id" BIGINT NOT NULL,
-    "total_amount" INTEGER NOT NULL,
-    "payment_status" VARCHAR(255) NOT NULL,
-    "payment_method" VARCHAR(255) NOT NULL,
-    "created_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    "modified_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP
-);
-CREATE TABLE "shopping_cart"(
-    "id" SERIAL primary key,
-    "user_id" INTEGER NOT NULL,
-    "product_id" INTEGER NOT NULL,
-    "product_quantity" INTEGER NOT NULL,
-    "created_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    "modified_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP
-);
-CREATE TABLE "products"(
-    "id" SERIAL primary key,
-    "category_id" INTEGER NOT NULL,
-    "product_name" VARCHAR(255) NOT NULL,
-    "product_details" TEXT NOT NULL,
-    "product_color" VARCHAR(255) NOT NULL,
-    "product_size" VARCHAR(255) NULL,
-    "selling_price" INTEGER NOT NULL,
-    "image_one" VARCHAR(255) NOT NULL,
-    "image_two" VARCHAR(255) NULL,
-    "image_three" VARCHAR(255) NULL,
-    "created_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    "modified_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP
-);
+
 ALTER TABLE
     "orders" ADD CONSTRAINT "orders_user_id_foreign" FOREIGN KEY("user_id") REFERENCES "users"("id");
 ALTER TABLE
@@ -150,8 +152,8 @@ VALUES
 ('ipad',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
 INSERT INTO users (user_name,password,first_name,last_name,phone,email,created_at,modified_at)
 VALUES
-('john','0000','john','chan','99229922','john@gmail.com',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
-('ken','0000','ken','lai','11111','111@gmail.com',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+('john@gmail.com','0000','john','chan','99229922','john@gmail.com',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
+('ken@gmail.com','0000','ken','lai','11111','111@gmail.com',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
 INSERT INTO products (category_id,product_name,product_details,product_color,product_size,selling_price,image_one,image_two,image_three,created_at,modified_at)
 VALUES
 (1,'iphone_15','iphone_15 128gb','blue','128gb',6899,'../asset/product-img/iphone_15/iphone_15_blue.jpg','null','null','2023-09-01T18:29:40.000Z','2023-09-01T18:29:40.000Z'),
@@ -168,10 +170,16 @@ VALUES
 (1,1,2,'2023-10-08T18:29:40.000Z','2023-10-08T18:29:40.000Z'),
 (1,5,3,'2023-10-08T18:29:40.000Z','2023-10-08T18:29:40.000Z');
 INSERT INTO orders (user_id,total_amount,payment_status,payment_method) 
-VALUES (1,15647,"successful","credit card"),
-(1,8599,"successful","credit card");
+VALUES (1,15647,'successful','credit card'),
+(1,8599,'successful','credit card');
 INSERT INTO order_detail_items (order_id,product_id,product_name,product_color,
 product_size,product_quantity,selling_price,product_total_price) VALUES 
 (1,1,'iphone_15','blue','128gb',2,6899,13798),
 (1,9,'airpods_pro','white','null',1,1849,1849),
 (2,9,'iphone_15_pro','black','128gb',1,8599,8599);
+INSERT INTO delivery_contacts(order_id,first_name,last_name,phone,email) VALUES
+(1, 'stephen', 'curry', 22222222, 'stephen@gmail.com'),
+(2, 'chris', 'paul', 33333333, 'chris@gmail.com');
+INSERT INTO delivery_address(delivery_contact_id,address1,address2,street,city,postal_code,country) VALUES
+(1, 'Room 20B, 20/F', 'TML Tower', '3 Hoi Shing Road', 'Hong Kong', '000000', 'China'),
+(2, 'Room 23B, 22/F', 'ABC Tower', '3 Tai Shing Road', 'Hong Kong', '000000', 'China');

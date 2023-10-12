@@ -104,17 +104,17 @@ app.post('/login', async (req, res) => {
 app.get('/logout', (req, res) => {
     req.session.destroy((error) => {
         console.log('out of session');
-      if (error) {
-        console.error('Error occurred during session destruction:', error);
-        return res.status(500).json({ message: 'Internal Server Error' });
-      }
-  
-      console.log('Logged out');
-      res.redirect('/');
-      console.log('isLoggedOut');
-      return;
+        if (error) {
+            console.error('Error occurred during session destruction:', error);
+            return res.status(500).json({ message: 'Internal Server Error' });
+        }
+
+        console.log('Logged out');
+        res.redirect('/');
+        console.log('isLoggedOut');
+        return;
     });
-  });
+});
 
 
 // Changing the Login Button to Logout Button
@@ -123,15 +123,15 @@ app.get('/login-status', (req, res) => {
         if (req.session.userId) {
             // User is logged in
             res.json({ isLoggedIn: true });
-          } else {
+        } else {
             // User is not logged in
             res.json({ isLoggedIn: false });
-          }
+        }
     } catch (error) {
-      console.error('An error occurred:', error);
-      res.status(500).json({ error: 'An error occurred' });
+        console.error('An error occurred:', error);
+        res.status(500).json({ error: 'An error occurred' });
     }
-  });
+});
 app.get("/products", async (req, res) => {
     try {
         const queryResult = await client.query(/*sql*/
@@ -262,7 +262,25 @@ app.get("/cartCount", async (req, res) => {
 
 })
 
-
+// 未login，未買野
+app.get('/orderHistory.html/orders', async (req, res) => {
+    try {
+        const user_id = req.session?.userId
+        const deliveryQueryResult = await client.query(/*sql*/
+            `SELECT orders.total_amount as total_amount, orders.payment_status as payment_status,
+             orders.payment_method as payment_method, orders.created_at as created_at,
+             delivery_contacts.first_name as first_name, delivery_contacts.last_name as last_name, 
+             delivery_contacts.phone as phone, delivery_address.address1 as address1,
+             delivery_address.address2 as address2, delivery_address.country as country
+             from orders
+             inner join delivery_contacts on delivery_contacts.order_id = orders.id
+             inner join delivery_address on delivery_address.delivery_contact_id = delivery_contacts.id
+             where user_id = $1 order by orders.created_at`, [user_id])
+        res.json(deliveryQueryResult.rows)
+    } catch (err) {
+        res.status(400).json({ success: false, msg: "error occurred" });
+    }
+})
 
 app.post("/checkout", isLoggedIn, async (req, res) => {
     try {
