@@ -8,7 +8,7 @@ import { convertStr2Arr } from './utils';
 import { Colors, Products, ShoppingCart } from './model';
 import { isLoggedIn } from './guards'
 import { hashPassword, checkPassword } from './hash';
-// import { userRoutes } from './userRoutes';
+
 
 const app = express();
 
@@ -101,8 +101,37 @@ app.post('/login', async (req, res) => {
     }
 });
 
+app.get('/logout', (req, res) => {
+    req.session.destroy((error) => {
+        console.log('out of session');
+      if (error) {
+        console.error('Error occurred during session destruction:', error);
+        return res.status(500).json({ message: 'Internal Server Error' });
+      }
+  
+      console.log('Logged out');
+      res.redirect('/');
+      console.log('isLoggedOut');
+      return;
+    });
+  });
 
 
+// Changing the Login Button to Logout Button
+app.get('/login-status', (req, res) => {
+    try {
+        if (req.session.userId) {
+            // User is logged in
+            res.json({ isLoggedIn: true });
+          } else {
+            // User is not logged in
+            res.json({ isLoggedIn: false });
+          }
+    } catch (error) {
+      console.error('An error occurred:', error);
+      res.status(500).json({ error: 'An error occurred' });
+    }
+  });
 app.get("/products", async (req, res) => {
     try {
         const queryResult = await client.query(/*sql*/
@@ -379,6 +408,7 @@ app.use('/resources', isLoggedIn) // protected resources
 //                 // quantity: item.quantity,
 //             };
 //         }),
+//         success_url: `${DOMAIN}/success.html`,
 //         success_url: `${ DOMAIN } /success.html`,
 //         cancel_url: `${DOMAIN}/cancel.html`,
 //     });
@@ -388,7 +418,6 @@ app.use('/resources', isLoggedIn) // protected resources
 
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.static(path.join(__dirname, 'public', "html")))
-// app.use(isLoggedIn, express.static('frontend'))
 
 
 app.use((_req, res) => {

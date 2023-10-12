@@ -261,12 +261,15 @@ small {
   color: var(--primary);
 }
 
+/* Footer */
 .footer-img {
   height: 100px;
   margin-bottom: 15px;
 }
 
 footer {
+  margin-top:auto;
+  width: 100%;
   background-color: var(--accent);
 }
 
@@ -302,13 +305,15 @@ footer p {
   font-size: 0.9rem;
 }
 
-footer .email p {
+footer .teckyemail p {
   text-decoration: none;
   transition: 0.3 ease-in-out;
+  display: flex;
+  align-items: left;
 }
 
-footer .email p:hover,
-footer .email p:active {
+footer .teckyemail p:hover,
+footer .teckyemail p:active {
   text-decoration: none;
 }
 

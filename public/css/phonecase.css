@@ -1,0 +1,78 @@
+
+  :root {
+    --text: #010403;
+    --background: white;
+    --primary: #67c1bb;
+    --secondary: white;
+    --accent: #4eb7b0;
+  }
+  
+  @import url("https://fonts.googleapis.com/css?family=Poppins:400|Noto Sans:700");
+  
+  body {
+    font-family: "poppins", sans-serif;
+    font-weight: 400;
+  }
+
+  html {
+    font-size: 100%;
+  }
+  
+  .logo-img {
+    height: 100px;
+    padding-left: 80px;
+  }
+  
+  .navbar {
+    font-size: 16px;
+  }
+  
+  .navbar-light .navbar-nav .nav-item .nav-link {
+    padding: 0 20px;
+    color: var(--text);
+    transition: 0.3 ease-in-out;
+  }
+  
+  .navbar-light .navbar-nav .nav-item .nav-link:hover,
+  .navbar-light .navbar-nav .nav-item .nav-link:active {
+    color: var(--primary);
+  }
+  
+  .navbar i {
+    font-size: 1.2rem;
+    padding: 0 9px;
+    cursor: pointer;
+    transition: 0.3 ease-in-out;
+  }
+  
+  .navbar i:hover .navbar i:active {
+    color: var(--primary);
+    filter: drop-shadow(0 0 0.5rem var(--primary));
+  }
+  
+  /* mobile */
+  .navbar-light .navbar-toggler {
+    border: none;
+    outline: none;
+  }
+  
+  .navbar-toggler-icon {
+    font-size: 1.5rem;
+    padding: 7px;
+    cursor: pointer;
+    transition: 0.3 ease-in-out;
+    border-color: var(--primary);
+    /* background-color: var(--accent); */
+  }
+  
+  .navbar-toggler-icon:hover,
+  .navbar-toggler-icon:active {
+    color: var(--primary);
+  }
+  
+  .banner {
+    background-color: var(--background);
+    height: 100vh;
+    width: 100%;
+    display: flex;
+  }

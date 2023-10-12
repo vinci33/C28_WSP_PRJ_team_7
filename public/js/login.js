@@ -25,7 +25,7 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
       console.log("Login successful!");
 
       // Redirect to the success page
-      window.location.href = "/admin.html";
+      window.location.href = "/loginSuccess.html";
     } else {
       // Handle error response
       console.error("Error logging in");
