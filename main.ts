@@ -44,10 +44,11 @@ declare module 'express-session' {
 //     console.log(`Request path: ${rqe.path}, method: ${rqe.method}`);
 //     next();
 // })
-app.use((req, res, next) => {
-    req.session.userId = 1;
-    next();
-})
+// can be delete later
+// app.use((req, res, next) => {
+//     req.session.userId = 1;
+//     next();
+// })
 
 
 
@@ -215,6 +216,7 @@ app.post("/cartItem", async (req, res) => {
         req.session.cartCount = req.session.cartCount ? req.session.cartCount + 1 : 1
         req.session.shoppingCartId = shoppingCartId.rows[0].id
         console.log(`this is the shopping_cart_id:${req.session.shoppingCartId}`)
+        console.log(`this is the user_id:${req.session.userId}`)
         res.json({ success: true, msg: "item added to cart" })
     } catch (err: any) {
         console.error(err.message);
@@ -231,22 +233,24 @@ app.get("/cartCount", async (req, res) => {
 
 })
 
-app.post("/checkout", async (req, res) => {
+
+
+app.post("/checkout", isLoggedIn, async (req, res) => {
     try {
         const { address, contact } = req.body;
         console.log(address, contact);
-        console.log(req.session.userId)
-        console.log(1)
+        console.log(`this is the shopping_cart_id:${req.session.shoppingCartId}`)
+        console.log(`this is the user_id:${req.session.userId}`)
         await client.query(/*sql*/`WITH d_contacts AS(
-            INSERT INTO delivery_contacts (
+            INSERT INTO delivery_contacts(
                 user_id,
                 first_name,
                 last_name,
                 phone,
                 email
-            ) VALUES ( $1, $2, $3, $4, $5 )
+            ) VALUES($1, $2, $3, $4, $5)
             RETURNING id
-            )INSERT INTO delivery_address (
+        )INSERT INTO delivery_address(
             address1,
             address2,
             street,
@@ -254,7 +258,7 @@ app.post("/checkout", async (req, res) => {
             postal_code,
             country,
             delivery_contact_id
-        ) VALUES ( $6, $7, $8, $9, $10, $11, 
+        ) VALUES($6, $7, $8, $9, $10, $11,
             (SELECT id FROM d_contacts AS delivery_contact_id))`,
             [req.session.userId, contact.first_name,
             contact.last_name, contact.phone,
@@ -266,55 +270,55 @@ app.post("/checkout", async (req, res) => {
 
         console.log(2)
 
-        await client.query(/*sql*/`WITH cart_items AS (
-            SELECT
+        await client.query(/*sql*/`WITH cart_items AS(
+                SELECT
               user_id,
-              product_id,
-              product_quantity
+                product_id,
+                product_quantity
             FROM shopping_cart
             WHERE
               shopping_cart.user_id = $1
-          ), product_details AS (
-            SELECT
+            ), product_details AS(
+                SELECT
               cart_items.product_id,
-              products.product_name,
-              products.product_color,
-              products.product_size,
-              products.selling_price
+                products.product_name,
+                products.product_color,
+                products.product_size,
+                products.selling_price
             FROM cart_items
               JOIN products ON cart_items.product_id = products.id
-          ), inserted_order AS (
-            INSERT INTO orders (user_id, product_id, product_quantity, 
-                total_amount, payment_status, payment_method)
-            VALUES (
-            (SELECT
+            ), inserted_order AS(
+                INSERT INTO orders(user_id, product_id, product_quantity,
+                    total_amount, payment_status, payment_method)
+            VALUES(
+                        (SELECT
               cart_items.user_id,
-              cart_items.product_id,
-              cart_items.product_quantity,
-              SUM(product_quantity * selling_price) AS total_amount,
-              'pending' AS payment_status,
-              'credit card' AS payment_method
+                        cart_items.product_id,
+                        cart_items.product_quantity,
+                        SUM(product_quantity * selling_price) AS total_amount,
+                        'pending' AS payment_status,
+                        'credit card' AS payment_method
             FROM cart_items
               JOIN product_details ON product_details.product_id = cart_items.product_id
             GROUP BY
-              user_id,cart_items.product_id))
+              user_id, cart_items.product_id))
             RETURNING id, user_id
           )
 
-          INSERT INTO order_detail_items (order_id, product_id, product_name, product_color, product_size, product_quantity, selling_price, product_total_price)
-          SELECT
-            inserted_order.id AS order_id,
-            cart_items.product_id,
-            product_details.product_name,
-            product_details.product_color,
-            product_details.product_size,
-            cart_items.product_quantity,
-            product_details.selling_price,
-            cart_items.product_quantity * product_details.selling_price AS product_total_price
-          FROM
-            cart_items
+          INSERT INTO order_detail_items(order_id, product_id, product_name, product_color, product_size, product_quantity, selling_price, product_total_price)
+SELECT
+inserted_order.id AS order_id,
+    cart_items.product_id,
+    product_details.product_name,
+    product_details.product_color,
+    product_details.product_size,
+    cart_items.product_quantity,
+    product_details.selling_price,
+    cart_items.product_quantity * product_details.selling_price AS product_total_price
+FROM
+cart_items
             JOIN product_details ON cart_items.product_id = product_details.product_id
-            JOIN inserted_order ON cart_items.user_id = inserted_order.user_id;`,
+            JOIN inserted_order ON cart_items.user_id = inserted_order.user_id; `,
             [req.session?.userId])
 
 
@@ -368,7 +372,7 @@ app.use('/resources', isLoggedIn) // protected resources
 //                 // quantity: item.quantity,
 //             };
 //         }),
-//         success_url: `${DOMAIN}/success.html`,
+//         success_url: `${ DOMAIN } /success.html`,
 //         cancel_url: `${DOMAIN}/cancel.html`,
 //     });
 
