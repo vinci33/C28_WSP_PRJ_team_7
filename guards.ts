@@ -8,7 +8,7 @@ export function isLoggedIn(req: Request, res: Response, next: NextFunction) {
     next();
     return
   } else {
-    res.redirect('./login.html');
+    res.redirect('/login.html');
     console.log("user is not logged in");
     return
   }
