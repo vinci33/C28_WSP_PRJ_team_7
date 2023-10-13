@@ -1,3 +1,8 @@
+a {
+  color: inherit;
+  text-decoration: none !important;
+}
+
 .logo-div .logo-img {
   height: 100px;
   padding-left: 80px;
@@ -94,13 +99,6 @@
   flex: 4.5;
 }
 
-.stepper {
-  flex: 2;
-  text-align: left;
-  display: flex;
-  align-items: center;
-}
-
 .product-total-price {
   flex: 2;
   text-align: left;
@@ -141,11 +139,19 @@
 .checkout-btn {
   background-color: var(--accent);
   color: #fff;
-  border: none;
+  border: 5px solid var(--accent);
+  /*rounded and add hover kdl*/
+  border-radius: 40px;
   padding: 10px 20px;
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
+}
+
+.checkout-btn:hover {
+  background-color: var(--secondary);
+  border: 5px solid var(--secondary);
+  border-radius: 40px;
 }
 
 /* navbar and footer css */
@@ -268,7 +274,7 @@ small {
 }
 
 footer {
-  margin-top:auto;
+  margin-top: auto;
   width: 100%;
   background-color: var(--accent);
 }
@@ -338,4 +344,33 @@ footer .social-icons a:hover {
   color: var(--background);
   background-color: var(--primary);
   text-decoration: none;
+}
+
+/* stepping kdl */
+.stepper {
+  flex: 2;
+  text-align: left;
+  display: flex;
+  align-items: center;
+}
+
+.reduce,
+.add {
+  min-width: 15px;
+  font-size: 24px;
+  font-weight: 300;
+  margin: 0 20px;
+  cursor: pointer;
+}
+
+.reduce:active,
+.add:active {
+  font-size: 26px;
+}
+
+.number-of-quantity {
+  min-width: 20px;
+  font-size: 40px;
+  font-weight: bold;
+  margin: 0 20px;
 }

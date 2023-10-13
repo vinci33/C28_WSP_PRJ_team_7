@@ -46,11 +46,11 @@ declare module 'express-session' {
 // })
 
 
-// TODO can be delete later
-app.use((req, res, next) => {
-    req.session.userId = 1;
-    next();
-})
+// // TODO can be delete later
+// app.use((req, res, next) => {
+//     req.session.userId = 1;
+//     next();
+// })
 
 
 
@@ -220,6 +220,10 @@ app.delete('/shoppingCart.html', async (req, res) => {
     }
 })
 
+
+
+
+
 app.get("/proDetail.html", isLoggedIn, async (req, res, next) => { next() })
 
 app.get("/productDetail/:id", isLoggedIn, async (req, res) => {
@@ -240,9 +244,9 @@ app.get("/productDetail/:id", isLoggedIn, async (req, res) => {
 app.post("/cartItem", async (req, res) => {
     try {
         const cartItem: ShoppingCart = await req.body;
-        // console.log(cartItem, req.session?.userId)
+        console.log(cartItem, req.session?.userId)
         let shoppingCartId = await client.query(/*sql*/ `INSERT INTO shopping_cart (user_id, product_id, product_quantity ) 
-            VALUES ($1, $2, $3) RETURNING id `,
+        VALUES ($1, $2, $3) RETURNING id `,
             [req.session?.userId, cartItem.product_id, cartItem.product_quantity]);
         req.session.cartCount = req.session.cartCount ? req.session.cartCount + 1 : 1
         req.session.shoppingCartId = shoppingCartId.rows[0].id
@@ -252,6 +256,25 @@ app.post("/cartItem", async (req, res) => {
         res.status(400).json({ success: false, msg: "unable to add item to cart" });
     }
 })
+
+app.get("SoppingId", async (req, res) => { })
+
+app.put("/updateQuantity", async (req, res) => {
+    const product_quantity = req.body.product_quantity;
+    const user_id = req.session?.userId;
+    const shoppingCartId = req.session?.shoppingCartId
+    console.log(product_quantity, user_id, shoppingCartId)
+    try {
+        const updateId = await client.query
+            (/*sql*/`UPDATE shopping_cart SET product_quantity = $1 
+            WHERE id = $2  RETURNING id`, [product_quantity, shoppingCartId])
+        console.log(updateId.rows)
+        res.json({ success: true, msg: `${updateId} update success` })
+    } catch (err) {
+        res.status(400).json({ success: false, msg: "error occurred" });
+    }
+})
+
 
 app.get("/cartCount", async (req, res) => {
     try {
