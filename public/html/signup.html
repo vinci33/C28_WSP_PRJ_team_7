@@ -24,7 +24,7 @@
     <title> Three-Signup</title>
 </head>
 
-<body>
+<body class="d-flex flex-column vh-100">
     <nav class="navbar navbar-expand-lg navbar-light bg-light py-3">
         <div class="container-fluid">
 
@@ -37,16 +37,25 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="index.html">Home</a>
+                        <a class="nav-link" id="homebtn"></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="product.html">Mobile</a>
+                        <a class="nav-link" id="productbtn"></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./phonecase.html">Phone Case</a>
+                        <a class="nav-link" id="phonecasebtn"></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./aboutus.html">About Us</a>
+                        <a class="nav-link" id="aboutusbtn"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profilebtn"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="cartbtn"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="loginbtn"></a>
                     </li>
                 </ul>
             </div>
@@ -96,7 +105,7 @@
         </form>
     </div>
     <!-- Footer -->
-    <footer class="py-5">
+    <footer class="py-5 mt-auto">
         <div class="row container mx-auto pt-5">
             <div class="footer-one col-lg-4 col-md-6 col-12 mb-3">
                 <img class="footer-img" src="../asset/logo-three/white.png" alt="">

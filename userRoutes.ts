@@ -5,8 +5,6 @@ const crypto = require('crypto');
 export const userRoutes = express.Router();
 
 userRoutes.get('/login/google', loginGoogle);
-//userRoutes.post('/login');
-//userRoutes.get('/logout');
 
 async function loginGoogle (req:express.Request, res:express.Response){
     console.log('google login')
@@ -36,5 +34,5 @@ async function loginGoogle (req:express.Request, res:express.Response){
         req.session.userId = currentUser.id;
     }
 
-    return res.redirect('/')
+    return res.redirect('/loginSuccess.html')
 }
