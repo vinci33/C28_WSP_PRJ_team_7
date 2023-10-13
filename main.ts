@@ -216,7 +216,7 @@ app.get('/shoppingCart.html/products', async (req, res) => {
     try {
         const user_id = req.session?.userId
         const queryResult = await client.query(/*sql*/
-            `SELECT products.image_one as image_one, products.product_name as product_name,
+            `SELECT shopping_cart.id AS cart_id, products.image_one as image_one, products.product_name as product_name,
              products.product_details as product_details, products.product_color as product_color,
              products.product_size as product_size, products.selling_price as selling_price, 
              products.image_one as image_one, product_id, product_quantity from shopping_cart inner join products
