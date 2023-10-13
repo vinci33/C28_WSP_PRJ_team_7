@@ -47,10 +47,10 @@ declare module 'express-session' {
 
 
 // // TODO can be delete later
-app.use((req, res, next) => {
-    req.session.userId = 1;
-    next();
-})
+// app.use((req, res, next) => {
+//     req.session.userId = 1;
+//     next();
+// })
 
 
 
