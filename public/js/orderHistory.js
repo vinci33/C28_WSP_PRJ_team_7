@@ -4,14 +4,14 @@ window.onload = () => {
 
 async function initOrders() {
   const resp = await fetch("/orderHistory.html/orders");
-  const orders = await resp.json();
+  let orders = await resp.json();
 
   const orderContainerEle = document.querySelector(".order-container");
   const templateEle = document.querySelector("#order-template");
   orderContainerEle.innerHTML = "";
   let count = 0;
 
-  for (const order of orders) {
+  for (const order of orders[0]) {
     const orderClone = templateEle.content.cloneNode(true);
 
     count++

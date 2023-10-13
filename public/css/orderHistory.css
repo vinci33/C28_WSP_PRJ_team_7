@@ -37,6 +37,14 @@
   padding: 28px 80px 20px 80px;
 }
 
+.order {
+  width: 100%
+}
+
+#color-container {
+  width: 100%;
+}
+
 .order_number {
   font-size: 20px;
   font-weight: bold;
@@ -47,8 +55,7 @@
   padding: 0px 80px;
 }
 
-.order .container {
-  width: 100%;
+.order .container-fluid {
   margin: 0px;
   padding: 20px;
   background-color: #FFFFFF;

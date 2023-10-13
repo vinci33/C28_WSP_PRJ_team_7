@@ -51,11 +51,14 @@
                         <a class="nav-link" id="loginbtn">LogIn/SignUp</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./orderHistory.html">Order History</a>
+                        <a href="./orderHistory.html" id="profilebtn">
+                            <i class="fa-solid fa-user"></i>
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                        <a href='./shoppingCart.html'><i class="fa-solid fa-cart-shopping"></i></a>
+                        <a href="./shoppingCart.html" id="cartbtn">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </a>
                     </li>
 
                 </ul>
@@ -125,7 +128,7 @@
 </body>
 <template id="order-template">
     <div class="order card">
-        <div class="container" id="color-container">
+        <div class="container-fluid" id="color-container">
             <div class="order-date">
                 <div class="order_number"></div>
                 <div class="created_at"></div>
