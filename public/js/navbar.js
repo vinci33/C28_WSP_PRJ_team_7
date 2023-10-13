@@ -9,7 +9,7 @@ fetch('/login-status')
 
         if (data.isLoggedIn) {
             // User is logged in
-            loginbtn.innerHTML = '<i class="fa-solid fa-arrow-right-to-bracket"></i> Logout';
+            loginbtn.innerHTML = /*html*/ `<i class="fa-solid fa-arrow-right-to-bracket"></i> Logout`;
             loginbtn.href = "/logout";
             profilebtn.innerHTML = '<i class="fa-solid fa-user"></i>My Orders';
             profilebtn.style.display = "block"; // Show profile button

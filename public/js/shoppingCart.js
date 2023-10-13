@@ -68,7 +68,6 @@ async function initProducts() {
           e.target.parentNode.querySelector(".product-quantity").textContent
         );
         const cart_id = e.target.getAttribute("cart_id");
-        console.log(quantity);
         if (quantity <= 1) {
           return;
         }
@@ -77,7 +76,6 @@ async function initProducts() {
           e.target.parentNode.querySelector(
             ".product-quantity"
           ).textContent = reduce;
-          console.log(quantity);
           updateProductQuantity(reduce, cart_id);
         }
       });
@@ -89,12 +87,10 @@ async function initProducts() {
           e.target.parentNode.querySelector(".product-quantity").textContent
         );
         const cart_id = e.target.getAttribute("cart_id");
-        console.log(quantity);
         add = quantity + 1;
         e.target.parentNode.querySelector(
           ".product-quantity"
         ).textContent = add;
-        console.log(quantity);
         updateProductQuantity(add, cart_id);
 
       });
@@ -142,7 +138,6 @@ async function updateProductQuantity(quantity, cart_id) {
     },
   });
   if (res.ok) {
-    console.log(res);
     initProducts();
   } else {
     alert("Error when loading the page");

@@ -1,3 +1,5 @@
+
+
 const contactAlert = document.querySelector('.contact-alert')
 const addressAlert = document.querySelector('.address-alert')
 
@@ -15,10 +17,48 @@ window.onload = async function () {
 async function checkOut() {
     const checkOutBtn = document.querySelector('.checkout-login-btn');
     checkOutBtn.addEventListener('click', async function (e) {
+        let res = await fetch('/cartItemsByUserId');
+        let cartItems = await res.json();
+        if (cartItems.length == 0) {
+            throw new Error('Something wrong with shopping cart')
+        }
+        cartItems.forEach(item => {
+            item.product_total_price
+                = +(item.selling_price * item.product_quantity)
+        });
+        console.log(cartItems[0].product_total_price);
+        cartItems.reduce((previous, current) => {
+            return total_amount = previous + current.product_total_price
+        }, 0);
+        console.log(total_amount, cartItems[0].product_total_price);
+        await fetch("/orders", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                product_id: cartItems[0].product_id,
+                product_name: cartItems[0].product_name,
+                product_color: cartItems[0].product_color,
+                product_size: cartItems[0].product_size,
+                product_quantity: cartItems[0].product_quantity,
+                selling_price: cartItems[0].selling_price,
+                product_total_price: cartItems[0].product_total_price,
+                total_amount: total_amount,
+                payment_status: "testing-processing",
+                payment_method: "testing-credit card",
+            }),
+        });
+        if (res.ok) {
+            console.log(`Order updated`);
+        } else {
+            console.log(`Order can not update`);
+        }
         let checkOutDetail = getCheckOutInfo();
+        console.log(checkOutDetail.checkOutInfo);
         if (checkOutDetail.success) {
             try {
-                const resp = await fetch('/checkOut', {
+                const resp = await fetch('/deliveryConAdd', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -27,27 +67,41 @@ async function checkOut() {
                 });
                 const result = await resp.json();
                 if (result.success) {
-                    window.location.href = './product.html';
+                    console.log(`Delivery info updated`);
                 }
             } catch (err) {
-                console.error(`Unable to submit check out info: ${err}`);
+                console.error(`Unable to submit  info`);
             }
+        } else {
+            console.log(err.message);
         }
-    });
-    const resp = await fetch("/shoppingCart.html/products");
-    const products = await resp.json();
-    const productPost = await fetch("/create-checkout-session", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(products),
-    });
-    const result = await productPost.json();
-    if (result.success) {
-        window.location.href = 'url';
-    }
+    })
+}
 
+async function loadSummary() {
+    try {
+        let res = await fetch('/cartItemsByUserId');
+        let summary = await res.json();
+        if (summary.length == 0) {
+            throw new Error('Something wrong with shopping cart')
+        }
+        summary.forEach(item => {
+            item.product_total_price
+                = +(item.selling_price * item.product_quantity)
+        });
+        console, log(summary, summary[0].product_total_price);
+        console.log(summary[0].product_total_price);
+        summary.reduce((previous, current) => {
+            return total_amount = previous + current.product_total_price
+        }, 0);
+
+
+        if (result.success) {
+            console.log(`Summary Loaded`);
+        }
+    } catch (err) {
+        console.log(err);
+    }
 }
 
 function getCheckOutInfo() {
