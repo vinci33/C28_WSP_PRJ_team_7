@@ -1,37 +1,40 @@
-// import express, { Request, Response } from 'express'
-// import { checkPassword } from './hash'
-// import { client } from './main'
+import express from 'express';
+import { client } from "./main";
+import { hashPassword } from './hash';
+const crypto = require('crypto'); 
+export const userRoutes = express.Router();
 
-// export const userRoutes = express.Router()
-// userRoutes.post('/login', login)
+userRoutes.get('/login/google', loginGoogle);
+//userRoutes.post('/login');
+//userRoutes.get('/logout');
 
-// async function login(req: Request, res: Response) {
-//   const { email, password } = req.body
-//   const result = await client.query(
-//     `SELECT * FROM users WHERE users.email = $1`,
-//     [email],
-//   )
+async function loginGoogle (req:express.Request, res:express.Response){
+    console.log('google login')
+    const accessToken = req.session?.['grant'].response.access_token;
+    const fetchRes = await fetch('https://www.googleapis.com/oauth2/v2/userinfo',{
+        method:"get",
+        headers:{
+            "Authorization":`Bearer ${accessToken}`
+        }
+    });
 
-//   const user = result.rows[0]
-//   if (!email) {
-//     res.status(401).json({ error: 'Wrong Email or Password' })
-//     return;
-//   }
+    const result = await fetchRes.json();
+    const users = (await client.query(`SELECT * FROM users WHERE email = $1`, [result.email])).rows;
 
-//   const match = await checkPassword({
-//     plainPassword: password,
-//     hashedPassword: user.password,
-//   })
-//   if (!match) {
-//     res.status(401).json({ error: 'Wrong Email or Password' })
-//     return;
-//   }
-//   if (!req.session) {
-//     res.status(412).json({ error: 'Missing request session' })
-//     return;
-//   }
+    let currentUser = users[0];
 
-//   req.session.userId = { 
-//     userId: user.id, email: user.email}
-//   res.json({ success: true, message: "success" })
-// };
+    if(!currentUser){
+        // Create the user when the user does not exist
+        currentUser = ( await client.query(
+                `INSERT INTO users (email,password)
+                VALUES ($1,$2) RETURNING *`,
+                [result.email, await hashPassword(crypto.randomBytes(20).toString())])
+            ).rows[0]
+    } 
+
+    if(req.session){
+        req.session.userId = currentUser.id;
+    }
+
+    return res.redirect('/')
+}

@@ -15,6 +15,7 @@ body {
     font-family: 'poppins', sans-serif;
     font-weight: 400;
 }
+
 footer {
     font-family: 'poppins', sans-serif;
 }
@@ -23,55 +24,55 @@ footer {
 .logo-img {
     height: 100px;
     padding-left: 80px;
-  }
-  
-  .navbar {
+}
+
+.navbar {
     font-size: 16px;
-  }
-  
-  .navbar-light .navbar-nav .nav-item .nav-link {
+}
+
+.navbar-light .navbar-nav .nav-item .nav-link {
     padding: 0 20px;
     color: var(--text);
     transition: 0.3 ease-in-out;
-  }
-  
-  .navbar-light .navbar-nav .nav-item .nav-link:hover,
-  .navbar-light .navbar-nav .nav-item .nav-link:active {
+}
+
+.navbar-light .navbar-nav .nav-item .nav-link:hover,
+.navbar-light .navbar-nav .nav-item .nav-link:active {
     color: var(--primary);
-  }
-  
-  .navbar i {
+}
+
+.navbar i {
     font-size: 1.2rem;
     padding: 0 9px;
     cursor: pointer;
     transition: 0.3 ease-in-out;
-  }
-  
-  .navbar i:hover .navbar i:active {
+}
+
+.navbar i:hover .navbar i:active {
     color: var(--primary);
     filter: drop-shadow(0 0 0.5rem var(--primary));
-  }
-  
-  /* mobile */
-  .navbar-light .navbar-toggler {
+}
+
+/* mobile */
+.navbar-light .navbar-toggler {
     border: none;
     outline: none;
-  }
-  
-  .navbar-toggler-icon {
+}
+
+.navbar-toggler-icon {
     font-size: 1.5rem;
     padding: 7px;
     cursor: pointer;
     transition: 0.3 ease-in-out;
     border-color: var(--primary);
     /* background-color: var(--accent); */
-  }
-  
-  .navbar-toggler-icon:hover,
-  .navbar-toggler-icon:active {
+}
+
+.navbar-toggler-icon:hover,
+.navbar-toggler-icon:active {
     color: var(--primary);
-  }
-  
+}
+
 
 /* Body */
 .greeting {
@@ -117,10 +118,11 @@ footer {
     font-family: Poppins;
 }
 
-.goshopbtn {
+.goshopbtn-container {
     display: flex;
     justify-content: center;
     margin-top: 80px;
+    text-decoration: none;
 }
 
 #goshopbtn {
@@ -136,11 +138,28 @@ footer {
     color: white;
     font-size: 15px;
     margin-top: 20px;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a {
+    color: inherit;
     text-decoration: none;
 }
 
 .goshopbtn {
     color: var(--primary);
+}
+
+button:focus {
+    box-shadow: 2px 2px 2px 2px lightgrey;
+}
+
+button:hover {
+    box-shadow: 2px 2px 2px 2px lightgrey;
+    color: white !important;
 }
 
 /* Footer */
@@ -150,7 +169,7 @@ footer {
 }
 
 footer {
-    margin-top:auto;
+    margin-top: auto;
     width: 100%;
     background-color: var(--accent);
 }
