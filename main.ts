@@ -14,8 +14,6 @@ import { userRoutes } from './userRoutes';
 
 const app = express();
 
-
-
 app.use(express.json());
 app.use(
     expressSession({
@@ -68,11 +66,11 @@ app.use('/', userRoutes)
 // })
 
 
-// // TODO can be delete later
-app.use((req, res, next) => {
-    req.session.userId = 1;
-    next();
-})
+// TODO can be delete later
+// app.use((req, res, next) => {
+//     req.session.userId = 1;
+//     next();
+// })
 
 
 
@@ -132,7 +130,6 @@ app.get('/logout', (req, res) => {
             console.error('Error occurred during session destruction:', error);
             return res.status(500).json({ message: 'Internal Server Error' });
         }
-
         console.log('Logged out');
         res.redirect('/');
         console.log('isLoggedOut');
@@ -147,9 +144,11 @@ app.get('/login-status', (req, res) => {
         if (req.session.userId) {
             // User is logged in
             res.json({ isLoggedIn: true });
+            console.log('User is logged in');
         } else {
             // User is not logged in
             res.json({ isLoggedIn: false });
+            console.log('User is not logged in');
         }
     } catch (error) {
         console.error('An error occurred:', error);

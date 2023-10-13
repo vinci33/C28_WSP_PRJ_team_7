@@ -24,53 +24,54 @@ a:hover {
 .logo-img {
     height: 100px;
     padding-left: 80px;
-}
+  }
 
 .navbar {
     font-size: 16px;
-}
-
-.navbar-light .navbar-nav .nav-item .nav-link {
+  }
+  
+  .navbar-light .navbar-nav .nav-item .nav-link {
+    padding: 0 20px;
     color: var(--text);
     transition: 0.3 ease-in-out;
-}
-
-.navbar-light .navbar-nav .nav-item .nav-link:hover,
-.navbar-light .navbar-nav .nav-item .nav-link:active {
+  }
+  
+  .navbar-light .navbar-nav .nav-item .nav-link:hover,
+  .navbar-light .navbar-nav .nav-item .nav-link:active {
     color: var(--primary);
-}
-
-.navbar i {
+  }
+  
+  .navbar i {
     font-size: 1.2rem;
     padding: 0 9px;
     cursor: pointer;
     transition: 0.3 ease-in-out;
-}
-
-.navbar i:hover .navbar i:active {
+  }
+  
+  .navbar i:hover .navbar i:active {
     color: var(--primary);
     filter: drop-shadow(0 0 0.5rem var(--primary));
-}
-
-/* mobile */
-.navbar-light .navbar-toggler {
+  }
+  
+  /* mobile */
+  .navbar-light .navbar-toggler {
     border: none;
     outline: none;
-}
-
-.navbar-toggler-icon {
+  }
+  
+  .navbar-toggler-icon {
     font-size: 1.5rem;
     padding: 7px;
     cursor: pointer;
     transition: 0.3 ease-in-out;
     border-color: var(--primary);
     /* background-color: var(--accent); */
-}
-
-.navbar-toggler-icon:hover,
-.navbar-toggler-icon:active {
+  }
+  
+  .navbar-toggler-icon:hover,
+  .navbar-toggler-icon:active {
     color: var(--primary);
-}
+  }
 
 /* Body */
 .greeting {
