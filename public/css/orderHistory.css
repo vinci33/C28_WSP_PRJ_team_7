@@ -3,6 +3,12 @@ a {
   text-decoration: none !important;
 }
 
+.body {
+  display: flex;
+  display: flex-direction;
+  min-height: 100vh;
+}
+
 .logo-div .logo-img {
   height: 100px;
   padding-left: 80px;
@@ -210,6 +216,7 @@ small {
 }
 
 footer {
+  margin-top:auto;
   background-color: var(--accent);
 }
 
