@@ -17,6 +17,11 @@ body {
     font-weight: 400;
 }
 
+a {
+    color: inherit;
+    text-decoration: none !important;
+  }
+
 h1,
 h2,
 h3,
