@@ -15,6 +15,9 @@ body {
 footer {
     font-family: 'poppins', sans-serif;
 }
+a:hover {
+    text-decoration: none;
+}
 
 
 /* Nav Bar */
@@ -138,7 +141,17 @@ footer {
 
 .goshopbtn {
     color: var(--primary);
+    text-decoration: none;
 }
+
+button:focus {
+    box-shadow: 2px 2px 2px 2px lightgrey;
+  }
+  
+  button:hover {
+    box-shadow: 2px 2px 2px 2px lightgrey;
+    color: white !important;
+  }
 
 /* Footer */
 .footer-img {

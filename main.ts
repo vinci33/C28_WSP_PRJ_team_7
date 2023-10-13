@@ -8,9 +8,12 @@ import { convertStr2Arr } from './utils';
 import { Colors, Products, ShoppingCart } from './model';
 import { isLoggedIn } from './guards'
 import { hashPassword, checkPassword } from './hash';
+import grant from "grant";
+import { userRoutes } from './userRoutes';
 
 
 const app = express();
+
 
 
 app.use(express.json());
@@ -36,9 +39,28 @@ declare module 'express-session' {
         email?: string;
         shoppingCartId?: number
         cartCount?: number
+        grant?: any;
     }
 }
 
+const grantExpress = grant.express({
+    defaults: {
+      origin: "http://localhost:8080",
+      transport: "session",
+      state: true,
+    },
+    google: {
+      key: process.env.GOOGLE_CLIENT_ID || "",
+      secret: process.env.GOOGLE_CLIENT_SECRET || "",
+      scope: ["profile", "email"],
+      callback: "/login/google",
+    },
+    
+  });
+
+
+  app.use(grantExpress as express.RequestHandler);
+  app.use('/',userRoutes)
 
 // app.use((rqe, _res, next) => {
 //     console.log(`Request path: ${rqe.path}, method: ${rqe.method}`);
@@ -134,6 +156,10 @@ app.get('/login-status', (req, res) => {
         res.status(500).json({ error: 'An error occurred' });
     }
 });
+
+
+
+
 app.get("/products", async (req, res) => {
     try {
         const queryResult = await client.query(/*sql*/
