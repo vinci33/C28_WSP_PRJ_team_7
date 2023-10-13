@@ -19,7 +19,7 @@ async function initProducts() {
 
     productClone.querySelector(
       ".product-details"
-    ).textContent = `${product.product_details} (${product.product_color})`;
+    ).textContent = `${product.product_details.replace(/_/g, " ")} (${product.product_color})`;
     productClone.querySelector(
       ".product-selling-price"
     ).textContent = `$ ${product.selling_price.toLocaleString()}`; //*pls use this for all price .toLocaleString()
