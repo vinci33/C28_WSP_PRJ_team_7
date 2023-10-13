@@ -66,7 +66,7 @@ async function initProducts(searchParams) {
 
     productClone.querySelector(
       ".product-title"
-    ).textContent = `${product["product_name"]} (${product["product_color"]})`;
+    ).textContent = `${product["product_name"].replace(/_/g, " ")} (${product["product_color"]})`;
 
     productClone.querySelector(".product-price").textContent = `$ ${product[
       "selling_price"

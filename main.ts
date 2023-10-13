@@ -45,22 +45,22 @@ declare module 'express-session' {
 
 const grantExpress = grant.express({
     defaults: {
-      origin: "http://localhost:8080",
-      transport: "session",
-      state: true,
+        origin: "http://localhost:8080",
+        transport: "session",
+        state: true,
     },
     google: {
-      key: process.env.GOOGLE_CLIENT_ID || "",
-      secret: process.env.GOOGLE_CLIENT_SECRET || "",
-      scope: ["profile", "email"],
-      callback: "/login/google",
+        key: process.env.GOOGLE_CLIENT_ID || "",
+        secret: process.env.GOOGLE_CLIENT_SECRET || "",
+        scope: ["profile", "email"],
+        callback: "/login/google",
     },
-    
-  });
+
+});
 
 
-  app.use(grantExpress as express.RequestHandler);
-  app.use('/',userRoutes)
+app.use(grantExpress as express.RequestHandler);
+app.use('/', userRoutes)
 
 // app.use((rqe, _res, next) => {
 //     console.log(`Request path: ${rqe.path}, method: ${rqe.method}`);

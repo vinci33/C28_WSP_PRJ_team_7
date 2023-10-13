@@ -99,7 +99,7 @@ async function initProductDetail(id) {
     }
     productClone.querySelector(
       ".product-price-value"
-    ).textContent = `$${product.selling_price}`;
+    ).textContent = `$${product.selling_price.toLocaleString()}`;
     productContainerEle.appendChild(productClone);
   } catch (err) {
     console.error("initializing product detail:", err);
