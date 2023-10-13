@@ -42,6 +42,14 @@ a {
   padding: 28px 80px 20px 80px;
 }
 
+.order {
+  width: 100%
+}
+
+#color-container {
+  width: 100%;
+}
+
 .order_number {
   font-size: 20px;
   font-weight: bold;
@@ -52,7 +60,7 @@ a {
   padding: 0px 80px;
 }
 
-.order .container1 {
+.order .container-fluid {
   margin: 0px;
   padding: 20px;
   background-color: #FFFFFF;
@@ -60,10 +68,11 @@ a {
 
 .collapsible {
   background-color: #eee;
-  color: #444;
+  color: #000000;
   cursor: pointer;
-  padding: 18px;
-  width: 100%;
+  margin: 5px;
+  padding: 10px;
+  width: 30%;
   border: none;
   text-align: left;
   outline: none;
@@ -81,27 +90,6 @@ a {
   overflow: hidden;
   background-color: #f1f1f1;
 }
-
-/* .order-date {
-  padding: 0px;
-  width: 100%;
-}
-
-.client_info1 {
-  padding: 0px;
-  width: 100%;
-  display: flex;
-  flex: wrap;
-  gap: 100px;
-}
-
-.transaction {
-  padding: 0px;
-  width: 100%;
-  display: flex;
-  flex: wrap;
-  justify-content: space-between;
-} */
 
 /* navbar and footer css */
 :root {

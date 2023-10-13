@@ -4,14 +4,14 @@ window.onload = () => {
 
 async function initOrders() {
   const resp = await fetch("/orderHistory.html/orders");
-  const orders = await resp.json();
+  let orders = await resp.json();
 
   const orderContainerEle = document.querySelector(".order-container");
   const templateEle = document.querySelector("#order-template");
   orderContainerEle.innerHTML = "";
   let count = 0;
 
-  for (const order of orders) {
+  for (const order of orders[0]) {
     const orderClone = templateEle.content.cloneNode(true);
 
     count++
@@ -60,7 +60,6 @@ async function initOrders() {
       ".total-amount"
     ).textContent = `Total Amount: $ ${(order.total_amount).toLocaleString()}`;
 
-    // Change it or not??
     orderClone.querySelector(
       ".payment-status"
     ).textContent = `Payment Status: Successful`;
@@ -69,20 +68,19 @@ async function initOrders() {
       ".payment-method"
     ).textContent = `Payment Method: ${order.payment_method}`;
 
-    let coll = document.getElementsByClassName("collapsible");
-    let i;
+    orderClone.querySelector(".collapsible").addEventListener("click", function () {
+      this.classList.toggle("active");
+      let content = this.nextElementSibling;
+      if (content.style.display === "block") {
+        content.style.display = "none";
+      } else {
+        content.style.display = "block";
+      }
 
-    for (i = 0; i < coll.length; i++) {
-      coll[i].addEventListener("click", function () {
-        this.classList.toggle("active");
-        let content = this.nextElementSibling;
-        if (content.style.display === "block") {
-          content.style.display = "none";
-        } else {
-          content.style.display = "block";
-        }
-      });
-    }
+      let contentDivs = orderClone.querySelectorAll('.content div')
+      contentDivs[0].textContent = 'hello world'
+    });
+
     orderContainerEle.appendChild(orderClone);
   }
 }
