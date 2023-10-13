@@ -53,13 +53,13 @@ async function initProducts() {
         }
       });
 
-    // productClone
-    //   .querySelector(".reduce")
-    //   .setAttribute("pid", product.product_id);
+    productClone
+      .querySelector(".reduce")
+      .setAttribute("cart_id", product.cart_id);
 
-    // productClone
-    //   .querySelector(".add")
-    //   .setAttribute("pid", product.product_id);
+    productClone
+      .querySelector(".add")
+      .setAttribute("cart_id", product.cart_id);
 
     productClone
       .querySelector(".reduce")
@@ -67,9 +67,8 @@ async function initProducts() {
         let quantity = parseInt(
           e.target.parentNode.querySelector(".product-quantity").textContent
         );
-        // const id = e.target.getAttribute("pid");
+        const cart_id = e.target.getAttribute("cart_id");
         console.log(quantity);
-        //  const reduce = quantity - 1;
         if (quantity <= 1) {
           return;
         }
@@ -79,7 +78,7 @@ async function initProducts() {
             ".product-quantity"
           ).textContent = reduce;
           console.log(quantity);
-          updateProductQuantity(reduce);
+          updateProductQuantity(reduce, cart_id);
         }
       });
 
@@ -89,14 +88,14 @@ async function initProducts() {
         let quantity = parseInt(
           e.target.parentNode.querySelector(".product-quantity").textContent
         );
-        // const id = e.target.getAttribute("pid");
+        const cart_id = e.target.getAttribute("cart_id");
         console.log(quantity);
         add = quantity + 1;
         e.target.parentNode.querySelector(
           ".product-quantity"
-        ).textContent = reduce;
+        ).textContent = add;
         console.log(quantity);
-        updateProductQuantity(add);
+        updateProductQuantity(add, cart_id);
 
       });
 
@@ -128,7 +127,7 @@ async function deleteItems(pid) {
 
 // update quantity kdl
 
-async function updateProductQuantity(quantity) {
+async function updateProductQuantity(quantity, cart_id) {
   const resp = await fetch("/getShoppingId", {
 
   })
@@ -136,6 +135,7 @@ async function updateProductQuantity(quantity) {
     method: "PUT",
     body: JSON.stringify({
       product_quantity: quantity,
+      cart_id: cart_id
     }),
     headers: {
       "Content-Type": "application/json",

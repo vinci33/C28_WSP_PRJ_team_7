@@ -216,7 +216,7 @@ app.get('/shoppingCart.html/products', async (req, res) => {
     try {
         const user_id = req.session?.userId
         const queryResult = await client.query(/*sql*/
-            `SELECT products.image_one as image_one, products.product_name as product_name,
+            `SELECT shopping_cart.id AS cart_id, products.image_one as image_one, products.product_name as product_name,
              products.product_details as product_details, products.product_color as product_color,
              products.product_size as product_size, products.selling_price as selling_price, 
              products.image_one as image_one, product_id, product_quantity from shopping_cart inner join products
@@ -271,6 +271,20 @@ app.post("/cartItem", async (req, res) => {
     try {
         const cartItem: ShoppingCart = await req.body;
         console.log(cartItem, req.session?.userId)
+        const checkQuantityQuery = await client.query(
+            /*sql*/ `SELECT * FROM shopping_cart WHERE user_id = $1 AND product_id = $2`,
+            [req.session?.userId, cartItem.product_id])
+        console.log(checkQuantityQuery.rows.length, checkQuantityQuery.rows)
+        if (checkQuantityQuery.rows.length != 0) {
+            cartItem.product_quantity += checkQuantityQuery.rows[0].product_quantity
+            console.log(cartItem.product_quantity)
+            const updateQuantityQueryResult = await client.query(
+                /*sql*/ `UPDATE shopping_cart SET product_quantity = $1 WHERE user_id = $2 AND product_id = $3`,
+                [cartItem.product_quantity, req.session?.userId, cartItem.product_id])
+            console.log(updateQuantityQueryResult.rows)
+            res.json({ success: true, msg: "item added to cart" })
+            return
+        }
         let shoppingCartId = await client.query(/*sql*/ `INSERT INTO shopping_cart (user_id, product_id, product_quantity ) 
         VALUES ($1, $2, $3) RETURNING id `,
             [req.session?.userId, cartItem.product_id, cartItem.product_quantity]);
@@ -287,9 +301,8 @@ app.get("SoppingId", async (req, res) => { })
 
 app.put("/updateQuantity", async (req, res) => {
     const product_quantity = req.body.product_quantity;
-    const user_id = req.session?.userId;
-    const shoppingCartId = req.session?.shoppingCartId
-    console.log(product_quantity, user_id, shoppingCartId)
+    const shoppingCartId = req.body?.cart_id
+    console.log(product_quantity, shoppingCartId)
     try {
         const updateId = await client.query
             (/*sql*/`UPDATE shopping_cart SET product_quantity = $1 
