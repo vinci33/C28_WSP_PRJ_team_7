@@ -15,7 +15,9 @@ fetch('/login-status')
         // Hide or show buttons based on login status and current page
         if (data.isLoggedIn) {
             // User is logged in
-            loginbtn.style.display = "none"; // Hide login button
+            loginbtn.innerHTML = '<i class="fa-solid fa-arrow-right-to-bracket"></i> LogOut';
+            loginbtn.style.display = "block"; // Show login button
+            loginbtn.href = "/logout";
             profilebtn.innerHTML = '<i class="fa-solid fa-user"></i>My Orders';
             profilebtn.style.display = "block"; // Show profile button
             profilebtn.href = "/orderhistory.html";
