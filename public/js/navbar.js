@@ -9,14 +9,16 @@ fetch('/login-status')
 
         if (data.isLoggedIn) {
             // User is logged in
-            loginbtn.innerHTML = "Logout";
+            loginbtn.innerHTML = '<i class="fa-solid fa-arrow-right-to-bracket"></i> Logout';
             loginbtn.href = "/logout";
+            profilebtn.innerHTML = '<i class="fa-solid fa-user"></i>My Orders';
             profilebtn.style.display = "block"; // Show profile button
+            cartbtn.innerHTML = '<i class="fa-solid fa-cart-shopping"></i>My Cart';
             cartbtn.style.display = "block"; // Show cart button
         } else {
-            // User is not logged in
-            loginbtn.innerHTML = "LogIn/SignUp";
-            loginbtn.href = "/signup.html";
+            // User is NOT logged in
+            loginbtn.innerHTML = '<i class="fa-solid fa-arrow-right-to-bracket"></i> LogIn / SignUp';
+            loginbtn.href = "/login.html";
             profilebtn.style.display = "none"; // Hide profile button
             cartbtn.style.display = "none"; // Hide cart button
         }

@@ -28,9 +28,14 @@ a {
   text-decoration: none !important;
 }
 
+span {
+  color: var(--accent);
+}
+
 .button-container {
   display: flex;
   justify-content: center;
+  margin-top: 35px;
 }
 
 .view-all-products-btn {
@@ -50,6 +55,15 @@ a {
   --primary: #67c1bb;
   --secondary: #caeceb;
   --accent: #4eb7b0;
+}
+
+button:focus {
+  box-shadow: 2px 2px 2px 2px lightgrey;
+}
+
+button:hover {
+  box-shadow: 2px 2px 2px 2px lightgrey;
+  color: white !important;
 }
 
 @import url("https://fonts.googleapis.com/css?family=Poppins:400|Noto Sans:700");
@@ -264,6 +278,10 @@ small {
   white-space: nowrap;
   all: unset;
   box-sizing: border-box;
+}
+
+.new-arrival {
+  margin-left: 30px;
 }
 
 /* footer */
