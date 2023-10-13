@@ -11,7 +11,7 @@ async function initOrders() {
   orderContainerEle.innerHTML = "";
   let count = 0;
 
-  for (const order of orders[0]) {
+  for (const order of orders) {
     const orderClone = templateEle.content.cloneNode(true);
 
     count++
