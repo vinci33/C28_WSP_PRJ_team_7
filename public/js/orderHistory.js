@@ -77,7 +77,7 @@ async function initOrders() {
         content.style.display = "block";
       }
 
-      let contentDivs = orderClone.querySelectorAll('.content div')
+      let contentDivs = this.nextElementSibling.querySelectorAll('.content div')
       contentDivs[0].textContent = 'hello world'
     });
 
