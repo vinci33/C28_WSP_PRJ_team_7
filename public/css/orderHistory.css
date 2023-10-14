@@ -48,6 +48,13 @@ a {
   padding: 28px 80px 20px 80px;
 }
 
+.sorting-area {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 28px 80px 20px 80px;
+}
+
 .order {
   width: 100%
 }
@@ -216,7 +223,7 @@ small {
 }
 
 footer {
-  margin-top:auto;
+  margin-top: auto;
   background-color: var(--accent);
 }
 
