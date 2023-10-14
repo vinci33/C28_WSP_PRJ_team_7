@@ -1,4 +1,5 @@
 // Make an AJAX request to check the login status
+document.addEventListener('DOMContentLoaded', function() {
 fetch('/login-status')
     .then(response => response.json())
     .then(data => {
@@ -13,8 +14,8 @@ fetch('/login-status')
         // Hide or show buttons based on login status and current page
         if (data.isLoggedIn) {
             // User is logged in
-            loginbtn.innerHTML = '<i class="fa-solid fa-arrow-right-to-bracket"></i> LogOut';
-            loginbtn.style.display = "block"; // Show login button
+            loginbtn.innerHTML = '<i class="fa-solid fa-arrow-right-to-bracket"></i>LogOut';
+            loginbtn.style.display = "block !important"; // Show login button
             loginbtn.href = "/logout";
             profilebtn.innerHTML = '<i class="fa-solid fa-user"></i>My Orders';
             profilebtn.style.display = "block"; // Show profile button
@@ -64,10 +65,15 @@ fetch('/login-status')
         }
 
         if (currentPage === "/signup.html") {
-            loginbtn.style.display = "none"; // Hide about us button on about us page
+            loginbtn.style.display = "none"; // Hide login button on signup page
         } else {
-            loginbtn.innerHTML = 'LogIn / SignUp';
-            loginbtn.href = "/login.html";
+            if (data.isLoggedIn) {
+                loginbtn.innerHTML = '<i class="fa-solid fa-arrow-right-to-bracket"></i>LogOut';
+                loginbtn.href = "/logout";
+            } else {
+                loginbtn.innerHTML = 'LogIn / SignUp';
+                loginbtn.href = "/login.html";
+            }
         }
 
         // Check if it's the signup success page
@@ -93,3 +99,4 @@ fetch('/login-status')
     .catch(error => {
         console.error('An error occurred:', error);
     });
+});
