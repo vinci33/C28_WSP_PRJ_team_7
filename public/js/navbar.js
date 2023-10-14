@@ -66,7 +66,7 @@ fetch('/login-status')
         // Check if it's the signup success page
         if (currentPage === "/signupSuccess.html") {
             loginbtn.innerHTML = '<i class="fa-solid fa-arrow-right-to-bracket"></i> Logout';
-            loginbtn.href = "/index.html";
+            loginbtn.href = "/logout";
         }
 
         // Hide order history button if user is not logged in or if it's the order history page
