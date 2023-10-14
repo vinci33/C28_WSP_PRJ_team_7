@@ -60,12 +60,51 @@
     </nav>
 
     <section id=" home">
-        <div class="bannercontainer">
-            <div>
-                <a href="product.html?category=iphone">
-                    <img src="../asset/banner_Img/iphone15probanner.jpg" alt="iPhone15Pro" class="banner">
-                </a>
+        <!-- <div class="bannercontainer">
+            <div class="banner-slider">
+                <div class="banner-item">
+                    <a href="product.html?category=iphone">
+                        <img src="../asset/banner_Img/iphone15probanner.jpg" alt="iPhone15Pro" class="banner">
+                    </a>
+                </div> -->
+        <!-- Add more banner items here -->
+        <!-- </div>
+            <div class="slider-controls">
+                <div class="slider-arrow prev"></div>
+                <div class="slider-dots"></div>
+                <div class="slider-arrow next"></div>
             </div>
+        </div> -->
+
+
+
+        <div id="carouselExampleIndicators" class="carousel slide">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <a href="product.html?category=iphone">
+                        <img src="../asset/banner_Img/iphone15pro.jpeg" class="d-block">
+                    </a>
+                </div>
+                <div class="carousel-item">
+                    <a href="product.html?category=iphone">
+                        <img src="../asset/banner_Img/iphone15.jpeg" class="d-block">
+                    </a>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" id="arrow" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" id="arrow" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
 
         <!-- <div class="hero-blocks">
@@ -93,12 +132,14 @@
         </a>
     </div>
 
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
     <script type="text/javascript" src="../js/index.js"></script>
     <script type="text/javascript" src="../js/navbar.js"></script>
     <script type="text/javascript" src="../js/footer.js"></script>
+    <!-- <script type="text/javascript" src="../js/banner.js"></script> -->
 </body>
 <template id="product-template">
     <div class="product card">
