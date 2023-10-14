@@ -38,6 +38,7 @@ declare module 'express-session' {
         shoppingCartId?: number
         cartCount?: number
         grant?: any;
+        orderId?: number
     }
 }
 
@@ -396,7 +397,9 @@ app.post("/orders", async (req, res) => {
             [req.session?.userId, req.body.total_amount,
             req.body.payment_status, req.body.payment_method]
         )
-        console.log(`${orderId.rows[0]}`)
+        req.session.orderId = orderId.rows[0].id
+        console.log(`order ID :${orderId.rows[0].id}`)
+        console.log(`order ID from session :${req.session?.orderId}`)
         // console.log(`productId:${req.body[0].product_id}`)
         await client.query(/*sql*/`INSERT INTO 
             order_detail_items(
@@ -427,8 +430,11 @@ app.post("/deliveryConAdd", isLoggedIn, async (req, res) => {
         console.log(address.address1, contact.first_name);
         console.log(`this is the shopping_cart_id:${req.session.shoppingCartId}`)
         console.log(`this is the user_id:${req.session.userId}`)
-        const orderSqlData = await client.query(/*sql*/`SELECT id FROM orders 
-            WHERE user_id = $1 `, [req.session.userId])
+        const orderId = req.session.orderId
+        if (!orderId) {
+            res.status(400).json({ success: false, msg: "order id not found" });
+            return
+        }
         const delivery_contactSql = `INSERT INTO delivery_contacts (
           order_id, first_name, last_name, phone, email
         ) VALUES (($1),$2,$3,$4, $5
@@ -436,7 +442,6 @@ app.post("/deliveryConAdd", isLoggedIn, async (req, res) => {
         const delivery_addressSql = `INSERT INTO delivery_address (
           address1, address2, street, city, postal_code, country, delivery_contact_id
         ) VALUES ( $1, $2, $3, $4, $5, $6, $7)`;
-        const orderId = orderSqlData.rows[0].id
         const delivery_contactSqlData = await client.query(delivery_contactSql,
             [orderId, contact.first_name,
                 contact.last_name, contact.phone,
@@ -448,6 +453,7 @@ app.post("/deliveryConAdd", isLoggedIn, async (req, res) => {
             address.postal_code, address.country,
                 delivery_contactId])
         console.log("end")
+        console.log(`order ID :${orderId}`)
         res.json({ success: true, msg: "Delivery info updated" })
     } catch (err: any) {
         console.log(err.message)
