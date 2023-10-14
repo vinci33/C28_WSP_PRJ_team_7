@@ -14,8 +14,6 @@ import { userRoutes } from './userRoutes';
 
 const app = express();
 
-
-
 app.use(express.json());
 app.use(
     expressSession({
@@ -68,6 +66,12 @@ app.use('/', userRoutes)
 // })
 
 
+// TODO can be delete later
+// app.use((req, res, next) => {
+//     req.session.userId = 1;
+//     next();
+// })
+
 
 
 app.post('/create-account', (req, res) => {
@@ -82,6 +86,7 @@ app.post('/create-account', (req, res) => {
 
             client.query(query, values)
                 .then((result) => {
+                    req.session.userId = result.rows[0].id;
                     res.status(200).json({ message: 'Account created!', user: result.rows[0] });
                 })
                 .catch((err) => {
@@ -126,7 +131,6 @@ app.get('/logout', (req, res) => {
             console.error('Error occurred during session destruction:', error);
             return res.status(500).json({ message: 'Internal Server Error' });
         }
-
         console.log('Logged out');
         res.redirect('/');
         console.log('isLoggedOut');
@@ -141,9 +145,11 @@ app.get('/login-status', (req, res) => {
         if (req.session.userId) {
             // User is logged in
             res.json({ isLoggedIn: true });
+            console.log('User is logged in');
         } else {
             // User is not logged in
             res.json({ isLoggedIn: false });
+            console.log('User is not logged in');
         }
     } catch (error) {
         console.error('An error occurred:', error);
@@ -264,18 +270,16 @@ app.get("/productDetail/:id", isLoggedIn, async (req, res) => {
 app.post("/cartItem", async (req, res) => {
     try {
         const cartItem: ShoppingCart = await req.body;
-        console.log(cartItem, req.session?.userId)
         const checkQuantityQuery = await client.query(
             /*sql*/ `SELECT * FROM shopping_cart WHERE user_id = $1 AND product_id = $2`,
             [req.session?.userId, cartItem.product_id])
-        console.log(checkQuantityQuery.rows.length, checkQuantityQuery.rows)
         if (checkQuantityQuery.rows.length != 0) {
             cartItem.product_quantity += checkQuantityQuery.rows[0].product_quantity
-            console.log(cartItem.product_quantity)
-            const updateQuantityQueryResult = await client.query(
+
+            await client.query(
                 /*sql*/ `UPDATE shopping_cart SET product_quantity = $1 WHERE user_id = $2 AND product_id = $3`,
                 [cartItem.product_quantity, req.session?.userId, cartItem.product_id])
-            console.log(updateQuantityQueryResult.rows)
+
             res.json({ success: true, msg: "item added to cart" })
             return
         }
@@ -291,17 +295,15 @@ app.post("/cartItem", async (req, res) => {
     }
 })
 
-app.get("SoppingId", async (req, res) => { })
+
 
 app.put("/updateQuantity", async (req, res) => {
     const product_quantity = req.body.product_quantity;
     const shoppingCartId = req.body?.cart_id
-    console.log(product_quantity, shoppingCartId)
     try {
         const updateId = await client.query
             (/*sql*/`UPDATE shopping_cart SET product_quantity = $1 
             WHERE id = $2  RETURNING id`, [product_quantity, shoppingCartId])
-        console.log(updateId.rows)
         res.json({ success: true, msg: `${updateId} update success` })
     } catch (err) {
         res.status(400).json({ success: false, msg: "error occurred" });
@@ -360,172 +362,167 @@ app.get("/orderHistory.html/orderData", isLoggedIn, async (req, res) => {
 });
 
 app.post("/checkout", isLoggedIn, async (req, res) => {
-    try {
-        const { address, contact } = req.body;
-        console.log(address, contact);
-        console.log(`this is the shopping_cart_id:${req.session.shoppingCartId}`)
-        console.log(`this is the user_id:${req.session.userId}`)
-        await client.query(/*sql*/`WITH d_contacts AS(
-            INSERT INTO delivery_contacts(
-                user_id,
-                first_name,
-                last_name,
-                phone,
-                email
-            ) VALUES($1, $2, $3, $4, $5)
-            RETURNING id
-        )INSERT INTO delivery_address(
-            address1,
-            address2,
-            street,
-            city,
-            postal_code,
-            country,
-            delivery_contact_id
-        ) VALUES($6, $7, $8, $9, $10, $11,
-            (SELECT id FROM d_contacts AS delivery_contact_id))`,
-            [req.session.userId, contact.first_name,
-            contact.last_name, contact.phone,
-            contact.email,
-            address.address1,
-            address.address2, address.street,
-            address.city, address.postal_code,
-            address.country]);
+    app.get('/cartItemsByUserId', async (req, res) => {
+        try {
+            const user_id = req.session?.userId
+            const cartItems = await client.query(/*sql*/`SELECT 
+            shopping_cart.id AS cart_id,  
+            products.image_one as image_one, products.product_name as product_name,
+            products.product_details as product_details, 
+            products.product_color as product_color,
+            products.product_size as product_size, 
+            products.selling_price as selling_price, 
+            products.image_one as image_one, 
+            product_id, product_quantity 
+        from shopping_cart inner join products
+            on shopping_cart.product_id = products.id 
+            where user_id = $1 order by shopping_cart.created_at`,
+                [user_id])
+            res.json(cartItems.rows)
+        } catch (err) {
+            res.status(400).json({ success: false, msg: "error occurred" });
+        }
+    })
 
-        console.log(2)
-
-        await client.query(/*sql*/`WITH cart_items AS(
-                SELECT
-              user_id,
-                product_id,
-                product_quantity
-            FROM shopping_cart
-            WHERE
-              shopping_cart.user_id = $1
-            ), product_details AS(
-                SELECT
-              cart_items.product_id,
-                products.product_name,
-                products.product_color,
-                products.product_size,
-                products.selling_price
-            FROM cart_items
-              JOIN products ON cart_items.product_id = products.id
-            ), inserted_order AS(
-                INSERT INTO orders(user_id, product_id, product_quantity,
-                    total_amount, payment_status, payment_method)
-            VALUES(
-                        (SELECT
-              cart_items.user_id,
-                        cart_items.product_id,
-                        cart_items.product_quantity,
-                        SUM(product_quantity * selling_price) AS total_amount,
-                        'pending' AS payment_status,
-                        'credit card' AS payment_method
-            FROM cart_items
-              JOIN product_details ON product_details.product_id = cart_items.product_id
-            GROUP BY
-              user_id, cart_items.product_id))
-            RETURNING id, user_id
-          )
-
-          INSERT INTO order_detail_items(order_id, product_id, product_name, product_color, product_size, product_quantity, selling_price, product_total_price)
-SELECT
-inserted_order.id AS order_id,
-    cart_items.product_id,
-    product_details.product_name,
-    product_details.product_color,
-    product_details.product_size,
-    cart_items.product_quantity,
-    product_details.selling_price,
-    cart_items.product_quantity * product_details.selling_price AS product_total_price
-FROM
-cart_items
-            JOIN product_details ON cart_items.product_id = product_details.product_id
-            JOIN inserted_order ON cart_items.user_id = inserted_order.user_id; `,
-            [req.session?.userId])
+    app.post("/orders", async (req, res) => {
+        try {
+            console.log("1", req.body)
+            const orderId = await client.query(/*sql*/`INSERT INTO orders (
+            user_id, 
+            total_amount, 
+            payment_status, 
+            payment_method)
+        VALUES ($1,$2,$3,$4) RETURNING id`,
+                [req.session?.userId, req.body.total_amount,
+                req.body.payment_status, req.body.payment_method]
+            )
+            console.log(`${orderId.rows[0]}`)
+            console.log(`productId:${req.body[0].product_id}`)
+            await client.query(/*sql*/`INSERT INTO 
+            order_detail_items(
+            order_id,
+            product_id,
+            product_name,  
+            product_color,
+            product_size,
+            product_quantity,
+            selling_price,
+            product_total_price)
+            VALUES ($1,$2,$3,$4,$5,$6,$7,$8)`,
+                [orderId.rows[0].id, req.body.product_id,
+                req.body.product_name, req.body.product_color,
+                req.body.product_size, req.body.product_quantity,
+                req.body.selling_price, req.body.product_total_price])
+            res.json({ success: true, msg: "checkout success" })
+        } catch (err: any) {
+            console.log(err.message)
+            res.status(400).json({ success: false, msg: "Unable to checkout" });
+        }
+    })
 
 
-        res.json({ success: true, msg: "checkout success" })
-    } catch (err: any) {
-        console.error(err.message)
-        res.status(400).json({ success: false, msg: "unable to checkout" });
-    }
-})
-
-// async function insertOrder(shopping_cart_id) {
-//     await client.query(/*sql*/`SELECT 
-//     user_id,
-//     product_id,
-//     INSERT INTO orders (
-//         user_id, total_amount, payment_status, payment_method)
-//         VALUES ($1, $2, $3, $4) RETURNING id`, [])
-// }
-
-const router = Router();
-// Protected route example
-router.get('/protected-route', isLoggedIn, (req, res) => {
-    // This route will only be accessible if the user is logged in
-    res.send('You are logged in!');
-});
-
-export default router;
-
-// app.use('/', userRoutes)
-app.use('/resources', isLoggedIn) // protected resources
-
-// app.use(express.static('public'))
+    app.post("/deliveryConAdd", isLoggedIn, async (req, res) => {
+        try {
+            const { address, contact } = req.body;
+            console.log(address.address1, contact.first_name);
+            console.log(`this is the shopping_cart_id:${req.session.shoppingCartId}`)
+            console.log(`this is the user_id:${req.session.userId}`)
+            const orderSqlData = await client.query(/*sql*/`SELECT id FROM orders 
+            WHERE user_id = $1 `, [req.session.userId])
+            const delivery_contactSql = `INSERT INTO delivery_contacts (
+          order_id, first_name, last_name, phone, email
+        ) VALUES (($1),$2,$3,$4, $5
+        ) RETURNING id`;
+            const delivery_addressSql = `INSERT INTO delivery_address (
+          address1, address2, street, city, postal_code, country, delivery_contact_id
+        ) VALUES ( $1, $2, $3, $4, $5, $6, $7)`;
+            const orderId = orderSqlData.rows[0].id
+            const delivery_contactSqlData = await client.query(delivery_contactSql,
+                [orderId, contact.first_name,
+                    contact.last_name, contact.phone,
+                    contact.email])
+            const delivery_contactId = delivery_contactSqlData.rows[0].id
+            await client.query(delivery_addressSql,
+                [address.address1, address.address2,
+                address.street, address.city,
+                address.postal_code, address.country,
+                    delivery_contactId])
+            console.log("end")
+            res.json({ success: true, msg: "Delivery info updated" })
+        } catch (err: any) {
+            console.log(err.message)
+            res.status(400).json({ success: false, msg: "unable to checkout" });
+        }
+    })
 
 
 
-// const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-
-// const DOMAIN = process.env.DOMAIN;
-
-// console.log(DOMAIN, stripe)
-
-// app.post('/create-checkout-session', async (req, res) => {
-//     const products = await client.query(/*sql*/`SELECT * FROM products`);
-//     const storeProducts = products.rows;
-//     console.log(storeProducts)
-//     const session = await stripe.checkout.sessions.create({
-//         payment_method_types: ['card'],
-//         mode: 'payment',
-//         line_items: req.body.items.map((item: any) => {
-//             // const storeItem = storeItems.get(item.id);
-//             return {
-//                 // price_data: {
-//                 //     currency: 'hkd',
-//                 //     product_data: {
-//                 //         name: storeItem.name,
-//                 //         images: [storeItem.image],
-//                 //     },
-//                 //     unit_amount: storeItem.price,
-//                 // },
-//                 // quantity: item.quantity,
-//             };
-//         }),
-//         success_url: `${DOMAIN}/success.html`,
-//         success_url: `${ DOMAIN } /success.html`,
-//         cancel_url: `${DOMAIN}/cancel.html`,
-//     });
-
-//     res.redirect(303, session.url);
-// });
-
-app.use(express.static(path.join(__dirname, 'public')))
-app.use(express.static(path.join(__dirname, 'public', "html")))
 
 
-app.use((_req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'html', '404.html'))
-})
+    const router = Router();
+    // Protected route example
+    router.get('/protected-route', isLoggedIn, (req, res) => {
+        // This route will only be accessible if the user is logged in
+        res.send('You are logged in!');
+    });
 
-const PORT = 8080
-app.listen(PORT, () => {
-    console.log(`Server is listening on ${PORT}`)
-})
+    export default router;
+
+    // app.use('/', userRoutes)
+    app.use('/resources', isLoggedIn) // protected resources
+
+    // app.use(express.static('public'))
 
 
 
-export { client };
+    // const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+
+    // const DOMAIN = process.env.DOMAIN;
+
+    // console.log(DOMAIN, stripe)
+
+    // app.post('/create-checkout-session', async (req, res) => {
+    //     const products = await client.query(/*sql*/`SELECT * FROM products`);
+    //     const storeProducts = products.rows;
+    //     console.log(storeProducts)
+    //     const session = await stripe.checkout.sessions.create({
+    //         payment_method_types: ['card'],
+    //         mode: 'payment',
+    //         line_items: req.body.items.map((item: any) => {
+    //             // const storeItem = storeItems.get(item.id);
+    //             return {
+    //                 // price_data: {
+    //                 //     currency: 'hkd',
+    //                 //     product_data: {
+    //                 //         name: storeItem.name,
+    //                 //         images: [storeItem.image],
+    //                 //     },
+    //                 //     unit_amount: storeItem.price,
+    //                 // },
+    //                 // quantity: item.quantity,
+    //             };
+    //         }),
+    //         success_url: `${DOMAIN}/success.html`,
+    //         success_url: `${ DOMAIN } /success.html`,
+    //         cancel_url: `${DOMAIN}/cancel.html`,
+    //     });
+
+    //     res.redirect(303, session.url);
+    // });
+
+    app.use(express.static(path.join(__dirname, 'public')))
+    app.use(express.static(path.join(__dirname, 'public', "html")))
+
+
+    app.use((_req, res) => {
+        res.sendFile(path.join(__dirname, 'public', 'html', '404.html'))
+    })
+
+    const PORT = 8080
+    app.listen(PORT, () => {
+        console.log(`Server is listening on ${PORT}`)
+    })
+
+
+
+    export { client };

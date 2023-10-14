@@ -28,7 +28,6 @@ async function initAddToCart(id) {
     addBtn.addEventListener("click", () => {
       quantity++;
       quantityEle.innerHTML = quantity;
-      console.log(quantity);
     });
 
     const addToCartBtn = document.querySelector(".add-to-cart-btn");
@@ -40,7 +39,6 @@ async function initAddToCart(id) {
         throw new Error("Unable to get/fetch product details");
       }
       const product = await resp.json();
-      console.log(`${[product]}, this func 1 ${quantity}`);
       const addToCartItemObj = {};
       addToCartItemObj.product_id = product.id;
       addToCartItemObj.product_quantity = quantity;

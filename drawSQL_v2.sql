@@ -26,19 +26,7 @@ CREATE TABLE "categories"(
 );
 ALTER TABLE
     "categories" ADD CONSTRAINT "categories_categories_name_unique" UNIQUE("categories_name");
-CREATE TABLE "order_detail_items"(
-    "id" SERIAL primary key,
-    "order_id" BIGINT NOT NULL,
-    "product_id" BIGINT NOT NULL,
-    "product_name" VARCHAR(255) NOT NULL,
-    "product_color" VARCHAR(255) NOT NULL,
-    "product_size" VARCHAR(255) NULL,
-    "product_quantity" BIGINT NOT NULL,
-    "selling_price" BIGINT NOT NULL,
-    "product_total_price" BIGINT NOT NULL,
-    "created_at"  TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    "modified_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP
-);
+
 
 CREATE TABLE "users"(
     "id" SERIAL primary key,
@@ -56,7 +44,7 @@ ALTER TABLE
 ALTER TABLE
     "users" ADD CONSTRAINT "users_email_unique" UNIQUE("email");
 
--- TODO: add  User adderss table fk user_id
+
 CREATE TABLE "user_address"(
     "id" SERIAL primary key,
     "user_id" BIGINT NOT NULL,
@@ -72,6 +60,54 @@ CREATE TABLE "user_address"(
 ALTER TABLE
     "user_address" ADD CONSTRAINT "user_address_user_id_foreign" FOREIGN KEY("user_id") REFERENCES "users"("id");
 
+CREATE TABLE "products"(
+    "id" SERIAL primary key,
+    "category_id" INTEGER NOT NULL,
+    "product_name" VARCHAR(255) NOT NULL,
+    "product_details" TEXT NOT NULL,
+    "product_color" VARCHAR(255) NOT NULL,
+    "product_size" VARCHAR(255) NULL,
+    "selling_price" INTEGER NOT NULL,
+    "image_one" VARCHAR(255) NOT NULL,
+    "image_two" VARCHAR(255) NULL,
+    "image_three" VARCHAR(255) NULL,
+    "created_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    "modified_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE "orders"(
+    "id" SERIAL primary key,
+    "user_id" BIGINT NOT NULL,
+    "total_amount" INTEGER NOT NULL,
+    "payment_status" VARCHAR(255) NOT NULL,
+    "payment_method" VARCHAR(255) NOT NULL,
+    "created_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    "modified_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+ALTER TABLE
+    "orders" ADD CONSTRAINT "orders_user_id_foreign" 
+    FOREIGN KEY("user_id") REFERENCES "users"("id");
+
+CREATE TABLE "order_detail_items"(
+    "id" SERIAL primary key,
+    "order_id" BIGINT NOT NULL,
+    "product_id" BIGINT NOT NULL,
+    "product_name" VARCHAR(255) NOT NULL,
+    "product_color" VARCHAR(255) NOT NULL,
+    "product_size" VARCHAR(255) NULL,
+    "product_quantity" BIGINT NOT NULL,
+    "selling_price" BIGINT NOT NULL,
+    "product_total_price" BIGINT NOT NULL,
+    "created_at"  TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    "modified_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+ALTER TABLE
+    "order_detail_items" ADD CONSTRAINT "order_detail_items_order_id_foreign" 
+    FOREIGN KEY("order_id") REFERENCES "orders"("id");
+ALTER TABLE
+    "order_detail_items" ADD CONSTRAINT "order_detail_items_product_id_foreign" 
+    FOREIGN KEY("product_id") REFERENCES "products"("id");
+    
 
 CREATE TABLE "delivery_contacts"(
     "id" SERIAL primary key,
@@ -82,7 +118,7 @@ CREATE TABLE "delivery_contacts"(
     "email" VARCHAR(255) NULL,
     "created_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     "modified_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY("order_id") REFERENCES "order"("id")
+    FOREIGN KEY("order_id") REFERENCES "orders"("id")
 );
 
 CREATE TABLE "delivery_address"(
@@ -98,17 +134,8 @@ CREATE TABLE "delivery_address"(
     "modified_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY("delivery_contact_id") REFERENCES "delivery_contacts"("id")
 );
--- TODO: End of adding
 
-CREATE TABLE "orders"(
-    "id" SERIAL primary key,
-    "user_id" BIGINT NOT NULL,
-    "total_amount" INTEGER NOT NULL,
-    "payment_status" VARCHAR(255) NOT NULL,
-    "payment_method" VARCHAR(255) NOT NULL,
-    "created_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    "modified_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP
-);
+
 CREATE TABLE "shopping_cart"(
     "id" SERIAL primary key,
     "user_id" INTEGER NOT NULL,
@@ -117,32 +144,16 @@ CREATE TABLE "shopping_cart"(
     "created_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     "modified_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
-CREATE TABLE "products"(
-    "id" SERIAL primary key,
-    "category_id" INTEGER NOT NULL,
-    "product_name" VARCHAR(255) NOT NULL,
-    "product_details" TEXT NOT NULL,
-    "product_color" VARCHAR(255) NOT NULL,
-    "product_size" VARCHAR(255) NULL,
-    "selling_price" INTEGER NOT NULL,
-    "image_one" VARCHAR(255) NOT NULL,
-    "image_two" VARCHAR(255) NULL,
-    "image_three" VARCHAR(255) NULL,
-    "created_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    "modified_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP
-);
-ALTER TABLE
-    "orders" ADD CONSTRAINT "orders_user_id_foreign" FOREIGN KEY("user_id") REFERENCES "users"("id");
-ALTER TABLE
-    "order_detail_items" ADD CONSTRAINT "order_detail_items_product_id_foreign" FOREIGN KEY("product_id") REFERENCES "products"("id");
+
+
+
 ALTER TABLE
     "products" ADD CONSTRAINT "product_category_id_foreign" FOREIGN KEY("category_id") REFERENCES "categories"("id");
 ALTER TABLE
     "shopping_cart" ADD CONSTRAINT "shopping_cart_user_id_foreign" FOREIGN KEY("user_id") REFERENCES "users"("id");
 ALTER TABLE
     "shopping_cart" ADD CONSTRAINT "shopping_cart_product_id_foreign" FOREIGN KEY("product_id") REFERENCES "products"("id");
-ALTER TABLE
-    "order_detail_items" ADD CONSTRAINT "order_detail_items_order_id_foreign" FOREIGN KEY("order_id") REFERENCES "orders"("id");
+
 INSERT INTO categories (categories_name,created_at,modified_at)
 VALUES 
 ('iphone',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
