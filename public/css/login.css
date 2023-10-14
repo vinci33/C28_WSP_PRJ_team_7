@@ -58,27 +58,30 @@ a {
     filter: drop-shadow(0 0 0.5rem var(--primary));
 }
 
+/* Body */
+/* Container styles */
+.container-fluid {
+    max-width: 100%;
+    padding: 0 20px;
+    margin: 0 auto;
+}
+
+/* Typography */
 .greeting {
     color: var(--neutral-gray-1, #303030);
-    font-family: Poppins;
-    font-size: 36px;
-    font-style: normal;
+    font-family: Poppins, sans-serif;
+    font-size: 24px;
     font-weight: 700;
     line-height: 150%;
     letter-spacing: 0.72px;
-    display: flex;
-    justify-content: center;
+    text-align: center;
     margin-top: 30px;
-    font-family: Poppins;
-    font-weight: bolder;
 }
 
+/* Form styles */
 .google {
     display: flex;
     justify-content: center;
-    border-radius: 8px;
-    background: white;
-    appearance: none;
     margin-top: 12px;
 }
 
@@ -89,9 +92,9 @@ a {
     background: white;
     border: 1px solid lightgrey;
     height: 60px;
-    width: 380px;
+    width: 100%;
+    max-width: 380px;
     margin-top: 20px;
-    border: 1px solid lightgrey;
     border-radius: 5px;
 }
 
@@ -99,6 +102,7 @@ a {
     display: flex;
     justify-content: center;
     margin-top: 20px;
+    font-size: 14px;
 }
 
 .email {
@@ -115,21 +119,13 @@ a {
     margin-top: 20px;
 }
 
-#email {
+#email, #password {
+    width: 100%;
+    max-width: 400px;
     height: 50px;
-    width: 400px;
+    padding: 10px;
     border: 1px solid lightgrey;
     border-radius: 5px;
-    padding: 20px;
-    font-size: 15px;
-}
-
-#password {
-    height: 50px;
-    width: 400px;
-    border: 1px solid lightgrey;
-    border-radius: 5px;
-    padding: 20px;
     font-size: 15px;
 }
 
@@ -141,21 +137,21 @@ a {
 .password {
     display: flex;
     justify-content: center;
-    margin-top: 40px;
+    margin-top: 20px;
     font-size: 15px;
 }
 
 .pwbox {
     display: flex;
     justify-content: center;
+    align-items: center;
     margin-top: 20px;
-
 }
 
 .confirm-password {
     display: flex;
     justify-content: center;
-    margin-top: 40px;
+    margin-top: 20px;
     font-size: 15px;
 }
 
@@ -170,7 +166,8 @@ a {
 }
 
 .input-label {
-    width: 400px;
+    width: 100%;
+    max-width: 400px;
     padding-left: 12px;
     text-align: left;
 }
@@ -185,9 +182,9 @@ a {
     display: flex;
     justify-content: center;
     height: 50px;
-    width: 430px;
+    width: 100%;
+    max-width: 430px;
     background: var(--primary);
-    border: 1px solid lightgrey;
     border: 1px solid lightgrey;
     border-radius: 5px;
     color: white;
@@ -208,12 +205,12 @@ a {
     text-decoration: none;
 }
 
-input:focus {
-    box-shadow: 2px 2px 2px 2px lightgrey;
-}
-
+button:focus,
+button:hover,
+input:focus,
 input:hover {
     box-shadow: 2px 2px 2px 2px lightgrey;
+    outline: none;
 }
 
 /* Footer */

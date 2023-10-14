@@ -103,6 +103,34 @@ a {
   text-decoration: none !important;
 }
 
+/* Mobile Responsive Adjustments */
+@media screen and (max-width: 767px) {
+  .product-headers-container {
+    padding: 40px 20px 5px 20px;
+  }
+
+  .filter {
+    width: 100%;
+    padding: 8px 16px;
+    justify-content: space-between;
+  }
+
+  .left-button-box,
+  .button-box,
+  label,
+  select {
+    padding: 8px 16px;
+  }
+
+  .product-container {
+    padding: 20px;
+  }
+
+  .card {
+    width: 100%;
+  }
+}
+
 /* navbar and footer css */
 :root {
   --text: #010403;

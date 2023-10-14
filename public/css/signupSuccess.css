@@ -140,8 +140,8 @@ a:hover {
     align-items: center;
     height: 50px;
     width: 430px;
+    max-width: 100%;
     background: var(--primary);
-    border: 1px solid lightgrey;
     border: 1px solid lightgrey;
     border-radius: 5px;
     color: white;
@@ -156,13 +156,42 @@ a:hover {
 
 button:focus {
     box-shadow: 2px 2px 2px 2px lightgrey;
-  }
-  
-  button:hover {
+}
+
+button:hover {
     box-shadow: 2px 2px 2px 2px lightgrey;
     color: white !important;
-  }
+}
 
+/* Mobile Responsive Adjustments */
+@media screen and (max-width: 768px) {
+    .greeting {
+        font-size: 24px;
+        width: auto;
+        max-width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .intro1,
+    .intro2 {
+        font-size: 16px;
+        width: auto;
+        max-width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .goshopbtn-container {
+        margin-top: 50px;
+    }
+
+    #goshopbtn {
+        width: 100%;
+        max-width: 300px;
+        margin-top: 10px;
+    }
+}
 /* Footer */
 .footer-img {
     height: 100px;

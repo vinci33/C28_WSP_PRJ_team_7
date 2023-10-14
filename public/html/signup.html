@@ -63,6 +63,7 @@
     </nav>
     <!-- Body -->
     <div class="container-fluid mb-5">
+        <form id="createAccountForm">
         <div class="greeting">Hello, Nice to see you here!</div>
         <div class="form-container"></div>
         <div class="google"><button class="googlebtn" type="button">
@@ -71,7 +72,19 @@
             </a>
         </div>
         <div class="or">or</div>
-        <form id="createAccountForm">
+        
+            <div class="name">
+                <div class="input-label">Enter Your Name</div>
+            </div>
+            <div class="namebox">
+                <div class="firstname-field">
+                    <i class="fa-solid fa-font"></i>&nbsp;&nbsp;
+                    <input type="text" name="first_name" id="firstname" placeholder="Enter your First Name" required>
+                </div>
+                <div class="lastname-field">
+                    <input type="text" name="last_name" id="lastname" placeholder="Enter your Last Name" required>
+                </div>
+            </div>
             <div class="email">
                 <div class="input-label">Enter your Email address</div>
             </div>
@@ -104,7 +117,8 @@
             </div>
             <div class="loginbox">
                 <div class="already">Already have an account?&nbsp;&nbsp;<a href="login.html"
-                        class="createaccbtn">Login</a></div>
+                        class="createaccbtn">Login</a>
+                </div>
             </div>
         </form>
     </div>

@@ -10,11 +10,10 @@
 
 
 .container-fluid {
-    width: 100%;
-    padding-right: 0px;
-    padding-left: 0px;
-    margin-right: auto;
-    margin-left: auto;
+    max-width: 100%;
+    padding: 0 20px;
+    margin: auto;
+
 }
 body {
     font-family: 'poppins', sans-serif;
@@ -94,27 +93,29 @@ a {
 }
 
 /* Body */
+/* Container styles */
+.container-fluid {
+    max-width: 100%;
+    padding: 0 20px;
+    margin: 0 auto;
+}
+
+/* Typography */
 .greeting {
     color: var(--neutral-gray-1, #303030);
-    font-family: Poppins;
-    font-size: 36px;
-    font-style: normal;
+    font-family: Poppins, sans-serif;
+    font-size: 24px;
     font-weight: 700;
     line-height: 150%;
     letter-spacing: 0.72px;
-    display: flex;
-    justify-content: center;
+    text-align: center;
     margin-top: 30px;
-    font-family: Poppins;
-    font-weight: bolder;
 }
 
+/* Form styles */
 .google {
     display: flex;
     justify-content: center;
-    border-radius: 8px;
-    background: white;
-    appearance: none;
     margin-top: 12px;
 }
 
@@ -124,10 +125,10 @@ a {
     align-items: center;
     background: white;
     border: 1px solid lightgrey;
-    height: 60px;
-    width: 380px;
+    height: 50px;
+    width: 100%;
+    max-width: 380px;
     margin-top: 20px;
-    border: 1px solid lightgrey;
     border-radius: 5px;
 }
 
@@ -135,6 +136,51 @@ a {
     display: flex;
     justify-content: center;
     margin-top: 20px;
+    font-size: 14px;
+}
+
+.name {
+    display: flex;
+    justify-content: center;
+}
+
+.namebox {
+    display: flex;
+}
+
+.firstnamefield-label {
+    display: flex;
+    padding-right: 120px;
+}
+
+.firstname-field {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-basis: 50%;
+    margin-left: 25px;
+    margin-right: 10px;
+}
+
+.lastname-field {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 50%;
+}
+
+.field-label {
+    margin-bottom: 5px;
+}
+
+#lastname, #firstname {
+    width: 100%;
+    max-width: 198px;
+    height: 50px;
+    padding: 10px;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    font-size: 15px;
+    /* text-align: left; Align text to the left */
 }
 
 .email {
@@ -145,119 +191,76 @@ a {
     font-size: 15px;
 }
 
-.emailbox {
+.emailbox, .pwbox, .conpwbox, .namebox {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
-}
-
-#email {
-    height: 50px;
-    width: 400px;
-    border: 1px solid lightgrey;
-    border-radius: 5px;
-    padding: 20px;
-    font-size: 15px;
-}
-
-#password {
-    height: 50px;
-    width: 400px;
-    border: 1px solid lightgrey;
-    border-radius: 5px;
-    padding: 20px;
-    font-size: 15px;
-}
-
-#confirmPassword {
-    height: 50px;
-    width: 400px;
-    border: 1px solid lightgrey;
-    border-radius: 5px;
-    padding: 20px;
-    font-size: 15px;
-}
-
-.fa-regular {
-    display: flex;
     align-items: center;
+    margin-top: 10px;
 }
 
-.password {
-    display: flex;
-    justify-content: center;
-    margin-top: 40px;
+#email, #password, #confirmPassword {
+    width: 100%;
+    max-width: 400px;
+    height: 50px;
+    padding: 10px;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
     font-size: 15px;
 }
 
-.pwbox {
+.password, .confirm-password {
     display: flex;
     justify-content: center;
     margin-top: 20px;
-
-}
-
-.confirm-password {
-    display: flex;
-    justify-content: center;
-    margin-top: 40px;
     font-size: 15px;
-}
-
-.conpwbox {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.placeholder {
-    font-size: 5px;
 }
 
 .input-label {
-    width: 400px;
+    width: 100%;
+    max-width: 400px;
     padding-left: 12px;
     text-align: left;
+    margin-top: 20px;
 }
 
 #passworderror {
     color: red;
     font-size: 15px;
-    margin-top: 10px;
-    display: none;
-    display: flex;
+    margin-top: 20px;
     text-align: center;
+    display: none;
 }
 
 .checkbox {
     display: flex;
     justify-content: center;
     align-items: baseline;
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 .agree {
-    padding-left: 20px;
+    padding-left: 10px;
+    font-size: 12px;
 }
 
 .signupbtn {
     display: flex;
     justify-content: center;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 #signupbtn {
     display: flex;
     justify-content: center;
-    height: 50px;
-    width: 430px;
+    height: 40px;
+    width: 100%;
+    max-width: 430px;
     background: var(--primary);
-    border: 1px solid lightgrey;
-    border: 1px solid lightgrey;
+    border: none;
     border-radius: 5px;
     color: white;
     font-size: 15px;
-    margin-top: 20px;
+    margin-top: 24px;
 }
 
 .loginbox {
@@ -269,16 +272,16 @@ a {
     font-size: 15px;
 }
 
-.signupbtn {
+.signupbtn a {
     color: var(--primary);
 }
 
-input:focus {
-    box-shadow: 2px 2px 2px 2px lightgrey;
-}
-
+button:focus,
+button:hover,
+input:focus,
 input:hover {
     box-shadow: 2px 2px 2px 2px lightgrey;
+    outline: none;
 }
 
 /* Footer */
