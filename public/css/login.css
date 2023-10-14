@@ -205,6 +205,8 @@ a {
     text-decoration: none;
 }
 
+button:focus,
+button:hover,
 input:focus,
 input:hover {
     box-shadow: 2px 2px 2px 2px lightgrey;
