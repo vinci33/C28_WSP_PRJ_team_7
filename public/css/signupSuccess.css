@@ -74,6 +74,15 @@ a:hover {
   }
 
 /* Body */
+
+.tick {
+    display: flex;
+    justify-content: center;
+    height: 20vh;
+    margin-top: 30px;
+    margin-bottom: 100px;
+}
+
 .greeting {
     color: var(--neutral-gray-1, #303030);
     font-family: Poppins;
@@ -99,7 +108,7 @@ a:hover {
     letter-spacing: 0.72px;
     display: flex;
     justify-content: center;
-    margin-top: 30px;
+    margin-top: 50px;
     font-family: Poppins;
 }
 
@@ -113,14 +122,15 @@ a:hover {
     letter-spacing: 0.72px;
     display: flex;
     justify-content: center;
-    margin-top: 30px;
+    margin-top: 20px;
     font-family: Poppins;
 }
 
 .goshopbtn {
     display: flex;
     justify-content: center;
-    margin-top: 30px;
+    margin-top: 100px;
+    margin-bottom: 100px;
     text-decoration: none;
 }
 
@@ -136,7 +146,6 @@ a:hover {
     border-radius: 5px;
     color: white;
     font-size: 15px;
-    margin-top: 20px;
     text-decoration: none;
 }
 

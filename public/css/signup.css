@@ -229,6 +229,17 @@ a {
     text-align: center;
 }
 
+.checkbox {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    margin-top: 20px;
+}
+
+.agree {
+    padding-left: 20px;
+}
+
 .signupbtn {
     display: flex;
     justify-content: center;
