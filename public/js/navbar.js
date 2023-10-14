@@ -66,8 +66,8 @@ fetch('/login-status')
         if (currentPage === "/signup.html") {
             loginbtn.style.display = "none"; // Hide about us button on about us page
         } else {
-            loginbtnbtn.innerHTML = 'LogIn / SignUps';
-            loginbtnbtn.href = "/login.html";
+            loginbtn.innerHTML = 'LogIn / SignUp';
+            loginbtn.href = "/login.html";
         }
 
         // Check if it's the signup success page

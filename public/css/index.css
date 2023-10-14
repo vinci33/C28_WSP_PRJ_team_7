@@ -1,3 +1,12 @@
+:root {
+  --text: #010403;
+  --background: #f1f9f9;
+  --primary: #67c1bb;
+  --secondary: #caeceb;
+  --accent: #4eb7b0;
+}
+
+
 .new-arrival {
   margin-top: 30px;
   padding: 28px 80px 20px 80px;
@@ -49,14 +58,6 @@ span {
   width: 25%;
 }
 
-:root {
-  --text: #010403;
-  --background: #f1f9f9;
-  --primary: #67c1bb;
-  --secondary: #caeceb;
-  --accent: #4eb7b0;
-}
-
 button:focus {
   box-shadow: 2px 2px 2px 2px lightgrey;
 }
@@ -64,6 +65,26 @@ button:focus {
 button:hover {
   box-shadow: 2px 2px 2px 2px lightgrey;
   color: white !important;
+}
+
+/* Mobile Responsive Adjustments */
+@media screen and (max-width: 767px) {
+  .new-arrival,
+  .product-container {
+    padding: 20px;
+  }
+
+  .card {
+    width: 100%;
+  }
+
+  .button-container {
+    margin-top: 20px;
+  }
+
+  .view-all-products-btn {
+    width: 100%;
+  }
 }
 
 @import url("https://fonts.googleapis.com/css?family=Poppins:400|Noto Sans:700");
@@ -192,7 +213,6 @@ small {
 .carousel-control-prev,
 .carousel-control-next {
   box-shadow: none !important;
-  /* Disable the outline */
 }
 
 .carousel-control-prev-icon,
@@ -204,11 +224,6 @@ small {
   box-shadow: none !important;
   /* Disable the outline */
   filter: invert(50%);
-}
-
-.carousel-indicators button[data-bs-slide-to="2"] {
-  display: flex;
-  align-items:baseline;
 }
 
 
