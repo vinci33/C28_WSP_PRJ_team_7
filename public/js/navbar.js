@@ -9,18 +9,12 @@ fetch('/login-status')
         const productbtn = document.getElementById("productbtn");
         const phonecasebtn = document.getElementById("phonecasebtn");
         const aboutusbtn = document.getElementById("aboutusbtn");
-        const orderhistorybtn = document.getElementById("orderhistorybtn");
-        const shoppingcartbtn = document.getElementById("shoppingcartbtn");
 
         // Hide or show buttons based on login status and current page
         if (data.isLoggedIn) {
             // User is logged in
-<<<<<<< HEAD
-            loginbtn.innerHTML = /*html*/ `<i class="fa-solid fa-arrow-right-to-bracket"></i> Logout`;
-=======
             loginbtn.innerHTML = '<i class="fa-solid fa-arrow-right-to-bracket"></i> LogOut';
             loginbtn.style.display = "block"; // Show login button
->>>>>>> 3079e9438cc263311a9dd897e1dee9a862808d9e
             loginbtn.href = "/logout";
             profilebtn.innerHTML = '<i class="fa-solid fa-user"></i>My Orders';
             profilebtn.style.display = "block"; // Show profile button
@@ -77,16 +71,16 @@ fetch('/login-status')
 
         // Hide order history button if user is not logged in or if it's the order history page
         if (!data.isLoggedIn || currentPage === "/orderhistory.html") {
-            orderhistorybtn.style.display = "none";
+            profilebtn.style.display = "none";
         } else {
-            orderhistorybtn.style.display = "block";
+            profilebtn.style.display = "block";
         }
 
         // Hide shopping cart button if user is not logged in or if it's the shopping cart page
         if (!data.isLoggedIn || currentPage === "/shoppingcart.html") {
-            shoppingcartbtn.style.display = "none";
+            cartbtn.style.display = "none";
         } else {
-            shoppingcartbtn.style.display = "block";
+            cartbtn.style.display = "block";
         }
     })
     .catch(error => {

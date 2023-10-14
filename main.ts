@@ -86,6 +86,7 @@ app.post('/create-account', (req, res) => {
 
             client.query(query, values)
                 .then((result) => {
+                    req.session.userId = result.rows[0].id;
                     res.status(200).json({ message: 'Account created!', user: result.rows[0] });
                 })
                 .catch((err) => {
