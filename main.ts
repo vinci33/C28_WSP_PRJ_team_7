@@ -145,11 +145,11 @@ app.get('/login-status', (req, res) => {
         if (req.session.userId) {
             // User is logged in
             res.json({ isLoggedIn: true });
-            console.log('User is logged in');
+            console.log(`User is logged in ${req.session.userId}`);
         } else {
             // User is not logged in
             res.json({ isLoggedIn: false });
-            console.log('User is not logged in');
+            console.log(`User is not logged in ${req.session.userId}`);
         }
     } catch (error) {
         console.error('An error occurred:', error);
@@ -397,7 +397,7 @@ app.post("/orders", async (req, res) => {
             req.body.payment_status, req.body.payment_method]
         )
         console.log(`${orderId.rows[0]}`)
-        console.log(`productId:${req.body[0].product_id}`)
+        // console.log(`productId:${req.body[0].product_id}`)
         await client.query(/*sql*/`INSERT INTO 
             order_detail_items(
             order_id,
