@@ -145,11 +145,11 @@ app.get('/login-status', (req, res) => {
         if (req.session.userId) {
             // User is logged in
             res.json({ isLoggedIn: true });
-            console.log(`User is logged in ${req.session.userId}`);
+            console.log(`User is logged in session number/userId: ${req.session.userId}`);
         } else {
             // User is not logged in
             res.json({ isLoggedIn: false });
-            console.log(`User is not logged in ${req.session.userId}`);
+            console.log(`User is not logged in session number/userId:${req.session.userId}`);
         }
     } catch (error) {
         console.error('An error occurred:', error);
