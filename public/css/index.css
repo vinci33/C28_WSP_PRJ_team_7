@@ -178,7 +178,7 @@ small {
 }
 
 .carousel-inner {
-  max-height: 600px;
+  max-height: 450px;
   display: flex;
   align-items: center;
 }
@@ -204,6 +204,11 @@ small {
   box-shadow: none !important;
   /* Disable the outline */
   filter: invert(50%);
+}
+
+.carousel-indicators button[data-bs-slide-to="2"] {
+  display: flex;
+  align-items:baseline;
 }
 
 
