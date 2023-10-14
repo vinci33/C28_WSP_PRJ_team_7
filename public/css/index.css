@@ -171,20 +171,43 @@ small {
 }
 
 /* banner */
-.bannercontainer {
+.carousel {
+  max-width: 100%;
+  overflow: hidden;
   margin-top: 70px;
-  display: flex;
-  justify-content: center;
 }
 
-.banner {
+.carousel-inner {
+  max-height: 600px;
   display: flex;
-  justify-content: center;
   align-items: center;
-  
 }
 
-#home {
+.carousel-item img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  box-shadow: none !important;
+  /* Disable the outline */
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(50%);
+}
+
+.carousel-indicators [data-bs-target] {
+  box-shadow: none !important;
+  /* Disable the outline */
+  filter: invert(50%);
+}
+
+
+/* #home {
   background-color: var(--background);
   height: 100vh;
   width: 100%;
@@ -278,7 +301,7 @@ small {
   white-space: nowrap;
   all: unset;
   box-sizing: border-box;
-}
+} */
 
 .new-arrival {
   margin-left: 30px;
