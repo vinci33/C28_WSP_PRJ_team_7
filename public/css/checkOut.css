@@ -17,7 +17,7 @@ body {
 a {
     color: inherit;
     text-decoration: none !important;
-  }
+}
 
 h1,
 h2,
@@ -60,7 +60,8 @@ h5 {
 }
 
 /* delivery form */
-.form {
+.form,
+.summary {
     width: 100%;
     padding: 30px 30px;
     border-radius: 15px;
@@ -114,15 +115,13 @@ input[type=number] {
     color: var(--text);
 }
 
-.client-detail {
+.client-detail,
+.product-summary {
     width: 600px;
 }
 
 .product-summary {
-    color: #f9f9f9;
-    font-size: 5rem;
-    background-color: black;
+
     box-shadow: #4eb7b0 0px 0px 40px 0px;
-    width: 600px;
-    height: 700px;
+
 }

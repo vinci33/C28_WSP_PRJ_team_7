@@ -367,14 +367,14 @@ app.get('/cartItemsByUserId', async (req, res) => {
     try {
         const user_id = req.session?.userId
         const cartItems = await client.query(/*sql*/`SELECT 
-            shopping_cart.id AS cart_id,  
+            shopping_cart.id AS cart_id,
             products.image_one as image_one, products.product_name as product_name,
             products.product_details as product_details, 
             products.product_color as product_color,
             products.product_size as product_size, 
             products.selling_price as selling_price, 
             products.image_one as image_one, 
-            product_id, product_quantity 
+            product_id, product_quantity, user_id
         from shopping_cart inner join products
             on shopping_cart.product_id = products.id 
             where user_id = $1 order by shopping_cart.created_at`,
@@ -387,21 +387,27 @@ app.get('/cartItemsByUserId', async (req, res) => {
 
 app.post("/orders", async (req, res) => {
     try {
-        console.log("1", req.body)
         const orderId = await client.query(/*sql*/`INSERT INTO orders (
             user_id, 
             total_amount, 
             payment_status, 
             payment_method)
         VALUES ($1,$2,$3,$4) RETURNING id`,
-            [req.session?.userId, req.body.total_amount,
+            [req.body.user_id, req.body.total_amount,
             req.body.payment_status, req.body.payment_method]
         )
         req.session.orderId = orderId.rows[0].id
-        console.log(`order ID :${orderId.rows[0].id}`)
-        console.log(`order ID from session :${req.session?.orderId}`)
-        // console.log(`productId:${req.body[0].product_id}`)
-        await client.query(/*sql*/`INSERT INTO 
+        res.status(200).json(orderId.rows)
+    } catch (err: any) {
+        console.log(err.message)
+    }
+})
+
+
+app.post("/orderDetailItems", isLoggedIn, async (req, res) => {
+    try {
+        for (let i = 0; i < req.body.cartItems.length; i++) {
+            await client.query(/*sql*/`INSERT INTO 
             order_detail_items(
             order_id,
             product_id,
@@ -412,14 +418,15 @@ app.post("/orders", async (req, res) => {
             selling_price,
             product_total_price)
             VALUES ($1,$2,$3,$4,$5,$6,$7,$8)`,
-            [orderId.rows[0].id, req.body.product_id,
-            req.body.product_name, req.body.product_color,
-            req.body.product_size, req.body.product_quantity,
-            req.body.selling_price, req.body.product_total_price])
+                [req.body.orderId[0].id, req.body.cartItems[i].product_id,
+                req.body.cartItems[i].product_name, req.body.cartItems[i].product_color,
+                req.body.cartItems[i].product_size, req.body.cartItems[i].product_quantity,
+                req.body.cartItems[i].selling_price, req.body.cartItems[i].product_total_price])
+        }
         res.json({ success: true, msg: "checkout success" })
     } catch (err: any) {
         console.log(err.message)
-        res.status(400).json({ success: false, msg: "Unable to checkout" });
+        res.status(400).json({ success: false, msg: "Unable to order details" });
     }
 })
 
@@ -427,12 +434,16 @@ app.post("/orders", async (req, res) => {
 app.post("/deliveryConAdd", isLoggedIn, async (req, res) => {
     try {
         const { address, contact } = req.body;
-        console.log(address.address1, contact.first_name);
-        console.log(`this is the shopping_cart_id:${req.session.shoppingCartId}`)
-        console.log(`this is the user_id:${req.session.userId}`)
-        const orderId = req.session.orderId
+        const orderId: number | undefined = req.session.orderId
         if (!orderId) {
             res.status(400).json({ success: false, msg: "order id not found" });
+            return
+        }
+        if (isNaN(contact.phone)) {
+            res.status(400).json({ success: false, msg: "Phone Number is not a number" });
+            return
+        } if (isNaN(address.postal_code)) {
+            res.status(400).json({ success: false, msg: "Postal-Code is not a number" });
             return
         }
         const delivery_contactSql = `INSERT INTO delivery_contacts (
@@ -452,12 +463,10 @@ app.post("/deliveryConAdd", isLoggedIn, async (req, res) => {
             address.street, address.city,
             address.postal_code, address.country,
                 delivery_contactId])
-        console.log("end")
-        console.log(`order ID :${orderId}`)
         res.json({ success: true, msg: "Delivery info updated" })
     } catch (err: any) {
         console.log(err.message)
-        res.status(400).json({ success: false, msg: "unable to checkout" });
+        res.status(400).json({ success: false, msg: "Unable to update delivery info" });
     }
 })
 
