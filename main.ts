@@ -68,12 +68,6 @@ app.use('/', userRoutes)
 // })
 
 
-// // TODO can be delete later
-app.use((req, res, next) => {
-    req.session.userId = 1;
-    next();
-})
-
 
 
 app.post('/create-account', (req, res) => {
@@ -328,7 +322,7 @@ app.get('/orderHistory.html/orders', async (req, res) => {
     try {
         const user_id = req.session?.userId
         const deliveryQueryResult = await client.query(/*sql*/
-            `SELECT orders.total_amount as total_amount, orders.payment_status as payment_status,
+            `SELECT orders.id, orders.total_amount as total_amount, orders.payment_status as payment_status,
              orders.payment_method as payment_method, orders.created_at as created_at,
              delivery_contacts.first_name as first_name, delivery_contacts.last_name as last_name, 
              delivery_contacts.phone as phone, delivery_address.address1 as address1,
@@ -345,6 +339,25 @@ app.get('/orderHistory.html/orders', async (req, res) => {
         res.status(400).json({ success: false, msg: "error occurred" });
     }
 })
+
+app.get("/orderHistory.html/orderData", isLoggedIn, async (req, res) => {
+    try {
+        const order_id = parseInt(req.query.orderId as string);
+        if (isNaN(order_id)) {
+            res.status(400).json({ success: false, msg: "id is not a number" });
+            return;
+        }
+        const results = await client.query(/*sql*/
+            `SELECT product_name, product_color, product_quantity, 
+            selling_price, product_total_price FROM orders 
+            LEFT JOIN order_detail_items ON orders.id = order_detail_items.order_id
+            WHERE orders.id = $1`, [order_id]);
+        res.send(results.rows)
+    } catch (err: any) {
+        console.error(err.message)
+        res.status(400).json({ success: false, msg: "error occurred" });
+    }
+});
 
 app.post("/checkout", isLoggedIn, async (req, res) => {
     try {

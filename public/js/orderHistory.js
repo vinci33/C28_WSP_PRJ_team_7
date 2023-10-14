@@ -61,14 +61,14 @@ async function initOrders() {
     ).textContent = `Total Amount: $ ${(order.total_amount).toLocaleString()}`;
 
     orderClone.querySelector(
-      ".payment-status"
-    ).textContent = `Payment Status: Successful`;
-
-    orderClone.querySelector(
       ".payment-method"
     ).textContent = `Payment Method: ${order.payment_method}`;
 
-    orderClone.querySelector(".collapsible").addEventListener("click", function () {
+    orderClone.querySelector(
+      ".payment-status"
+    ).textContent = `Payment Status: Successful`;
+
+    orderClone.querySelector(".collapsible").addEventListener("click", async function () {
       this.classList.toggle("active");
       let content = this.nextElementSibling;
       if (content.style.display === "block") {
@@ -76,11 +76,19 @@ async function initOrders() {
       } else {
         content.style.display = "block";
       }
-
-      let contentDivs = this.nextElementSibling.querySelectorAll('.content div')
-      contentDivs[0].textContent = 'hello world'
     });
 
+    let orderResp = await fetch(`/orderHistory.html/orderData?orderId=${order.id}`);
+    const orderData = await orderResp.json();
+    let orderDetailsContainerEle = orderClone.querySelector(".content")
+    let itemCount = 0
+    for (const details of orderData) {
+      itemCount++
+      const div2 = document.createElement("div");
+      div2.innerHTML = `${itemCount}. ${details.product_name} (${details.product_color}) x ${details.product_quantity} pcs <b>(Subtotal: $${(+details.product_total_price).toLocaleString()})</b>`;
+      orderDetailsContainerEle.appendChild(div2);
+
+    }
     orderContainerEle.appendChild(orderClone);
   }
 }
