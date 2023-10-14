@@ -52,7 +52,7 @@ fetch('/login-status')
         if (currentPage === "/phonecase.html") {
             phonecasebtn.style.display = "none"; // Hide phone case button on phone case page
         } else {
-            phonecasebtn.innerHTML = 'Phone Case';
+            phonecasebtn.innerHTML = 'Cases and Accessories';
             phonecasebtn.href = "/phonecase.html";
         }
 

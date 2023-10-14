@@ -39,8 +39,8 @@ function generateFooter() {
     </div>
     <div>
         <h6 class="text-uppercase ">Email</h6>
-        <a class="teckyemail" href="http://tecky.io">
-            <p>hello@tecky.io</p>
+        <a class="teckyemail" href="mailto:hello@tecky.com">
+            <p>hello@tecky.com</p>
         </a>
     </div>
 </div>
