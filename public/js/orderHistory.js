@@ -1,5 +1,6 @@
 window.onload = () => {
   initOrders();
+  handleSortingChange()
 };
 
 async function initOrders() {
@@ -9,13 +10,12 @@ async function initOrders() {
   const orderContainerEle = document.querySelector(".order-container");
   const templateEle = document.querySelector("#order-template");
   orderContainerEle.innerHTML = "";
-  let count = 0;
+  let count = orders.length + 1;
 
   for (const order of orders) {
     const orderClone = templateEle.content.cloneNode(true);
 
-    count++
-
+    count--
 
     if (count % 2 === 0) {
       orderClone.querySelector('#color-container').style.backgroundColor = '#b6e2d3'
@@ -37,11 +37,20 @@ async function initOrders() {
       ".phone"
     ).textContent = `Contact Number: ${order.phone}`;
 
-    let address = [order.address1]
+    let address = []
 
-    if (order.address2 !== null) {
-      address.push(order.address2)
+    let address1 = order.address1
+    if (address1.endsWith(',')) {
+      address.push(address1.slice(0, -1))
+    } else address.push(address1)
+
+    let address2 = order.address2
+    if (order.address2 !== null && address2.endsWith(',')) {
+      address.push(address2.slice(0, -1))
+    } else if (order.address2 !== null) {
+      address.push(address2)
     }
+
     if (order.street !== null) {
       address.push(order.street)
     }
@@ -87,8 +96,21 @@ async function initOrders() {
       const div2 = document.createElement("div");
       div2.innerHTML = `${itemCount}. ${details.product_name} (${details.product_color}) x ${details.product_quantity} pcs <b>(Subtotal: $${(+details.product_total_price).toLocaleString()})</b>`;
       orderDetailsContainerEle.appendChild(div2);
-
     }
     orderContainerEle.appendChild(orderClone);
   }
+}
+
+
+function handleSortingChange() {
+  const orderContainer = document.querySelector(".order-container");
+  const selectElement = document.querySelector("#date-order");
+  selectElement.addEventListener("change", function () {
+    const orderCards = Array.from(document.querySelectorAll(".order"));
+    orderCards.reverse();
+    orderContainer.innerHTML = "";
+    for (const card of orderCards) {
+      orderContainer.appendChild(card);
+    }
+  });
 }

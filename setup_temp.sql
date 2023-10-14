@@ -1,2 +1,0 @@
-SELECT * FROM orders LEFT JOIN order_items ON orders.id = order_items.order_id WHERE orders.user_id = 1;
-SELECT * FROM orders LEFT JOIN order_detail_items ON orders.id = order_detail_items.order_id WHERE orders.user_id = 1;
