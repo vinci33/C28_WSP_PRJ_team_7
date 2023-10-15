@@ -157,7 +157,7 @@ small {
 
 .amount-title {
     font-size: 14px;
-    font-weight: bold;
+    font-weight: 400;
     margin-bottom: 5px;
 }
 
@@ -169,7 +169,7 @@ small {
 .reduce,
 .add {
     font-size: 24px;
-    font-weight: bold;
+    font-weight: 400;
     margin: 0 10px;
     cursor: pointer;
 }
@@ -198,7 +198,8 @@ small {
 }
 
 .add-to-cart-btn:hover,
-.buy-now-btn:hover {
+.buy-now-btn:hover,
+.continue-shop-btn:hover {
     background-color: var(--secondary);
     border: 5px solid var(--secondary);
     border-radius: 40px;
@@ -217,7 +218,7 @@ small {
     width: 100%;
 }
 
-.buy-now-btn-con {
+.buy-con-btn-con {
     display: flex;
     justify-content: space-between;
 
@@ -240,6 +241,20 @@ small {
 
 }
 
+.continue-shop-btn {
+    width: 230px;
+    background-color: var(--accent);
+    color: #fff;
+    border: 5px solid var(--accent);
+    border-radius: 40px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+
+
+}
+
 .frame-2 {
     display: flex;
     justify-content: space-between;
@@ -250,7 +265,7 @@ small {
 
 .product-price-title {
     font-size: 20px;
-    font-weight: bold;
+    font-weight: 400;
 }
 
 .product-price-value {

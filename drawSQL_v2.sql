@@ -35,7 +35,7 @@ CREATE TABLE "users"(
     "first_name" VARCHAR(255) NULL,
     "last_name" VARCHAR(255) NULL,
     "phone" VARCHAR(255) NULL,
-    "email" VARCHAR(255) NULL,
+    "email" VARCHAR(255) NOT NULL,
     "created_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     "modified_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
@@ -112,10 +112,10 @@ ALTER TABLE
 CREATE TABLE "delivery_contacts"(
     "id" SERIAL primary key,
     "order_id" INTEGER NOT NULL,
-    "first_name" VARCHAR(255) NULL,
-    "last_name" VARCHAR(255) NULL,
-    "phone" VARCHAR(255) NULL,
-    "email" VARCHAR(255) NULL,
+    "first_name" VARCHAR(255) NOT NULL,
+    "last_name" VARCHAR(255) NOT NULL,
+    "phone" VARCHAR(255) NOT NULL,
+    "email" VARCHAR(255) NOT NULL,
     "created_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     "modified_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY("order_id") REFERENCES "orders"("id")
@@ -125,11 +125,11 @@ CREATE TABLE "delivery_address"(
     "id" SERIAL primary key,
     "delivery_contact_id" INTEGER NOT NULL,
     "address1" VARCHAR(255) NOT NULL,
-    "address2" VARCHAR(255) NULL,
-    "street" VARCHAR(255) NULL,
-    "city" VARCHAR(255) NULL,
-    "postal_code" INTEGER,
-    "country"  VARCHAR(255) NULL,
+    "address2" VARCHAR(255) NOT NULL,
+    "street" VARCHAR(255) NOT NULL,
+    "city" VARCHAR(255) NOT NULL,
+    "postal_code" INTEGER NOT NULL,
+    "country"  VARCHAR(255) NOT NULL,
     "created_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     "modified_at" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY("delivery_contact_id") REFERENCES "delivery_contacts"("id")
