@@ -1,18 +1,18 @@
 import express from 'express';
 import { client } from "./main";
 import { hashPassword } from './hash';
-const crypto = require('crypto'); 
+const crypto = require('crypto');
 export const userRoutes = express.Router();
 
 userRoutes.get('/login/google', loginGoogle);
 
-async function loginGoogle (req:express.Request, res:express.Response){
+async function loginGoogle(req: express.Request, res: express.Response) {
     console.log('google login')
     const accessToken = req.session?.['grant'].response.access_token;
-    const fetchRes = await fetch('https://www.googleapis.com/oauth2/v2/userinfo',{
-        method:"get",
-        headers:{
-            "Authorization":`Bearer ${accessToken}`
+    const fetchRes = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
+        method: "get",
+        headers: {
+            "Authorization": `Bearer ${accessToken}`
         }
     });
 
@@ -21,16 +21,18 @@ async function loginGoogle (req:express.Request, res:express.Response){
 
     let currentUser = users[0];
 
-    if(!currentUser){
+    if (!currentUser) {
         // Create the user when the user does not exist
-        currentUser = ( await client.query(
-                `INSERT INTO users (email,password)
+        currentUser = (await client.query(
+            `INSERT INTO users (email,password)
                 VALUES ($1,$2) RETURNING *`,
-                [result.email, await hashPassword(crypto.randomBytes(20).toString())])
-            ).rows[0]
-    } 
+            [result.email, await hashPassword(crypto.randomBytes(20).toString())])
+        ).rows[0]
 
-    if(req.session){
+        return res.redirect('/signupSuccess.html');
+    }
+
+    if (req.session) {
         req.session.userId = currentUser.id;
     }
 

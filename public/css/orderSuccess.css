@@ -9,72 +9,80 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:400|Noto Sans:700');
 
 body {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
     font-family: 'poppins', sans-serif;
     font-weight: 400;
 }
-
 footer {
     font-family: 'poppins', sans-serif;
 }
+a:hover {
+    text-decoration: none;
+}
 
 
+/* Nav Bar */
 .logo-img {
     height: 100px;
     padding-left: 80px;
-}
+  }
 
 .navbar {
     font-size: 16px;
-}
-
-.navbar-light .navbar-nav .nav-item .nav-link {
+  }
+  
+  .navbar-light .navbar-nav .nav-item .nav-link {
     padding: 0 20px;
     color: var(--text);
     transition: 0.3 ease-in-out;
-}
-
-.navbar-light .navbar-nav .nav-item .nav-link:hover,
-.navbar-light .navbar-nav .nav-item .nav-link:active {
+  }
+  
+  .navbar-light .navbar-nav .nav-item .nav-link:hover,
+  .navbar-light .navbar-nav .nav-item .nav-link:active {
     color: var(--primary);
-}
-
-.navbar i {
+  }
+  
+  .navbar i {
     font-size: 1.2rem;
     padding: 0 9px;
     cursor: pointer;
     transition: 0.3 ease-in-out;
-}
-
-.navbar i:hover .navbar i:active {
+  }
+  
+  .navbar i:hover .navbar i:active {
     color: var(--primary);
     filter: drop-shadow(0 0 0.5rem var(--primary));
-}
-
-/* mobile */
-.navbar-light .navbar-toggler {
+  }
+  
+  /* mobile */
+  .navbar-light .navbar-toggler {
     border: none;
     outline: none;
-}
-
-.navbar-toggler-icon {
+  }
+  
+  .navbar-toggler-icon {
     font-size: 1.5rem;
     padding: 7px;
     cursor: pointer;
     transition: 0.3 ease-in-out;
     border-color: var(--primary);
     /* background-color: var(--accent); */
-}
-
-.navbar-toggler-icon:hover,
-.navbar-toggler-icon:active {
+  }
+  
+  .navbar-toggler-icon:hover,
+  .navbar-toggler-icon:active {
     color: var(--primary);
-}
-
+  }
 
 /* Body */
+
+.tick {
+    display: flex;
+    justify-content: center;
+    height: 30vh;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
 .greeting {
     color: var(--neutral-gray-1, #303030);
     font-family: Poppins;
@@ -85,8 +93,7 @@ footer {
     letter-spacing: 0.72px;
     display: flex;
     justify-content: center;
-    text-align: center;
-    margin-top: 100px;
+    margin-top: 10px;
     font-family: Poppins;
     font-weight: bolder;
 }
@@ -101,32 +108,26 @@ footer {
     letter-spacing: 0.72px;
     display: flex;
     justify-content: center;
-    margin-top: 80px;
+    margin-top: 50px;
     font-family: Poppins;
 }
 
 .intro2 {
     color: var(--neutral-gray-1, #303030);
     font-family: Poppins;
-    font-size: 20px;
+    font-size: 15px;
     font-style: normal;
     font-weight: 700;
     line-height: 150%;
     letter-spacing: 0.72px;
     display: flex;
     justify-content: center;
-    margin-top: 30px;
+    margin-top: 20px;
     font-family: Poppins;
+    text-align: center;
 }
 
-.goshopbtn-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 80px;
-    text-decoration: none;
-}
-
-#goshopbtn {
+#goshopbtn, #gohomebtn {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -138,20 +139,24 @@ footer {
     border-radius: 5px;
     color: white;
     font-size: 15px;
-    margin-top: 20px;
-}
-
-a:hover {
     text-decoration: none;
 }
 
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-.goshopbtn {
+.goshopbtn, .gohomebtn {
     color: var(--primary);
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+}
+
+.gohomebtn {
+margin-top: 10px;
+}
+
+#gohomebtn {
+    margin-top: 20px;
 }
 
 button:focus {
@@ -164,9 +169,13 @@ button:hover {
 }
 
 /* Mobile Responsive Adjustments */
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
     .greeting {
         font-size: 24px;
+        width: auto;
+        max-width: 100%;
+        justify-content: center;
+        text-align: center;
     }
 
     .intro1,
@@ -180,15 +189,20 @@ button:hover {
 
     .goshopbtn-container {
         margin-top: 50px;
+        display: flex;
+        flex-direction: column;
+
     }
 
-    #goshopbtn {
+    #goshopbtn, #gohomebtn {
         width: 100%;
         max-width: 300px;
+        min-width: 300px;
         margin-top: 10px;
+        display: flex;
+        justify-content: center;
     }
 }
-
 /* Footer */
 .footer-img {
     height: 100px;
@@ -196,10 +210,9 @@ button:hover {
 }
 
 footer {
-    margin-top: auto;
-    width: 100%;
     background-color: var(--accent);
 }
+
 
 footer h5 {
     color: var(--background);
@@ -236,8 +249,6 @@ footer p {
 footer .teckyemail p {
     text-decoration: none;
     transition: 0.3 ease-in-out;
-    display: flex;
-    align-items: left;
 }
 
 footer .teckyemail p:hover,
