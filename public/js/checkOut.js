@@ -61,7 +61,7 @@ async function checkOut() {
             });
 
         } catch (err) {
-            console.log(`Unable update ${err}`);
+            console.log(`Unable update order detail`);
         }
 
         let checkOutDetail = getCheckOutInfo();
@@ -77,6 +77,8 @@ async function checkOut() {
                 const result = await resp.json();
                 if (res.ok) {
                     console.log(`Delivery info updated`);
+                    window.location.href = "./index.html";
+
                 }
             } catch (err) {
                 console.error(`Unable to submit  info`);
@@ -84,6 +86,15 @@ async function checkOut() {
         } else {
             console.log(err.message);
         }
+        try {
+            await fetch("/deleteCartItems", {
+                method: "DELETE",
+            });
+        }
+        catch (err) {
+            console.log(`Unable to delete cart items`);
+        }
+
     })
 }
 
@@ -92,7 +103,7 @@ async function loadSummary() {
         let res = await fetch('/cartItemsByUserId');
         let summary = await res.json();
         if (summary.length == 0) {
-            throw new Error('Unable to Load Summary')
+            throw new Error('Shopping cart is empty')
         }
         const summaryWithTotalPri = summary.map(item => {
             const product_total_price = +(item.selling_price * item.product_quantity);
@@ -104,10 +115,38 @@ async function loadSummary() {
         let total_amount = summaryWithTotalPri.reduce((previous, current) => {
             return previous + current.product_total_price;
         }, 0);
-        console.log(summary);
+        console.log(summaryWithTotalPri[0].product_name);
         console.log(summaryWithTotalPri);
         console.log(total_amount);
 
+        const summaryTotal = document.querySelector(".total-amount");
+        summaryTotal.textContent = `$ ` + total_amount.toLocaleString();
+        for (let i = 0; i < summaryWithTotalPri.length; i++) {
+            const tbody = document.querySelector(".t-body");
+
+            const summaryDetail = document.createElement("tr");
+            summaryDetail.classList.add("summary-detail");
+
+            const itemCell = document.createElement("td");
+            itemCell.setAttribute("scope", "row");
+            itemCell.setAttribute("colspan", "2");
+            itemCell.style.fontWeight = "200";
+            itemCell.textContent = summaryWithTotalPri[i].product_name;
+
+            const quantityCell = document.createElement("td");
+            quantityCell.classList.add("quantity", "t-detail", "body-text");
+            quantityCell.textContent = summaryWithTotalPri[i].product_quantity;
+
+            const subtotalCell = document.createElement("td");
+            subtotalCell.classList.add("subtotal", "t-detail", "body-text");
+            subtotalCell.textContent = summaryWithTotalPri[i].product_total_price.toLocaleString();
+
+            summaryDetail.appendChild(itemCell);
+            summaryDetail.appendChild(quantityCell);
+            summaryDetail.appendChild(subtotalCell);
+
+            tbody.appendChild(summaryDetail);
+        }
 
         if (res.ok) {
             console.log(`Summary Loaded`);

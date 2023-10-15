@@ -115,13 +115,71 @@ input[type=number] {
     color: var(--text);
 }
 
+
+/* Order Summary */
 .client-detail,
 .product-summary {
-    width: 600px;
+    width: 800px;
 }
 
+.text {
+    font-size: 1.2rem;
+}
+
+
+
 .product-summary {
+    box-shadow: #4eb7b0 3px 0px 20px 2px;
 
-    box-shadow: #4eb7b0 0px 0px 40px 0px;
+}
 
+
+
+.t-detail {
+    font-size: 1.2rem;
+    font-weight: 200;
+}
+
+
+
+.t-head {
+    text-align: end;
+}
+
+.body-text {
+    text-align: end;
+    font-size: 16px;
+    gap: 15px;
+}
+
+.total-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+
+.item-head {
+    text-align: start;
+}
+
+.total-head {
+    font-size: 1.1rem;
+    font-weight: 100;
+}
+
+.total-amount {
+    font-size: 1.3rem;
+    font-weight: 300;
+}
+
+.table-container {
+    overflow: auto;
+    height: 510px;
+}
+
+.table-container table th {
+    position: sticky;
+    top: 0;
 }
