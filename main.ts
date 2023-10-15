@@ -61,6 +61,37 @@ const grantExpress = grant.express({
 app.use(grantExpress as express.RequestHandler);
 app.use('/', userRoutes)
 
+// Assuming you have the necessary imports and setup for your server-side application
+async function emailExistsInDataStorage(email: string) {
+    try {
+        // Replace this with your actual logic to check email existence in your data storage mechanism
+        // Example: Query your database to check if the email exists
+        // Return true if the email exists, or false otherwise
+        // Your implementation may vary depending on the specific database or data storage mechanism you are using
+
+        const result = await client.query('SELECT COUNT(*) FROM users WHERE email = ?', [email]);
+
+        const count = parseInt(result.rows[0].count, 10);
+
+        return count > 0;
+    } catch (error) {
+        console.error('Error checking email existence:', error);
+        return false;
+    }
+}
+
+app.post('/check-email-existence', async (req, res) => {
+    const email = req.body.email;
+
+    try {
+        const exists = await emailExistsInDataStorage(email);
+
+        res.json({ exists });
+    } catch (error) {
+        console.error('Error checking email existence:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
 
 app.post('/create-account', (req, res) => {

@@ -75,7 +75,7 @@ async function initOrders() {
 
     orderClone.querySelector(
       ".payment-status"
-    ).textContent = `Payment Status: Successful`;
+    ).textContent = `Payment Status: ${order.payment_status}`;
 
     orderClone.querySelector(".collapsible").addEventListener("click", async function () {
       this.classList.toggle("active");

@@ -226,7 +226,23 @@ a {
 #passworderror {
     color: red;
     font-size: 15px;
-    margin-top: 20px;
+    margin-top: 10px;
+    text-align: center;
+    display: none;
+}
+
+#emailerror {
+    color: red;
+    font-size: 15px;
+    margin-top: 10px;
+    text-align: center;
+    display: none;
+}
+
+#emailexisterror {
+    color: red;
+    font-size: 15px;
+    margin-top: 10px;
     text-align: center;
     display: none;
 }
