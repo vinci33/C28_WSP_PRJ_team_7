@@ -39,7 +39,7 @@ async function checkOut() {
                 user_id: cartItemsWithTotalPri[0].user_id,
                 total_amount: total_amount,
                 payment_status: "processing",
-                payment_method: "credit card",
+                payment_method: "credit_card",
             }),
         });
         if (res.ok) {

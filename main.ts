@@ -61,18 +61,6 @@ const grantExpress = grant.express({
 app.use(grantExpress as express.RequestHandler);
 app.use('/', userRoutes)
 
-// app.use((rqe, _res, next) => {
-//     console.log(`Request path: ${rqe.path}, method: ${rqe.method}`);
-//     next();
-// })
-
-
-// TODO can be delete later
-// app.use((req, res, next) => {
-//     req.session.userId = 1;
-//     next();
-// })
-
 
 
 app.post('/create-account', (req, res) => {
@@ -483,19 +471,6 @@ app.delete("/deleteCartItems", async (req, res) => {
 
 
 
-const router = Router();
-// Protected route example
-router.get('/protected-route', isLoggedIn, (req, res) => {
-    // This route will only be accessible if the user is logged in
-    res.send('You are logged in!');
-});
-
-export default router;
-
-// app.use('/', userRoutes)
-app.use('/resources', isLoggedIn) // protected resources
-
-// app.use(express.static('public'))
 
 
 
@@ -533,6 +508,20 @@ app.use('/resources', isLoggedIn) // protected resources
 
 //     res.redirect(303, session.url);
 // });
+
+const router = Router();
+// Protected route example
+router.get('/protected-route', isLoggedIn, (req, res) => {
+    // This route will only be accessible if the user is logged in
+    res.send('You are logged in!');
+});
+
+export default router;
+
+// app.use('/', userRoutes)
+app.use('/resources', isLoggedIn) // protected resources
+
+// app.use(express.static('public'))
 
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.static(path.join(__dirname, 'public', "html")))
