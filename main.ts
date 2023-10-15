@@ -454,7 +454,7 @@ app.post("/deliveryConAdd", isLoggedIn, async (req, res) => {
     try {
         const { address, contact } = req.body;
         const orderId: number | undefined = req.session.orderId
-        console.log(orderId)
+
         if (!orderId) {
             res.status(400).json({ success: false, msg: "order id not found" });
             return
@@ -469,7 +469,7 @@ app.post("/deliveryConAdd", isLoggedIn, async (req, res) => {
         const delivery_contactSql = `INSERT INTO delivery_contacts (
           order_id, first_name, last_name, phone, email
         ) VALUES (($1),$2,$3,$4, $5
-        ) RETURNING id, order_id, first_name, last_name, phone, email`;
+        ) RETURNING id`;
         const delivery_addressSql = `INSERT INTO delivery_address (
           address1, address2, street, city, postal_code, country, delivery_contact_id
         ) VALUES ( $1, $2, $3, $4, $5, $6, $7)`;
@@ -483,7 +483,7 @@ app.post("/deliveryConAdd", isLoggedIn, async (req, res) => {
             address.street, address.city,
             address.postal_code, address.country,
                 delivery_contactId])
-        res.json({ data: delivery_contactSqlData.rows, msg: { success: true, msg: "Delivery info updated" } })
+        res.json({ success: true, msg: "Delivery info updated" })
     } catch (err: any) {
         console.log(err.message)
         res.status(400).json({ success: false, msg: "Unable to update delivery info" });
@@ -501,73 +501,6 @@ app.delete("/deleteCartItems", async (req, res) => {
     }
 })
 
-
-// app.post('/create-checkout-session', async (req, res) => {
-//     try {
-//         const { cartItems, totalAmount } = req.body;
-
-//         const lineItems = cartItems.map((item) => ({
-//             price_data: {
-//                 currency: 'usd',
-//                 product_data: {
-//                     name: item.product_name,
-//                 },
-//                 unit_amount: item.selling_price * 100,
-//             },
-//             quantity: item.product_quantity,
-//         }));
-
-//         const session = await stripe.checkout.sessions.create({
-//             payment_method_types: ['card'],
-//             line_items: lineItems,
-//             mode: 'payment',
-//             success_url: 'http://localhost:3000/success',
-//             cancel_url: 'http://localhost:3000/cancel',
-//         });
-
-//         res.json({ sessionId: session.id });
-//     } catch (err) {
-//         console.error(err);
-//         res.status(500).json({ error: 'Something went wrong' });
-//     }
-// });
-
-
-
-// const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-
-// const DOMAIN = process.env.DOMAIN;
-
-// console.log(DOMAIN, stripe)
-
-// app.post('/create-checkout-session', async (req, res) => {
-//     const products = await client.query(/*sql*/`SELECT * FROM products`);
-//     const storeProducts = products.rows;
-//     console.log(storeProducts)
-//     const session = await stripe.checkout.sessions.create({
-//         payment_method_types: ['card'],
-//         mode: 'payment',
-//         line_items: req.body.items.map((item: any) => {
-//             // const storeItem = storeItems.get(item.id);
-//             return {
-//                 // price_data: {
-//                 //     currency: 'hkd',
-//                 //     product_data: {
-//                 //         name: storeItem.name,
-//                 //         images: [storeItem.image],
-//                 //     },
-//                 //     unit_amount: storeItem.price,
-//                 // },
-//                 // quantity: item.quantity,
-//             };
-//         }),
-//         success_url: `${DOMAIN}/success.html`,
-//         success_url: `${ DOMAIN } /success.html`,
-//         cancel_url: `${DOMAIN}/cancel.html`,
-//     });
-
-//     res.redirect(303, session.url);
-// });
 
 const router = Router();
 // Protected route example

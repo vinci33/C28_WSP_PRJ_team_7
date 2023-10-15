@@ -75,23 +75,6 @@ async function checkOut() {
                     body: JSON.stringify(checkOutDetail.checkOutInfo),
                 });
                 const data = await resp.json();
-                const orderInfo = data.data;
-                const msg = data.msg;
-
-                if (!msg.success) {
-                    throw new Error(err.msg);
-                } else {
-                    console.log(`delivery info updated ${msg.msg}`)
-                }
-                // console.log("data")
-                // console.log(data)
-                // console.log("orderInfo")
-                // console.log(orderInfo);
-                // console.log("msg")
-                // console.log(msg);
-
-
-
             } catch (err) {
                 console.error(`Unable to submit  info`);
             }
@@ -99,9 +82,10 @@ async function checkOut() {
             console.log(err.message);
         }
         try {
-            // await fetch("/deleteCartItems", {
-            //     method: "DELETE",
-            // });
+            await fetch("/deleteCartItems", {
+                method: "DELETE",
+            });
+            window.location.href = "./orderSuccess.html";
         }
         catch (err) {
             console.log(`Unable to delete cart items`);
@@ -215,19 +199,3 @@ function getCheckOutInfo() {
     }
 }
 
-
-// const response = await fetch('/create-checkout-session', {
-//     method: 'POST',
-//     headers: {
-//         'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify({
-//         cartItems: cartItems,
-//         totalAmount: totalAmount,
-//     }),
-// });
-
-// const data = await response.json();
-
-// // Redirect the user to the Stripe checkout page
-// stripe.redirectToCheckout({ sessionId: data.sessionId });
