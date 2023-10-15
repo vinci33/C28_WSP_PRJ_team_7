@@ -38,8 +38,8 @@ async function checkOut() {
             body: JSON.stringify({
                 user_id: cartItemsWithTotalPri[0].user_id,
                 total_amount: total_amount,
-                payment_status: "testing-processing",
-                payment_method: "testing-credit card",
+                payment_status: "processing",
+                payment_method: "credit card",
             }),
         });
         if (res.ok) {
@@ -131,7 +131,7 @@ async function loadSummary() {
             itemCell.setAttribute("scope", "row");
             itemCell.setAttribute("colspan", "2");
             itemCell.style.fontWeight = "200";
-            itemCell.textContent = summaryWithTotalPri[i].product_name;
+            itemCell.textContent = summaryWithTotalPri[i].product_name.replace(/_/g, " ");
 
             const quantityCell = document.createElement("td");
             quantityCell.classList.add("quantity", "t-detail", "body-text");
@@ -139,7 +139,7 @@ async function loadSummary() {
 
             const subtotalCell = document.createElement("td");
             subtotalCell.classList.add("subtotal", "t-detail", "body-text");
-            subtotalCell.textContent = summaryWithTotalPri[i].product_total_price.toLocaleString();
+            subtotalCell.textContent = `$${summaryWithTotalPri[i].product_total_price.toLocaleString()}`;
 
             summaryDetail.appendChild(itemCell);
             summaryDetail.appendChild(quantityCell);
