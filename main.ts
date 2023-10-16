@@ -430,8 +430,6 @@ app.post("/orders", async (req, res) => {
         }, 0);
 
         req.session.total_amount = total_amount
-        console.log(`req.session:  ${req.session.total_amount}`)
-        console.log(`total_amount :  ${total_amount}`)
         if (req.session.total_amount !== req.body.total_amount || user_id !== req.body.user_id) {
             res.status(400).json({ success: false, msg: "input invalid" });
             return
