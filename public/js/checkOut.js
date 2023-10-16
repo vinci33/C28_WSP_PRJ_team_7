@@ -82,10 +82,10 @@ async function checkOut() {
             console.log("Unable to submit info from input");
         }
         try {
-            // await fetch("/deleteCartItems", {
-            //     method: "DELETE",
-            // });
-            // window.location.href = "./orderSuccess.html";
+            await fetch("/deleteCartItems", {
+                method: "DELETE",
+            });
+            window.location.href = "./orderSuccess.html";
         }
         catch (err) {
             console.log(`Unable to delete cart items`);
