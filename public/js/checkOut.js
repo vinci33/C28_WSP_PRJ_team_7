@@ -76,16 +76,16 @@ async function checkOut() {
                 });
                 const data = await resp.json();
             } catch (err) {
-                console.error(`Unable to submit  info`);
+                console.error(`Unable to submit info`);
             }
         } else {
-            console.log(err.message);
+            console.log("Unable to submit info from input");
         }
         try {
-            await fetch("/deleteCartItems", {
-                method: "DELETE",
-            });
-            window.location.href = "./orderSuccess.html";
+            // await fetch("/deleteCartItems", {
+            //     method: "DELETE",
+            // });
+            // window.location.href = "./orderSuccess.html";
         }
         catch (err) {
             console.log(`Unable to delete cart items`);

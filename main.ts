@@ -39,6 +39,7 @@ declare module 'express-session' {
         cartCount?: number
         grant?: any;
         orderId?: number
+        total_amount?: number
     }
 }
 
@@ -406,6 +407,35 @@ app.get('/cartItemsByUserId', async (req, res) => {
 
 app.post("/orders", async (req, res) => {
     try {
+        const user_id = req.session?.userId
+        const cartItems = await client.query(/*sql*/`SELECT 
+            shopping_cart.id AS cart_id,
+            products.image_one as image_one, products.product_name as product_name,
+            products.product_details as product_details, 
+            products.product_color as product_color,
+            products.product_size as product_size, 
+            products.selling_price as selling_price, 
+            products.image_one as image_one, 
+            product_id, product_quantity, user_id
+        from shopping_cart inner join products
+            on shopping_cart.product_id = products.id 
+            where user_id = $1 order by shopping_cart.created_at`,
+            [user_id])
+
+        const cartItemsToOrders = cartItems.rows
+        let total_amount = cartItemsToOrders.reduce((previous, current) => {
+            const product_total_price = current.product_quantity * current.selling_price
+            const total_amount = previous + product_total_price
+            return total_amount
+        }, 0);
+
+        req.session.total_amount = total_amount
+        console.log(`req.session:  ${req.session.total_amount}`)
+        console.log(`total_amount :  ${total_amount}`)
+        if (req.session.total_amount !== req.body.total_amount || user_id !== req.body.user_id) {
+            res.status(400).json({ success: false, msg: "input invalid" });
+            return
+        }
         const orderId = await client.query(/*sql*/`INSERT INTO orders (
             user_id, 
             total_amount, 
