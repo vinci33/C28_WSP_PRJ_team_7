@@ -124,9 +124,6 @@ async function deleteItems(pid) {
 // update quantity kdl
 
 async function updateProductQuantity(quantity, cart_id) {
-  const resp = await fetch("/getShoppingId", {
-
-  })
   const res = await fetch("/updateQuantity", {
     method: "PUT",
     body: JSON.stringify({

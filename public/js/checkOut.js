@@ -1,6 +1,5 @@
 const contactAlert = document.querySelector('.contact-alert')
 const addressAlert = document.querySelector('.address-alert')
-
 window.onload = async function () {
     loadSummary();
     checkOut();
@@ -11,7 +10,6 @@ window.onload = async function () {
         });
     });
 }
-
 async function checkOut() {
     const checkOutBtn = document.querySelector('.checkout-login-btn');
     checkOutBtn.addEventListener('click', async function (e) {
@@ -59,11 +57,9 @@ async function checkOut() {
                     cartItems: cartItemsWithTotalPri
                 }),
             });
-
         } catch (err) {
             console.log(`Unable update order detail`);
         }
-
         let checkOutDetail = getCheckOutInfo();
         if (checkOutDetail.success) {
             try {
@@ -76,10 +72,10 @@ async function checkOut() {
                 });
                 const data = await resp.json();
             } catch (err) {
-                console.error(`Unable to submit info`);
+                console.error(`Unable to submit  info`);
             }
         } else {
-            console.log("Unable to submit info from input");
+            console.log(err.message);
         }
         try {
             await fetch("/deleteCartItems", {
@@ -90,9 +86,9 @@ async function checkOut() {
         catch (err) {
             console.log(`Unable to delete cart items`);
         }
-
     })
 }
+
 
 async function loadSummary() {
     try {
@@ -114,36 +110,28 @@ async function loadSummary() {
         console.log(summaryWithTotalPri[0].product_name);
         console.log(summaryWithTotalPri);
         console.log(total_amount);
-
         const summaryTotal = document.querySelector(".total-amount");
         summaryTotal.textContent = `$ ` + total_amount.toLocaleString();
         for (let i = 0; i < summaryWithTotalPri.length; i++) {
             const tbody = document.querySelector(".t-body");
-
             const summaryDetail = document.createElement("tr");
             summaryDetail.classList.add("summary-detail");
-
             const itemCell = document.createElement("td");
             itemCell.setAttribute("scope", "row");
             itemCell.setAttribute("colspan", "2");
             itemCell.style.fontWeight = "200";
             itemCell.textContent = summaryWithTotalPri[i].product_name.replace(/_/g, " ");
-
             const quantityCell = document.createElement("td");
             quantityCell.classList.add("quantity", "t-detail", "body-text");
             quantityCell.textContent = summaryWithTotalPri[i].product_quantity;
-
             const subtotalCell = document.createElement("td");
             subtotalCell.classList.add("subtotal", "t-detail", "body-text");
             subtotalCell.textContent = `$${summaryWithTotalPri[i].product_total_price.toLocaleString()}`;
-
             summaryDetail.appendChild(itemCell);
             summaryDetail.appendChild(quantityCell);
             summaryDetail.appendChild(subtotalCell);
-
             tbody.appendChild(summaryDetail);
         }
-
         if (res.ok) {
             console.log(`Summary Loaded`);
         }
@@ -151,7 +139,6 @@ async function loadSummary() {
         console.log(err);
     }
 }
-
 function getCheckOutInfo() {
     try {
         let checkOutInfo = {
@@ -170,7 +157,6 @@ function getCheckOutInfo() {
                 country: document.querySelector('#country').value,
             },
         };
-
         let success = true;
         if (
             checkOutInfo.contact.first_name == "" ||
@@ -198,4 +184,3 @@ function getCheckOutInfo() {
         return { checkOutInfo: null, success: false };
     }
 }
-

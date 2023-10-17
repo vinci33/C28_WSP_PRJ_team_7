@@ -43,7 +43,7 @@ async function initAddToCart(id) {
       addToCartItemObj.product_id = product.id;
       addToCartItemObj.product_quantity = quantity;
       const resp2 = await fetch("/cartItem", {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
